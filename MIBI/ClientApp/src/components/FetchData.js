@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner'
 import { actionCreators } from '../actions/WeatherForecastsActions';
 
 class FetchData extends Component {
@@ -16,8 +17,8 @@ class FetchData extends Component {
   }
 
   ensureDataFetched() {
-    const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
-    this.props.requestWeatherForecasts(startDateIndex);
+      const startDateIndex = parseInt(this.props.match.params.startDateIndex, 10) || 0;
+      this.props.requestWeatherForecasts(startDateIndex);
   }
 
   render() {
@@ -64,7 +65,7 @@ function renderPagination(props) {
   return <p className='clearfix text-center'>
     <Link className='btn btn-default pull-left' to={`/fetch-data/${prevStartDateIndex}`}>Previous</Link>
     <Link className='btn btn-default pull-right' to={`/fetch-data/${nextStartDateIndex}`}>Next</Link>
-    {props.isLoading ? <span>Loading...</span> : []}
+      {props.isLoading ? <LoadingSpinner /> : []}
   </p>;
 }
 

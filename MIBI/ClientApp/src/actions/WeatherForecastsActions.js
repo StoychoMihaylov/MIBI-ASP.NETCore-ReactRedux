@@ -1,6 +1,4 @@
-﻿// Action types
-export const REQUEST_WEATHER_FORECASTS = 'REQUEST_WEATHER_FORECASTS';
-export const RECEIVE_WEATHER_FORECASTS = 'RECEIVE_WEATHER_FORECASTS';
+﻿import { REQUEST_WEATHER_FORECASTS, RECEIVE_WEATHER_FORECASTS } from '../constants/actionTypes'
 
 // Actions
 export const actionCreators = {

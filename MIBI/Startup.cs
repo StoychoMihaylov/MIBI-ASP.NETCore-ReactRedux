@@ -8,6 +8,9 @@ namespace MIBI
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.EntityFrameworkCore;
     using MIBI.Data;
+    using MIBI.Data.Interfaces;
+    using MIBI.Services.Interfaces;
+    using MIBI.Services;
 
     public class Startup
     {
@@ -26,13 +29,25 @@ namespace MIBI
             services.AddDbContext<MIBIContext>(options => 
                 options.UseSqlServer(connection));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.SuppressConsumesConstraintForFormFileParameters = true;
+                    options.SuppressInferBindingSourcesForParameters = true;
+                    options.SuppressModelStateInvalidFilter = true;
+                    options.SuppressMapClientErrors = true;
+                    options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
+                });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            // Service Injection
+            services.AddTransient<IMIBIContext, MIBIContext>();
+            services.AddTransient<ISamleService, SampleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +73,8 @@ namespace MIBI
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+
+                routes.MapRoute(name: "api", template: "api/{controller=Admin}");
             });
 
             app.UseSpa(spa =>

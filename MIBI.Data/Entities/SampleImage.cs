@@ -8,6 +8,10 @@
 
         public string Name { get; set; }
 
+        public string UniqueName { get; set; }
+
+        public string Type { get; set; }
+
         public virtual Sample Sample { get; set; }
     }
 }
