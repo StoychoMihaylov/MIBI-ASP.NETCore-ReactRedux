@@ -8,7 +8,7 @@
 
         public string Description { get; set; }
 
-        public ICollection<string> Base64Images { get; set; }
+        public ICollection<SampleImageBindingModel> Images { get; set; }
 
         public ICollection<string> Tags { get; set; }
     }

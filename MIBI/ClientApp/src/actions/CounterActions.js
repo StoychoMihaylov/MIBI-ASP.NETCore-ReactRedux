@@ -1,6 +1,4 @@
-﻿// Action types
-export const INCREMENT_COUNT = 'INCREMENT_COUNT';
-export const DECREMENT_COUNT = 'DECREMENT_COUNT';
+﻿import { INCREMENT_COUNT, DECREMENT_COUNT } from '../constants/actionTypes'
 
 // Actions
 export const actionCreators = {

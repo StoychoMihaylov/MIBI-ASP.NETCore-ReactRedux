@@ -18,25 +18,27 @@
         [HttpGet]
         public IActionResult Get()
         {
-            return View();
+            return Ok("It works!");
         }
 
         [HttpPost]
         public IActionResult Post(CreateNewSampleBindingModel bm)
         {
-            return View();
+            var obj = new [] { "fdd", "fdfd", "fdfdfd" };
+
+            return Ok(obj);
         }
 
         [HttpPut]
         public IActionResult Edit()
         {
-            return View();
+            return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete()
         {
-            return View();
+            return Ok();
         }
     }
 }

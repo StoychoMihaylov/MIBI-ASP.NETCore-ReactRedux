@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\store\reducers\" />
+    <Folder Include="Images\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
