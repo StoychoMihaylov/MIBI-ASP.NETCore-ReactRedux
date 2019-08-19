@@ -1,5 +1,7 @@
 ﻿namespace MIBI.Controllers
 {
+    using System.Linq;
+    using System.Net;
     using MIBI.BindingModels;
     using MIBI.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
@@ -22,11 +24,15 @@
         }
 
         [HttpPost]
-        public IActionResult Post(CreateNewSampleBindingModel bm)
+        public IActionResult Post([FromBody]CreateNewSampleBindingModel bm)
         {
-            var obj = new [] { "fdd", "fdfd", "fdfdfd" };
+            var imgs = bm.Images;
+            foreach (var img in imgs)
+            {
 
-            return Ok(obj);
+            }
+
+            return Ok();
         }
 
         [HttpPut]
