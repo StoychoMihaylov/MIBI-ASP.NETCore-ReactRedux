@@ -5,29 +5,37 @@
 } from '../constants/actionTypes'
 import { api } from '../constants/api'
 
-export function requestAddNewSample() {
-    return (dispatch) => {
-        dispatch(createSample())
+export function addNewSampleInTheServer(newSample) {
+    console.log(newSample)
+    return function (dispatch) {
+        dispatch(createSample()) // Dispatch createNewSample
 
-        fetch(api + "addSample")
-            .then(data => dispatch(createSample({
-                type: REQUEST_ADD_NEW_SAMPLE,
-                payload: data
-            })))
-            .then(resp => resp.json())
+        return fetch(api + 'api/sample', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(newSample)
+            })
             .then(json => {
+                console.log("SUCCESSFUL RESPONSE:")
                 console.log(json)
 
-                dispatch(createSampleSuccess)
+                dispatch(createSampleSuccess()) // Dispatch Successful created sample
             })
-            .catch(err => dispatch(createSampleFail(err)))
+            .catch(err => {
+                console.log("ERROR:")
+                console.log(err)
+
+                dispatch(createSampleFail(true)) // Dispatch for error
+            })
     }
 }
 
-export function createSample(payload) {
+export function createSample() {
     return {
-        type: REQUEST_ADD_NEW_SAMPLE,
-        payload
+        type: REQUEST_ADD_NEW_SAMPLE
     }
 }
 
@@ -37,8 +45,9 @@ export function createSampleSuccess() {
     }
 }
 
-export function createSampleFail() {
+export function createSampleFail(error) {
     return {
-        type: REQUEST_ADD_NEW_SAMPLE_FAIL
+        type: REQUEST_ADD_NEW_SAMPLE_FAIL,
+        payload: error
     }
 }

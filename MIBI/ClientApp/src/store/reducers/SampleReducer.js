@@ -5,17 +5,25 @@
 } from '../../constants/actionTypes'
 
 const initialState = {
-    newSample: {},
+    newSample: {
+        name: "",
+        description: "",
+        tags: "",
+        images: [],
+    },
     isLoading: false,
     error: false
 }
 
-export default function sampleReducer(state = initialState, action) {
+const SampleReducer = (state, action) => {
+    state = state || initialState
+
+    console.log(state, action)
+
     switch (action.type) {
         case REQUEST_ADD_NEW_SAMPLE:
             return {
                 ...state,
-                newSample: state.newSample.concat(action.payload),
                 isLoading: true
             }
         case REQUEST_ADD_NEW_SAMPLE_SUCCESS:
@@ -33,3 +41,5 @@ export default function sampleReducer(state = initialState, action) {
             return state
     }
 }
+
+export default SampleReducer

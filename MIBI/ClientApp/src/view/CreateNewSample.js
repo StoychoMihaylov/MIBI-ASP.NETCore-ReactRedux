@@ -1,70 +1,63 @@
-﻿import React, { Component } from 'react';
-import { connect } from 'react-redux';
+﻿import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Route } from 'react-router'
-import { createSample } from '../actions/SampleActions'
+import { addNewSampleInTheServer } from '../actions/SampleActions'
 
 class CreateNewSample extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {       
             name: "",  
             description: "",
-            tags: "",
+            tags: [],
             images: [],
-            
+          
             previewImages: [],
         }
 
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
-        this.handleNameChange = this.handleNameChange.bind(this)
+        console.log(this.props.newSample)
+
         this.handleImages = this.handleImages.bind(this)
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
-        this.handleTagsChange = this.handleTagsChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleImages(images) {
+        // TO FIX Image uploading
         let imgs = Array.from(images.target.files)
-        let urlObj = []
+        let previewImages = []
 
         for (var i = 0; i < imgs.length; i++) {
             if (imgs[i].type === "image/jpeg") {
-                urlObj.push(URL.createObjectURL(imgs[i]))
+                let newImg = {
+                    name: imgs[i].name,
+                    type: imgs[i].type,
+                    url: URL.createObjectURL(imgs[i]),
+                    base64Img: 
+                }
+
+                previewImages.push(newImg)
             }
         }
 
         this.setState({
-            previewImages: urlObj,
-            images: imgs
+            images: previewImages
         })
-    }
-
-    handleNameChange(event) {
-        this.setState({ name: event.target.value })
-    }
-
-    handleDescriptionChange(event) {
-        this.setState({ description: event.target.value })
-    }
-
-    handleTagsChange(event) {
-        this.setState({ tags: event.target.value })
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state)
+
+        let tags = this.state.tags.toString().split(",").map(item => item.trim())
  
         let newSample = {
             name: this.state.name,
             description: this.state.description,
-            tags: this.state.tags,
+            tags: tags,
             images: this.state.images
         }
 
-        const payload = newSample
-        this.props.createNewSample(payload)    
+        this.props.createSample(newSample)
     }
 
     render() {
@@ -78,7 +71,7 @@ class CreateNewSample extends Component {
                             type="text"
                             placeholder="Type a name"
                             name="name"
-                            onChange={this.handleNameChange}
+                            onChange={(event) => this.setState({ name: event.target.value })}
                         />
                     </label>
                     <br />
@@ -86,7 +79,7 @@ class CreateNewSample extends Component {
                         Description:
                         <textarea
                             placeholder="Text..."
-                            onChange={this.handleDescriptionChange}
+                            onChange={(event) => this.setState({ description: event.target.value })}
                         />
                     </label>
                     <br />
@@ -102,11 +95,11 @@ class CreateNewSample extends Component {
                     <br />
                     {/* Image previewer */}
                     {
-                        this.state.previewImages.map(
+                        this.state.images.map(
                             img => {
                                 return (
-                                    <div key={img}>
-                                        <img src={img} alt="cat img" />
+                                    <div key={img.name}>
+                                        <img src={img.url} alt="cat img" />
                                     </div>
                                     )
                             }
@@ -119,7 +112,7 @@ class CreateNewSample extends Component {
                             type="text"
                             placeholder="tag1, tag2, tag3..."
                             name="tags"
-                            onChange={this.handleTagsChange}
+                            onChange={(event) => { this.setState({ tags: event.target.value }) }}
                         />
                     </label>
                     <br />
@@ -135,17 +128,21 @@ class CreateNewSample extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapStateToProps = (state) => {
     return {
-        createNewSample: newSample => dispatch(createSample(newSample))
+        newSample: state.sample.newSample,
+        isLoading: state.sample.isLoading,
+        error: state.sample.error
     }
 }
 
-function mapStateToProps(state) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        isLoading: state.isLoading,
-        error: state.error
+        createSample: (newSample) => dispatch(addNewSampleInTheServer(newSample))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateNewSample)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CreateNewSample)

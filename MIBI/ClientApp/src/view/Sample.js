@@ -10,7 +10,8 @@ const SampleView = props => (
         </div>
         <SearchField
             placeholder="Search..."
-            onChange={() => { }} // TO DO: Fetch
+            onChange={() => { }}
+            // TO DO: Fetch
             //searchText="Search for bacterias"
             //onEnter={() => { }}
             //onSearchClick={() => { }}

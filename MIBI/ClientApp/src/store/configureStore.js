@@ -1,13 +1,11 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
-import * as Counter from './reducers/Counter';
-import * as WeatherForecasts from './reducers/WeatherForecasts'
+import SampleReducer from './reducers/SampleReducer'
 
-export default function configureStore (history, initialState) {
+export default function configureStore(history, initialState) {
   const reducers = {
-    counter: Counter.reducer,
-    weatherForecasts: WeatherForecasts.reducer
+      sample: SampleReducer
   };
 
   const middleware = [
