@@ -68,7 +68,6 @@
                 return BadRequest(ex);
             }
 
-
             //TO DO: add new sample into the Database
 
             return Ok();
