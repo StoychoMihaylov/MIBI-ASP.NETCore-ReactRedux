@@ -18,8 +18,6 @@ const initialState = {
 const SampleReducer = (state, action) => {
     state = state || initialState
 
-    console.log(state, action)
-
     switch (action.type) {
         case REQUEST_ADD_NEW_SAMPLE:
             return {
