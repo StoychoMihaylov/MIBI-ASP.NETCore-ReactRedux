@@ -1,5 +1,6 @@
 ﻿namespace MIBI.BindingModels
 {
+    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
 
     public class CreateNewSampleBindingModel
@@ -8,7 +9,7 @@
 
         public string Description { get; set; }
 
-        public ICollection<SampleImageBindingModel> Images { get; set; }
+        public IFormCollection Images { get; set; }
 
         public ICollection<string> Tags { get; set; }
     }

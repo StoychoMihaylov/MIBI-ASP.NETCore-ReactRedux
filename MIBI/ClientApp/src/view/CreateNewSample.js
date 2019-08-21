@@ -12,8 +12,7 @@ class CreateNewSample extends Component {
             description: "",
             tags: [],
             images: [],
-          
-            previewImages: [],
+            files: {}
         }
 
         console.log(this.props.newSample)
@@ -23,17 +22,13 @@ class CreateNewSample extends Component {
     }
 
     handleImages(images) {
-        // TO FIX Image uploading
         let imgs = Array.from(images.target.files)
         let previewImages = []
 
         for (var i = 0; i < imgs.length; i++) {
             if (imgs[i].type === "image/jpeg") {
                 let newImg = {
-                    name: imgs[i].name,
-                    type: imgs[i].type,
                     url: URL.createObjectURL(imgs[i]),
-                    base64Img: 
                 }
 
                 previewImages.push(newImg)
@@ -41,23 +36,30 @@ class CreateNewSample extends Component {
         }
 
         this.setState({
-            images: previewImages
+            images: previewImages,
+            files: imgs
         })
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
-        let tags = this.state.tags.toString().split(",").map(item => item.trim())
+        let formDataImages = new FormData();
+        if (this.state.files.length > 0) { 
+            this.state.files.forEach(file => {
+                formDataImages.append("image", file)
+            })
+        }
+        
+        let tags = this.state.tags.toString()
  
         let newSample = {
             name: this.state.name,
             description: this.state.description,
             tags: tags,
-            images: this.state.images
         }
 
-        this.props.createSample(newSample)
+        this.props.createSample(newSample, formDataImages)
     }
 
     render() {
@@ -138,7 +140,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createSample: (newSample) => dispatch(addNewSampleInTheServer(newSample))
+        createSample: (newSample, imageFormData) => dispatch(addNewSampleInTheServer(newSample, imageFormData))
     }
 }
 
