@@ -9,8 +9,8 @@ namespace MIBI
     using Microsoft.EntityFrameworkCore;
     using MIBI.Data;
     using MIBI.Data.Interfaces;
+    using MIBI.Services.Services;
     using MIBI.Services.Interfaces;
-    using MIBI.Services;
 
     public class Startup
     {
@@ -59,7 +59,7 @@ namespace MIBI
 
             // Service Injection
             services.AddTransient<IMIBIContext, MIBIContext>();
-            services.AddTransient<ISamleService, SampleService>();
+            services.AddTransient<ISampleService, SampleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

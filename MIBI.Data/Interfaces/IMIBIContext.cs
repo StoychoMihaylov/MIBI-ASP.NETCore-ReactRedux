@@ -7,10 +7,6 @@
     {
         DbSet<Sample> Samples { get; set; }
 
-        DbSet<SampleImage> SampleImages { get; set; }
-
-        DbSet<Tag> Tags { get; set; }
-
         int SaveChanges();
     }
 }

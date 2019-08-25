@@ -14,6 +14,7 @@ export function addNewSampleInTheServer(newSample, imgFormdata) {
                 'name': newSample.name,
                 'description': newSample.description,
                 'tags': newSample.tags,
+                'group': newSample.group,
                 'Content-Type': 'multipart/form-data'
             }
         })

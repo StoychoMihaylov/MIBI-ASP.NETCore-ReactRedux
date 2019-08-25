@@ -24,11 +24,12 @@
 
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MIBI.Data\MIBI.Data.csproj" />
+    <ProjectReference Include="..\MIBI.Models\MIBI.Models.csproj" />
+    <ProjectReference Include="..\MIBI.Services\MIBI.Services.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
