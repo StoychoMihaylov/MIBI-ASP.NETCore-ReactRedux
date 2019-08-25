@@ -45,23 +45,21 @@ class CreateNewSample extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let formDataImages = new FormData();
+        let formData = new FormData();
         if (this.state.files.length > 0) { 
             this.state.files.forEach(file => {
-                formDataImages.append("image", file)
+                formData.append("image", file)
             })
-        }
+        } 
         
         let tags = this.state.tags.toString()
- 
-        let newSample = {
-            name: this.state.name,
-            description: this.state.description,
-            group: this.state.group,
-            tags: tags,
-        }
 
-        this.props.createSample(newSample, formDataImages)
+        formData.append("name", this.state.name)
+        formData.append("description", this.state.description)
+        formData.append("group", this.state.group)
+        formData.append("tags", tags)
+
+        this.props.createSample(formData)
     }
 
     render() {
@@ -101,8 +99,8 @@ class CreateNewSample extends Component {
                         Group:
                         <input
                             type="text"
-                            placeholder="Type a group name"
                             name="group"
+                            placeholder="group1, group2..."
                             onChange={(event) => this.setState({ group: event.target.value })}
                         />
                     </label>
@@ -110,9 +108,9 @@ class CreateNewSample extends Component {
                     {/* Image previewer */}
                     {
                         this.state.images.map(
-                            img => {
+                            (img, index) => {
                                 return (
-                                    <div key={img.name}>
+                                    <div key={index}>
                                         <img src={img.url} alt="cat img" />
                                     </div>
                                     )
@@ -152,7 +150,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createSample: (newSample, imageFormData) => dispatch(addNewSampleInTheServer(newSample, imageFormData))
+        createSample: (imageFormData) => dispatch(addNewSampleInTheServer(imageFormData))
     }
 }
 
