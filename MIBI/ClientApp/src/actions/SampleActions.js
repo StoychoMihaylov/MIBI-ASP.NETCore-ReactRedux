@@ -6,15 +6,11 @@
 import { api } from '../constants/api'
 import axios from 'axios'
 
-export function addNewSampleInTheServer(newSample, imgFormdata) {
+export function addNewSampleInTheServer(imgFormdata) {
     return function (dispatch) {
         dispatch(createSample()) // Dispatch createNewSample
         axios.post(api + 'api/sample', imgFormdata, {
             headers: {
-                'name': newSample.name,
-                'description': newSample.description,
-                'tags': newSample.tags,
-                'group': newSample.group,
                 'Content-Type': 'multipart/form-data'
             }
         })

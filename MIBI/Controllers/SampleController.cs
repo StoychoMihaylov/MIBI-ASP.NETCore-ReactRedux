@@ -30,30 +30,40 @@
         }
 
         [HttpPost]
-        public IActionResult Post(IFormCollection formData)
+        public IActionResult Post(
+            [FromForm] string name,
+            [FromForm] string description,
+            [FromForm] string group,
+            [FromForm] string tags,
+            [FromForm]IFormCollection formData)
         {
-            if (Request.Headers["name"] == "" 
-                && Request.Headers["description"] == "" 
-                && Request.Headers["tags"] == ""
+            if (name == null
+                && description == null
+                && tags == null
+                && group == null
                 && formData == null)
             {
-                return BadRequest("At least one image and all fields are requered!");
+                return BadRequest("Please field up at least one image! All fields are requered!");
             }
-            
-            var name = Request.Headers["name"];
-            var description = Request.Headers["description"];
-            var group = Request.Headers["group"];
-            var tags = Request.Headers["tags"]
+
+            var sampleGroups = group
                 .ToString()
                 .Split(',')
                 .Select(tag => tag.TrimStart(' ').TrimEnd(' '))
                 .ToArray();
 
-            var newSaple = new NewSampleBidingModel(){
+            var sampleTags = tags
+                .ToString()
+                .Split(',')
+                .Select(tag => tag.TrimStart(' ').TrimEnd(' '))
+                .ToArray();
+
+            var newSaple = new NewSampleBidingModel()
+            {
                 Name = name,
                 Description = description,
-                Group = group,
-                Tags = tags,
+                Group = sampleGroups,
+                Tags = sampleTags,
                 ImgUrls = new List<string>()
             };
 
@@ -74,7 +84,7 @@
             {
                 return BadRequest(ex);
             }
-            
+
             this.service.CreateNewSample(newSaple);
 
             return Ok();
