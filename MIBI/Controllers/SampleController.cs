@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Net;
-    using MIBI.BindingModels;
+    using MIBI.Models.BindingModels;
     using MIBI.Services.Interfaces;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -15,10 +14,10 @@
     [ApiController]
     public class SampleController : Controller
     {
-        private ISamleService service;
+        private ISampleService service;
         private IHostingEnvironment env;
 
-        public SampleController(ISamleService service, IHostingEnvironment env)
+        public SampleController(ISampleService service, IHostingEnvironment env)
         {
             this.service = service;
             this.env = env;
@@ -33,21 +32,29 @@
         [HttpPost]
         public IActionResult Post(IFormCollection formData)
         {
+            if (Request.Headers["name"] == "" 
+                && Request.Headers["description"] == "" 
+                && Request.Headers["tags"] == ""
+                && formData == null)
+            {
+                return BadRequest("At least one image and all fields are requered!");
+            }
             
             var name = Request.Headers["name"];
             var description = Request.Headers["description"];
+            var group = Request.Headers["group"];
             var tags = Request.Headers["tags"]
                 .ToString()
                 .Split(',')
                 .Select(tag => tag.TrimStart(' ').TrimEnd(' '))
                 .ToArray();
 
-            var newSample = new
-            {
+            var newSaple = new NewSampleBidingModel(){
                 Name = name,
                 Description = description,
+                Group = group,
                 Tags = tags,
-                Images = new List<string>()
+                ImgUrls = new List<string>()
             };
 
             try
@@ -55,11 +62,11 @@
                 foreach (var image in formData.Files)
                 {
                     string path = Path.Combine(this.env.ContentRootPath + "\\Images");
-                    var newImgName = Guid.NewGuid().ToString();
+                    var newImgName = Guid.NewGuid().ToString() + (image.FileName.Substring(image.FileName.LastIndexOf('.')));
                     using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
                     {
                         image.CopyToAsync(img);
-                        newSample.Images.Add(newImgName);
+                        newSaple.ImgUrls.Add(newImgName);
                     }
                 }
             }
@@ -67,8 +74,8 @@
             {
                 return BadRequest(ex);
             }
-
-            //TO DO: add new sample into the Database
+            
+            this.service.CreateNewSample(newSaple);
 
             return Ok();
         }

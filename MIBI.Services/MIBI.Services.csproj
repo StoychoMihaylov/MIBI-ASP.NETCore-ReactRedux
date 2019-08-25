@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MIBI.Data\MIBI.Data.csproj" />
+    <ProjectReference Include="..\MIBI.Models\MIBI.Models.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -10,6 +10,7 @@ class CreateNewSample extends Component {
         this.state = {       
             name: "",  
             description: "",
+            group: "",
             tags: [],
             images: [],
             files: {}
@@ -56,6 +57,7 @@ class CreateNewSample extends Component {
         let newSample = {
             name: this.state.name,
             description: this.state.description,
+            group: this.state.group,
             tags: tags,
         }
 
@@ -92,6 +94,16 @@ class CreateNewSample extends Component {
                             type="file"
                             multiple={true}
                             onChange={this.handleImages}
+                        />
+                    </label>
+                    <br/>
+                    <label>
+                        Group:
+                        <input
+                            type="text"
+                            placeholder="Type a group name"
+                            name="group"
+                            onChange={(event) => this.setState({ group: event.target.value })}
                         />
                     </label>
                     <br />

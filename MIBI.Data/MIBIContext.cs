@@ -11,7 +11,9 @@
 
         public DbSet<Sample> Samples { get; set; }
 
-        public DbSet<SampleImage> SampleImages { get; set; }
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<SampleImage> Images { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
     }
