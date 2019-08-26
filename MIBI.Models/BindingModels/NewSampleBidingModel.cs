@@ -8,7 +8,7 @@
 
         public string Description { get; set; }
 
-        public string[] Group {get; set;}
+        public string[] Groups {get; set;}
 
         public string[] Tags { get; set; }
 

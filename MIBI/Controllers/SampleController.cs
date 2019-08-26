@@ -62,7 +62,7 @@
             {
                 Name = name,
                 Description = description,
-                Group = sampleGroups,
+                Groups = sampleGroups,
                 Tags = sampleTags,
                 ImgUrls = new List<string>()
             };
@@ -85,7 +85,14 @@
                 return BadRequest(ex);
             }
 
-            this.service.CreateNewSample(newSaple);
+            try
+            {
+                this.service.CreateNewSample(newSaple);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
 
             return Ok();
         }

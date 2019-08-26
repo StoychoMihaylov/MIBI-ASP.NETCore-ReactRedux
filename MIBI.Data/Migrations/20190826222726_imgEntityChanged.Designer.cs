@@ -4,14 +4,16 @@ using MIBI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MIBI.Data.Migrations
 {
     [DbContext(typeof(MIBIContext))]
-    partial class MIBIContextModelSnapshot : ModelSnapshot
+    [Migration("20190826222726_imgEntityChanged")]
+    partial class imgEntityChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
