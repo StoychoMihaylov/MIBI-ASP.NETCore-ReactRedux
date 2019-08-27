@@ -16,8 +16,6 @@ class CreateNewSample extends Component {
             files: {}
         }
 
-        console.log(this.props.newSample)
-
         this.handleImages = this.handleImages.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -42,7 +40,7 @@ class CreateNewSample extends Component {
         })
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
 
         let formData = new FormData();
@@ -59,7 +57,8 @@ class CreateNewSample extends Component {
         formData.append("group", this.state.group)
         formData.append("tags", tags)
 
-        this.props.createSample(formData)
+        await this.props.createSample(formData)
+        this.props.history.push("/")
     }
 
     render() {
