@@ -11,6 +11,7 @@ namespace MIBI
     using MIBI.Data.Interfaces;
     using MIBI.Services.Services;
     using MIBI.Services.Interfaces;
+    using AutoMapper;
 
     public class Startup
     {
@@ -30,6 +31,8 @@ namespace MIBI
             var connection = @"Server=.\SQLEXPRESS;Database=MIBI;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true";
             services.AddDbContext<MIBIContext>(options => 
                 options.UseSqlServer(connection));
+
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .ConfigureApiBehaviorOptions(options =>
