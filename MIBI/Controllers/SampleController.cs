@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using MIBI.Models.BindingModels;
+    using MIBI.Models.ViewModels;
     using MIBI.Services.Interfaces;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -24,9 +25,11 @@
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string bacteriaName)
         {
-            return Ok("It works!");
+            List<AutocompleteBacteriaNamesViewModel> bacteriaNames =  this.service.GetAllNamesOfSamples(bacteriaName);
+
+            return Ok(bacteriaNames);
         }
 
         [HttpPost]
@@ -71,6 +74,12 @@
             {
                 foreach (var image in formData.Files)
                 {
+                    var isImage = CheckIfFileIsAnImage(image);
+                    if (! isImage)
+                    {
+                        return BadRequest("The file is not an image!");
+                    }
+
                     string path = Path.Combine(this.env.ContentRootPath + "\\Images");
                     var newImgName = Guid.NewGuid().ToString() + (image.FileName.Substring(image.FileName.LastIndexOf('.')));
                     using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
@@ -95,6 +104,18 @@
             }
 
             return Ok();
+        }
+
+        private bool CheckIfFileIsAnImage(IFormFile image)
+        {
+            if (image.ContentType == "image/jpg" 
+                || image.ContentType == "image/jpeg"
+                || image.ContentType == "image/png")
+            {
+                return true;
+            }
+
+            return false;
         }
 
         [HttpPut]

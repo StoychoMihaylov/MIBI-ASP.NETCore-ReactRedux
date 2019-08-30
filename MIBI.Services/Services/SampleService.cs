@@ -6,6 +6,8 @@
     using MIBI.Models.BindingModels;
     using MIBI.Services.Interfaces;
     using System.Collections.Generic;
+    using MIBI.Models.ViewModels;
+    using System.Linq;
 
     public class SampleService : Service, ISampleService
     {
@@ -60,6 +62,16 @@
 
             this.Context.Samples.Add(newSample);
             this.Context.SaveChanges();
+        }
+
+        public List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples(string bacteriaName)
+        {
+            //if (bacteriaName != null || bacteriaName != "")
+            //{
+            //    return this.Context.Samples.Where(b => b.Name.Contains(bacteriaName)).ToList();
+            //}
+
+            return null;
         }
     }
 }
