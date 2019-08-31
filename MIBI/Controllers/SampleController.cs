@@ -24,14 +24,6 @@
             this.env = env;
         }
 
-        [HttpGet]
-        public IActionResult Get(string bacteriaName)
-        {
-            List<AutocompleteBacteriaNamesViewModel> bacteriaNames =  this.service.GetAllNamesOfSamples(bacteriaName);
-
-            return Ok(bacteriaNames);
-        }
-
         [HttpPost]
         public IActionResult Post(
             [FromForm] string name,

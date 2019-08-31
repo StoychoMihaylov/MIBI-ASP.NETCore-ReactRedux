@@ -1,6 +1,6 @@
 ﻿namespace MIBI.Models.ViewModels
 {
-    public class AutocompleteBacteriaNamesViewModel
+    public class TagsNamesViewModel
     {
         public int Id { get; set; }
 

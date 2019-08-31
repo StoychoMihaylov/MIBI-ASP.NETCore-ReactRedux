@@ -32,7 +32,8 @@ namespace MIBI
             services.AddDbContext<MIBIContext>(options => 
                 options.UseSqlServer(connection));
 
-            
+            //Automapper
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .ConfigureApiBehaviorOptions(options =>

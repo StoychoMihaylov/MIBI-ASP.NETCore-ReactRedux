@@ -64,14 +64,50 @@
             this.Context.SaveChanges();
         }
 
-        public List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples(string bacteriaName)
+        public List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples()
         {
-            //if (bacteriaName != null || bacteriaName != "")
-            //{
-            //    return this.Context.Samples.Where(b => b.Name.Contains(bacteriaName)).ToList();
-            //}
+            var namesOfSamples = new List<AutocompleteBacteriaNamesViewModel>();
 
-            return null;
+            var samples = this.Context
+                .Samples
+                .Select(b => new { b.Id, b.Name })
+                .ToList();
+
+            foreach (var sample in samples)
+            {
+                var sampleName = new AutocompleteBacteriaNamesViewModel()
+                {
+                    Id = sample.Id, 
+                    Name = sample.Name
+                };
+
+                namesOfSamples.Add(sampleName);
+            }
+            
+            return namesOfSamples;
+        }
+
+        public List<TagsNamesViewModel> GetAllTags()
+        {
+            var allTags = new List<TagsNamesViewModel>();
+
+            var tags = this.Context
+                .Tags
+                .Select(b => new { b.Id, b.Name })
+                .ToList();
+
+            foreach (var tag in tags)
+            {
+                var sampleName = new TagsNamesViewModel()
+                {
+                    Id = tag.Id,
+                    Name = tag.Name
+                };
+
+                allTags.Add(sampleName);
+            }
+
+            return allTags;
         }
     }
 }
