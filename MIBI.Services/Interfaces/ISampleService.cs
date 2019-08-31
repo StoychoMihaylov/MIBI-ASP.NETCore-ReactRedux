@@ -7,6 +7,7 @@
     public interface ISampleService
     {
         void CreateNewSample(NewSampleBidingModel newSample);
-        List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples(string bacteriaName);
+        List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples();
+        List<TagsNamesViewModel> GetAllTags();
     }
 }

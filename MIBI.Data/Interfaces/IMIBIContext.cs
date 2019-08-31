@@ -7,6 +7,12 @@
     {
         DbSet<Sample> Samples { get; set; }
 
+        DbSet<Group> Groups { get; set; }
+
+        DbSet<SampleImage> Images { get; set; }
+
+        DbSet<Tag> Tags { get; set; }
+
         int SaveChanges();
     }
 }
