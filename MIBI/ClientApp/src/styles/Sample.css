@@ -4,14 +4,16 @@
     background-color: transparent;
     border: 1px solid grey;
     border-radius: 5px;
+    margin: 1px;
     height: 39px;
     width: 39px;
 }
 
-#searchBar {
+#searchInput {
     height: 39px;
     width: 400px;
     border-radius: 5px;
+    margin: 1px;
 }
 
 #addSampleBtn {
@@ -20,6 +22,7 @@
     border-radius: 5px;
     height: 39px;
     width: 200px;
+    margin: 1px;
 }
 
 .searchingBar {
@@ -28,4 +31,8 @@
 
 .conteiner {
     text-align: center;
+}
+
+.autocompleateNames {
+    position: absolute;
 }
