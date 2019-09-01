@@ -1,32 +1,44 @@
-﻿import React from 'react';
-import { connect } from 'react-redux';
-import { Route } from 'react-router';
-import SearchField from "react-search-field";
+﻿import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Route } from 'react-router'
+import "../styles/Sample.css"
 
-const SampleView = props => (
-    <div>
-        <div>
-            <h1>Here is going to be the search for samples!</h1>
+class SampleView extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {}
+    }
+
+    handleSearchBarClick(event) {
+        let text = event.target.value
+        alert(text)
+    }
+
+    render() {
+        return(
+        <div className="conteiner">
+            <div className="searchingBar">
+                <input
+                    placeholder="Search..."
+                    onChange={() => { }}
+                    onSearchClick={this.handleSearchBarClick}
+                    id="searchBar"
+                />
+                <button id="searchBtn"><img/></button>
+                <Route render={({ history }) => (
+                    <button
+                        id="addSampleBtn"
+                        type='button'
+                        onClick={() => { history.push('/addSample') }}
+                    >
+                    Add Sample
+                    </button>
+                )} />
+            </div>
         </div>
-        <SearchField
-            placeholder="Search..."
-            onChange={() => { }}
-            // TO DO: Fetch
-            //searchText="Search for bacterias"
-            //onEnter={() => { }}
-            //onSearchClick={() => { }}
-            classNames="test-class"
-        />
-        <Route render={({ history }) => (
-            <button
-                type='button'
-                onClick={() => { history.push('/addSample') }}
-            >
-            Add Sample
-            </button>
-         )} />  
-    </div>
-
-);
+        )
+    }
+}
 
 export default connect()(SampleView);
