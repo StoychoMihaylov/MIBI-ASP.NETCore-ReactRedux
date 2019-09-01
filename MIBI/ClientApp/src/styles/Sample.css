@@ -1,0 +1,31 @@
+#searchBtn {
+    background-image: url("../content/searchIcon.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 39px;
+    width: 39px;
+}
+
+#searchBar {
+    height: 39px;
+    width: 400px;
+    border-radius: 5px;
+}
+
+#addSampleBtn {
+    border-block-color: rgb(102, 178, 255);
+    background-color: rgb(102, 178, 255);
+    border-radius: 5px;
+    height: 39px;
+    width: 200px;
+}
+
+.searchingBar {
+    margin-top: 20%;
+}
+
+.conteiner {
+    text-align: center;
+}
