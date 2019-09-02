@@ -1,7 +1,7 @@
 ﻿import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Route } from "react-router"
-import { addNewSampleInTheServer } from "../actions/Sample/SampleActions"
+import { addNewSampleInTheServer } from "../store/actions/SampleActions"
 
 class CreateNewSample extends Component {
   constructor(props) {

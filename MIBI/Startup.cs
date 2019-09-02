@@ -57,7 +57,10 @@ namespace MIBI
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:5000", "https://localhost:5001");
+                    builder.WithOrigins(
+                        "https://localhost:5000",
+                        "https://localhost:5001"
+                        );
                 });
             });
 

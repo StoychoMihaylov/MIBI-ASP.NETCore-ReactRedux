@@ -15,7 +15,7 @@ const initialState = {
 
 const SampleReducer = (state, action) => {
     state = state || initialState
-    
+
     switch (action.type) {
         case REQUEST_ADD_NEW_SAMPLE:
             return {

@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
-import { getAllNamesOfExistingSamples } from '../actions/Sample/SampleActions'
+import { getAllNamesOfExistingSamples } from '../store/actions/SampleActions'
 import "../styles/Sample.css"
 
 class SampleView extends Component {
