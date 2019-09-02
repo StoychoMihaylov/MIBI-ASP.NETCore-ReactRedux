@@ -1,16 +1,14 @@
 ﻿import {
     REQUEST_ADD_NEW_SAMPLE,
     REQUEST_ADD_NEW_SAMPLE_SUCCESS,
-    REQUEST_ADD_NEW_SAMPLE_FAIL
+    REQUEST_ADD_NEW_SAMPLE_FAIL,
+    REQUEST_GET_ALL_NAMES_OF_SAMPLES,
+    REQUEST_GET_ALL_NAMES_OF_SAMPLES_SUCCESS,
+    REQUEST_GET_ALL_NAMES_OF_SAMPLES_FAIL
 } from '../../constants/actionTypes'
 
 const initialState = {
-    newSample: {
-        name: "",
-        description: "",
-        tags: "",
-        images: [],
-    },
+    autocompleteNamesOfSamples: [],
     isLoading: false,
     error: false
 }
@@ -33,7 +31,24 @@ const SampleReducer = (state, action) => {
             return {
                 ...state,
                 isLoading: false,
-                error: true
+                error: action.payload
+            }
+        case REQUEST_GET_ALL_NAMES_OF_SAMPLES:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case REQUEST_GET_ALL_NAMES_OF_SAMPLES_SUCCESS:
+            return {
+                ...state,
+                autocompleteNamesOfSamples: action.payload,
+                isLoading: false
+            }
+        case     REQUEST_GET_ALL_NAMES_OF_SAMPLES_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
             }
         default:
             return state

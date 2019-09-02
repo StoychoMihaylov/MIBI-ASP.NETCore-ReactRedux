@@ -1,11 +1,11 @@
-﻿import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route } from "react-router";
-import { addNewSampleInTheServer } from "../actions/SampleActions";
+﻿import React, { Component } from "react"
+import { connect } from "react-redux"
+import { Route } from "react-router"
+import { addNewSampleInTheServer } from "../store/actions/SampleActions"
 
 class CreateNewSample extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       name: "",
@@ -21,7 +21,7 @@ class CreateNewSample extends Component {
   }
 
   handleImages(images) {
-    let imgs = Array.from(images.target.files);
+    let imgs = Array.from(images.target.files)
     let previewImages = [];
 
     for (var i = 0; i < imgs.length; i++) {
@@ -30,7 +30,7 @@ class CreateNewSample extends Component {
           url: URL.createObjectURL(imgs[i])
         };
 
-        previewImages.push(newImg);
+        previewImages.push(newImg)
       }
     }
 
@@ -46,19 +46,19 @@ class CreateNewSample extends Component {
     let formData = new FormData();
     if (this.state.files.length > 0) {
       this.state.files.forEach(file => {
-        formData.append("image", file);
+        formData.append("image", file)
       });
     }
 
     let tags = this.state.tags.toString();
 
-    formData.append("name", this.state.name);
-    formData.append("description", this.state.description);
-    formData.append("group", this.state.group);
-    formData.append("tags", tags);
+    formData.append("name", this.state.name)
+    formData.append("description", this.state.description)
+    formData.append("group", this.state.group)
+    formData.append("tags", tags)
 
-    await this.props.createSample(formData);
-    this.props.history.push("/");
+    await this.props.createSample(formData)
+    this.props.history.push("/")
   }
 
   render() {
@@ -117,9 +117,7 @@ class CreateNewSample extends Component {
               type="text"
               placeholder="tag1, tag2, tag3..."
               name="tags"
-              onChange={event => {
-                this.setState({ tags: event.target.value });
-              }}
+              onChange={event => {this.setState({ tags: event.target.value }) }}
             />
           </label>
           <br />
@@ -128,11 +126,8 @@ class CreateNewSample extends Component {
             render={({ history }) => (
               <button
                 type="button"
-                onClick={() => {
-                  this.props.history.goBack();
-                }}
-              >
-                Back
+                onClick={() => { this.props.history.goBack() }}>
+                Backs
               </button>
             )}
           />
@@ -144,7 +139,6 @@ class CreateNewSample extends Component {
 
 const mapStateToProps = state => {
   return {
-    newSample: state.sample.newSample,
     isLoading: state.sample.isLoading,
     error: state.sample.error
   };
@@ -157,7 +151,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateNewSample);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateNewSample)
