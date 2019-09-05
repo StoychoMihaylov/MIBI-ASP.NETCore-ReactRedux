@@ -4,7 +4,10 @@
     REQUEST_ADD_NEW_SAMPLE_FAIL,
     REQUEST_GET_ALL_NAMES_OF_SAMPLES,
     REQUEST_GET_ALL_NAMES_OF_SAMPLES_SUCCESS,
-    REQUEST_GET_ALL_NAMES_OF_SAMPLES_FAIL
+    REQUEST_GET_ALL_NAMES_OF_SAMPLES_FAIL,
+    REQUEST_GET_ALL_EXISTING_TAGS,
+    REQUEST_GET_ALL_EXISTING_TAGS_SUCCESS,
+    REQUEST_GET_ALL_EXISTING_TAGS_FAIL
 } from '../../constants/actionTypes'
 
 import { api } from '../../constants/api'
@@ -81,6 +84,40 @@ export function getAllExistingNamesOfSamplesSuccess(data) {
 export function getAllExistingNamesOfSamplesFail(error) {
     return {
         type: REQUEST_GET_ALL_NAMES_OF_SAMPLES_FAIL,
+        payload: error
+    }
+}
+
+export function getAllExistingtagsFromServer() {
+    return function (dispatch) {
+        dispatch(getAllExistingTags()) // Dispatch get all ezisting names of samples
+        axios.get(api + 'api/autocomplete/tags')
+        .then(response => {
+            dispatch(getAllExistingTagsSuccess(response["data"])) // Dispatch Successful request
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(getAllExistingTagsFail(err)) // Dispatch an error
+        })
+    }
+}
+
+export function getAllExistingTags() {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_TAGS,
+    }
+}
+
+export function getAllExistingTagsSuccess(data) {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_TAGS_SUCCESS,
+        payload: data
+    }
+}
+
+export function getAllExistingTagsFail(error) {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_TAGS_FAIL,
         payload: error
     }
 }

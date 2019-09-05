@@ -9,9 +9,17 @@
     width: 39px;
 }
 
+#searchBtn:hover {
+    background-color: rgb(102, 178, 255);
+}
+
+#searchBtn:active {
+    background-color: grey;
+}
+
 #searchInput {
     height: 39px;
-    width: 400px;
+    min-width: 400px;
     border-radius: 5px;
     margin: 1px;
 }
@@ -25,14 +33,83 @@
     margin: 1px;
 }
 
+#addSampleBtn:active {
+    background-color: grey;
+}
+
 .searchingBar {
     margin-top: 20%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 .conteiner {
     text-align: center;
+    height: auto;
+    width: 100%;
 }
 
-.autocompleateNames {
+#autocompleateListOfNames {
+    display: none;
     position: absolute;
+    border: none;
+    background-color: transparent;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    min-width: 400px;
 }
+
+#optionName {
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    background-color: rgba(255,255,255,0.9);
+}
+
+#optionName:hover {
+    cursor: pointer;
+    background-color: rgb(102, 178, 255);
+}
+
+#optionName:active {
+    cursor: pointer;
+    background-color: grey;
+}
+
+.tags {
+    color: white;
+    margin: 2px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 3px;
+    border-radius: 12px;
+    background-color: grey;
+}
+
+.tagsConteiner {
+    margin-top: 10px;
+}
+
+.tagsConteiner {
+    padding-bottom: 10px;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+#tagsTitle {
+    margin: 2px;
+    position: relative;
+    top: -14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 3px;
+    border-radius: 12px;
+    color: white;
+    background-color:  grey;
+}
+
