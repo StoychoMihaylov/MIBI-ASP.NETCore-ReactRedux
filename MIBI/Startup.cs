@@ -12,6 +12,8 @@ namespace MIBI
     using MIBI.Services.Services;
     using MIBI.Services.Interfaces;
     using AutoMapper;
+    using MIBI.Data.Context;
+    using MIBI.Data.DBInitilizer;
 
     public class Startup
     {
@@ -70,7 +72,7 @@ namespace MIBI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, MIBIContext context)
         {
             if (env.IsDevelopment())
             {
@@ -86,6 +88,8 @@ namespace MIBI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            DBInitializer.SeedDb(context);
 
             app.UseMvc(routes =>
             {

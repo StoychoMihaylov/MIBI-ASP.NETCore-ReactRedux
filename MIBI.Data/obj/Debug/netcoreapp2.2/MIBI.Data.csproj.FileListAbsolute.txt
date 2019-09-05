@@ -9,4 +9,3 @@ C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.Ass
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.csproj.CopyComplete
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.pdb
-C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.csprojAssemblyReference.cache
