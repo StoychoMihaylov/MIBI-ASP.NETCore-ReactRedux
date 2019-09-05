@@ -1,4 +1,4 @@
-﻿namespace MIBI.Data
+﻿namespace MIBI.Data.Context
 {
     using MIBI.Data.Entities;
     using MIBI.Data.Interfaces;
@@ -7,7 +7,7 @@
     public class MIBIContext : DbContext, IMIBIContext
     {
         public MIBIContext(DbContextOptions<MIBIContext> options)
-            : base(options) { }
+            : base(options){}
 
         public DbSet<Sample> Samples { get; set; }
 
