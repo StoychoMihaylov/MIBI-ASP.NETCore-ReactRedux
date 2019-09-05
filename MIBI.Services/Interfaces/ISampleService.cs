@@ -8,6 +8,7 @@
     {
         void CreateNewSample(NewSampleBidingModel newSample);
         List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples();
-        List<TagsNamesViewModel> GetAllTags();
+        List<TagNameViewModel> GetAllTags();
+        List<GroupViewModel> GetAllGroups();
     }
 }

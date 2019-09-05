@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MIBI.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-
-namespace MIBI.Controllers
+﻿namespace MIBI.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using MIBI.Services.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class AutocompleteController : Controller
@@ -35,6 +35,15 @@ namespace MIBI.Controllers
             var tags = this.service.GetAllTags();
 
             return Ok(tags);
+        }
+
+        [HttpGet]
+        [Route("groups")]
+        public IActionResult GetGroups()
+        {
+            var groups = this.service.GetAllGroups();
+
+            return Ok(groups);
         }
     }
 }

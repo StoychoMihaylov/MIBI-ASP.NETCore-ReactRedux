@@ -7,7 +7,10 @@
     REQUEST_GET_ALL_NAMES_OF_SAMPLES_FAIL,
     REQUEST_GET_ALL_EXISTING_TAGS,
     REQUEST_GET_ALL_EXISTING_TAGS_SUCCESS,
-    REQUEST_GET_ALL_EXISTING_TAGS_FAIL
+    REQUEST_GET_ALL_EXISTING_TAGS_FAIL,
+    REQUEST_GET_ALL_EXISTING_GROUPS,
+    REQUEST_GET_ALL_EXISTING_GROUPS_SUCCESS,
+    REQUEST_GET_ALL_EXISTING_GROUPS_FAIL
 } from '../../constants/actionTypes'
 
 import { api } from '../../constants/api'
@@ -88,7 +91,9 @@ export function getAllExistingNamesOfSamplesFail(error) {
     }
 }
 
-export function getAllExistingtagsFromServer() {
+//**********
+
+export function getAllExistingTagsFromServer() {
     return function (dispatch) {
         dispatch(getAllExistingTags()) // Dispatch get all ezisting names of samples
         axios.get(api + 'api/autocomplete/tags')
@@ -118,6 +123,42 @@ export function getAllExistingTagsSuccess(data) {
 export function getAllExistingTagsFail(error) {
     return {
         type: REQUEST_GET_ALL_EXISTING_TAGS_FAIL,
+        payload: error
+    }
+}
+
+//**********
+
+export function getAllExistingGroupsFromServer() {
+    return function (dispatch) {
+        dispatch(getAllExistingGroups()) // Dispatch get all ezisting names of samples
+        axios.get(api + 'api/autocomplete/groups')
+        .then(response => {
+            dispatch(getAllExistingGroupsSuccess(response["data"])) // Dispatch Successful request
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(getAllExistingGroupsFail(err)) // Dispatch an error
+        })
+    }
+}
+
+export function getAllExistingGroups() {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_GROUPS
+    }
+}
+
+export function getAllExistingGroupsSuccess(data) {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_GROUPS_SUCCESS,
+        payload: data
+    }
+}
+
+export function getAllExistingGroupsFail(error) {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_GROUPS_FAIL,
         payload: error
     }
 }

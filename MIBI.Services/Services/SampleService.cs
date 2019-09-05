@@ -64,6 +64,29 @@
             this.Context.SaveChanges();
         }
 
+        public List<GroupViewModel> GetAllGroups()
+        {
+            var groupsVm = new List<GroupViewModel>();
+
+            var groups = this.Context
+                .Groups
+                .Select(g => new { g.Id, g.Name })
+                .ToList();
+
+            foreach (var group in groups)
+            {
+                var groupName = new GroupViewModel()
+                {
+                    Id = group.Id,
+                    Name = group.Name
+                };
+
+                groupsVm.Add(groupName);
+            }
+
+            return groupsVm;
+        }
+
         public List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples()
         {
             var namesOfSamples = new List<AutocompleteBacteriaNamesViewModel>();
@@ -87,9 +110,9 @@
             return namesOfSamples;
         }
 
-        public List<TagsNamesViewModel> GetAllTags()
+        public List<TagNameViewModel> GetAllTags()
         {
-            var allTags = new List<TagsNamesViewModel>();
+            var allTags = new List<TagNameViewModel>();
 
             var tags = this.Context
                 .Tags
@@ -98,7 +121,7 @@
 
             foreach (var tag in tags)
             {
-                var sampleName = new TagsNamesViewModel()
+                var sampleName = new TagNameViewModel()
                 {
                     Id = tag.Id,
                     Name = tag.Name

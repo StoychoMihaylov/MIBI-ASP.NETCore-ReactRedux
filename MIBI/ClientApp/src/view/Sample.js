@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import {
     getAllNamesOfExistingSamples,
-    getAllExistingtagsFromServer
+    getAllExistingTagsFromServer,
+    getAllExistingGroupsFromServer
 } from '../store/actions/SampleActions'
 import "../styles/Sample.css"
 
@@ -14,13 +15,17 @@ class SampleView extends Component {
         this.state = {
             searchSampleName: "",
             optionSetNames: [],
-            selectedTags: []
+            selectedTags: [],
+            selectedGroups: [],
+            isTagsBtnClicked: false,
+            isGroupsBtnClicked: false
         }
     }
 
     async componentWillMount() {
         this.props.fetchAllNamesOfExistingSamples()
-        this.props.fetchAllExistingtags()
+        this.props.fetchAllExistingTags()
+        this.props.fetchAllExistingGroups()
     }
 
     setTheSelectedOption(event) {
@@ -101,6 +106,72 @@ class SampleView extends Component {
         }
     }
 
+    addsearchingByGroup(event) {
+        let id = event.target.id
+        let value = event.target.value
+        let tabIndex = event.target.tabIndex
+        let groups = this.state.selectedGroups
+
+        if(tabIndex === 0) {
+            let element = document.getElementById(id)
+            element.style.backgroundColor = "#66B2FF"
+            element.tabIndex = "1"
+
+            this.props.allExistingGroups.forEach(group => {
+                if(group.name.toLowerCase() === value.toLowerCase()) {
+                    groups.push(group)
+                }
+            })
+
+            this.setState({
+                selectedGroups: groups
+            })
+
+        } else if (tabIndex === 1) {
+            let element = document.getElementById(id)
+            element.style.backgroundColor = "grey"
+            element.tabIndex = "0"
+
+            this.props.allExistingGroups.forEach(group => {
+                if(group.name.toLowerCase() === value.toLowerCase()) {
+                    groups.splice(groups.indexOf(value), 1)
+                }
+            })
+
+            this.setState({
+                selectedGroups: groups
+            })
+        }
+    }
+
+    handleGroupsBtnClick() {
+        let state = this.state.isGroupsBtnClicked
+
+        if(state) {
+            this.setState({
+                isGroupsBtnClicked: false
+            })
+        } else if(! state) {
+            this.setState({
+                isGroupsBtnClicked: true
+            })
+        }
+    }
+
+    handleTagsBtnClick(){
+        let state = this.state.isTagsBtnClicked
+
+        if(state) {
+            this.setState({
+                isTagsBtnClicked: false
+            })
+        } else if(! state) {
+            this.setState({
+                isTagsBtnClicked: true
+            })
+        }
+    }
+
     render() {
         let optionSetOfNames = this.state.optionSetNames.map((rec, index) => (
             <div key={index}>
@@ -111,6 +182,28 @@ class SampleView extends Component {
                     value={rec.name}
                     onClick={this.setTheSelectedOption.bind(this)}/>
             </div>
+        ))
+
+        let tags = this.props.allExistingTags.map((tag, index) => (
+            <button
+                key={index}
+                id={tag.id}
+                className="tags"
+                tabIndex="0"
+                type="text"
+                value={tag.name}
+                onClick={this.addsearchingByTag.bind(this)}>{tag.name}</button>
+        ))
+
+        let groups = this.props.allExistingGroups.map((grop, index) => (
+            <button
+            key={index}
+            id={grop.id}
+            className="groups"
+            tabIndex="0"
+            type="text"
+            value={grop.name}
+            onClick={this.addsearchingByGroup.bind(this)}>{grop.name}</button>
         ))
 
         return(
@@ -127,7 +220,7 @@ class SampleView extends Component {
                                     onChange={this.showOptionSetOfNames.bind(this)}
                                 />
                                 <div id="autocompleateListOfNames">
-                                    {optionSetOfNames}
+                                    { optionSetOfNames }
                                 </div>
                             </td>
                             <td>
@@ -144,23 +237,28 @@ class SampleView extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <div className="tagsConteiner">
-                    <span id="tagsTitle">Tags</span>
-                    <br/>
-                    {
-                     this.props.allExistingTags.map((tag, index) => (
-                        <button
-                            readOnly
-                            key={index}
-                            id={tag.id}
-                            className="tags"
-                            tabIndex="0"
-                            type="text"
-                            value={tag.name}
-                            onClick={this.addsearchingByTag.bind(this)}>{tag.name}</button>
-                        ))
-                    }
-                </div>
+                {
+                    this.state.isGroupsBtnClicked
+                    ?
+                    <div className="groupsContainer">
+                        <button id="groupsTitle" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                        <br/>
+                        { groups }
+                    </div>
+                    :
+                    <button id="groupsBtn" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                }
+                {
+                    this.state.isTagsBtnClicked
+                    ?
+                    <div className="tagsConteiner">
+                        <button id="tagsTitle" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                        <br/>
+                        { tags }
+                    </div>
+                    :
+                    <button id="tagsBtn" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                }
             </div>
         </div>
         )
@@ -170,17 +268,19 @@ class SampleView extends Component {
 const mapStateToProps = state => {
     console.log(state)
     return {
-      allExistingTags: state.sample.allExistingTags,
-      autocompleteNamesOfSamples: state.sample.autocompleteNamesOfSamples,
-      isLoading: state.sample.isLoading,
-      error: state.sample.error
+        allExistingGroups: state.sample.allExistingGroups,
+        allExistingTags: state.sample.allExistingTags,
+        autocompleteNamesOfSamples: state.sample.autocompleteNamesOfSamples,
+        isLoading: state.sample.isLoading,
+        error: state.sample.error
     };
   };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchAllNamesOfExistingSamples: () => dispatch(getAllNamesOfExistingSamples()),
-        fetchAllExistingtags: () => dispatch(getAllExistingtagsFromServer())
+        fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
+        fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer())
     };
   };
 

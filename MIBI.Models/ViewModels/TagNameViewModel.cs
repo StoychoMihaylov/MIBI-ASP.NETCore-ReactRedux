@@ -1,6 +1,6 @@
 ﻿namespace MIBI.Models.ViewModels
 {
-    public class TagsNamesViewModel
+    public class TagNameViewModel
     {
         public int Id { get; set; }
 
