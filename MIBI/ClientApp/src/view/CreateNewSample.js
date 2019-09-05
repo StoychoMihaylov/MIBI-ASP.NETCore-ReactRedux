@@ -2,6 +2,11 @@
 import { connect } from "react-redux"
 import { Route } from "react-router"
 import { addNewSampleInTheServer } from "../store/actions/SampleActions"
+import {
+  getAllExistingTagsFromServer,
+  getAllExistingGroupsFromServer
+} from '../store/actions/SampleActions'
+import "../styles/CreateNewSample.css"
 
 class CreateNewSample extends Component {
   constructor(props) {
@@ -10,15 +15,20 @@ class CreateNewSample extends Component {
     this.state = {
       name: "",
       description: "",
-      group: "",
-      tags: [],
+      selectedTags: [],
+      selectedGroups: [],
       images: [],
-      files: {}
-    };
+      files: {},
 
-    this.handleImages = this.handleImages.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      isTagsBtnClicked: false,
+      isGroupsBtnClicked: false
+    }
   }
+
+  async componentWillMount() {
+    this.props.fetchAllExistingTags()
+    this.props.fetchAllExistingGroups()
+}
 
   handleImages(images) {
     let imgs = Array.from(images.target.files)
@@ -38,6 +48,110 @@ class CreateNewSample extends Component {
       images: previewImages,
       files: imgs
     });
+  }
+
+  handleGroupsBtnClick() {
+    let state = this.state.isGroupsBtnClicked
+
+    if(state) {
+        this.setState({
+            isGroupsBtnClicked: false
+        })
+    } else if(! state) {
+        this.setState({
+            isGroupsBtnClicked: true
+        })
+    }
+  }
+
+  handleTagsBtnClick(){
+    let state = this.state.isTagsBtnClicked
+
+    if(state) {
+        this.setState({
+            isTagsBtnClicked: false
+        })
+    } else if(! state) {
+        this.setState({
+            isTagsBtnClicked: true
+        })
+    }
+  }
+
+  addSearchingByTag(event) {
+    let id = event.target.id
+    let value = event.target.value
+    let tabIndex = event.target.tabIndex
+    let tags = this.state.selectedTags
+
+    if(tabIndex === 0) {
+        let element = document.getElementById(id)
+        element.style.backgroundColor = "#66B2FF"
+        element.tabIndex = "1"
+
+        this.props.allExistingTags.forEach(tag => {
+            if(tag.name.toLowerCase() === value.toLowerCase()) {
+                tags.push(tag)
+            }
+        })
+
+        this.setState({
+            selectedTags: tags
+        })
+
+    } else if (tabIndex === 1) {
+        let element = document.getElementById(id)
+        element.style.backgroundColor = "grey"
+        element.tabIndex = "0"
+
+        this.props.allExistingTags.forEach(tag => {
+            if(tag.name.toLowerCase() === value.toLowerCase()) {
+                tags.splice(tags.indexOf(value), 1)
+            }
+        })
+
+        this.setState({
+            selectedTags: tags
+        })
+    }
+}
+
+  addSearchingByGroup(event) {
+    let id = event.target.id
+    let value = event.target.value
+    let tabIndex = event.target.tabIndex
+    let groups = this.state.selectedGroups
+
+    if(tabIndex === 0) {
+        let element = document.getElementById(id)
+        element.style.backgroundColor = "#66B2FF"
+        element.tabIndex = "1"
+
+        this.props.allExistingGroups.forEach(group => {
+            if(group.name.toLowerCase() === value.toLowerCase()) {
+                groups.push(group)
+            }
+        })
+
+        this.setState({
+            selectedGroups: groups
+        })
+
+    } else if (tabIndex === 1) {
+        let element = document.getElementById(id)
+        element.style.backgroundColor = "grey"
+        element.tabIndex = "0"
+
+        this.props.allExistingGroups.forEach(group => {
+            if(group.name.toLowerCase() === value.toLowerCase()) {
+                groups.splice(groups.indexOf(value), 1)
+            }
+        })
+
+        this.setState({
+            selectedGroups: groups
+        })
+    }
   }
 
   async handleSubmit(event) {
@@ -62,10 +176,31 @@ class CreateNewSample extends Component {
   }
 
   render() {
+    let tags = this.props.allExistingTags.map((tag, index) => (
+      <button
+          key={index}
+          id={tag.id}
+          className="tags"
+          tabIndex="0"
+          type="text"
+          value={tag.name}
+          onClick={this.addSearchingByTag.bind(this)}>{tag.name}</button>
+  ))
+
+  let groups = this.props.allExistingGroups.map((grop, index) => (
+      <button
+      key={index}
+      id={grop.id}
+      className="groups"
+      tabIndex="0"
+      type="text"
+      value={grop.name}
+      onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
+  ))
+
     return (
-      <div>
-        <h1>Create new Sample View</h1>
-        <form onSubmit={this.handleSubmit}>
+      <div className="conteiner">
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <label>
             Name:
             <input
@@ -89,37 +224,31 @@ class CreateNewSample extends Component {
           {/* Image Uploader */}
           <label>
             Upload Images:
-            <input type="file" multiple={true} onChange={this.handleImages} />
+            <input type="file" multiple={true} onChange={this.handleImages.bind(this)} />
           </label>
           <br />
-          <label>
-            Group:
-            <input
-              type="text"
-              name="group"
-              placeholder="group1, group2..."
-              onChange={event => this.setState({ group: event.target.value })}
-            />
-          </label>
-          <br />
-          {/* Image previewer */}
-          {this.state.images.map((img, index) => {
-            return (
-              <div key={index}>
-                <img src={img.url} alt="cat img" />
-              </div>
-            );
-          })}
-          <br />
-          <label>
-            Tags:
-            <input
-              type="text"
-              placeholder="tag1, tag2, tag3..."
-              name="tags"
-              onChange={event => {this.setState({ tags: event.target.value }) }}
-            />
-          </label>
+          {
+            this.state.isGroupsBtnClicked
+            ?
+            <div className="groupsContainer">
+                <button id="groupsTitle" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                <br/>
+                { groups }
+            </div>
+            :
+            <button id="groupsBtn" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+          }
+          {
+            this.state.isTagsBtnClicked
+            ?
+            <div className="tagsConteiner">
+                <button id="tagsTitle" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                <br/>
+                { tags }
+            </div>
+            :
+            <button id="tagsBtn" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+          }
           <br />
           <button type="submit">SAVE</button>
           <Route
@@ -139,6 +268,8 @@ class CreateNewSample extends Component {
 
 const mapStateToProps = state => {
   return {
+    allExistingTags: state.sample.allExistingTags,
+    allExistingGroups: state.sample.allExistingGroups,
     isLoading: state.sample.isLoading,
     error: state.sample.error
   };
@@ -147,7 +278,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createSample: imageFormData =>
-      dispatch(addNewSampleInTheServer(imageFormData))
+      dispatch(addNewSampleInTheServer(imageFormData)),
+      fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
+      fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer())
   };
 };
 

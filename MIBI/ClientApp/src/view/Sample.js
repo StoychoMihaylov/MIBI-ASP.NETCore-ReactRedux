@@ -68,7 +68,7 @@ class SampleView extends Component {
         }
     }
 
-    addsearchingByTag(event) {
+    addSearchingByTag(event) {
         let id = event.target.id
         let value = event.target.value
         let tabIndex = event.target.tabIndex
@@ -106,7 +106,7 @@ class SampleView extends Component {
         }
     }
 
-    addsearchingByGroup(event) {
+    addSearchingByGroup(event) {
         let id = event.target.id
         let value = event.target.value
         let tabIndex = event.target.tabIndex
@@ -192,7 +192,7 @@ class SampleView extends Component {
                 tabIndex="0"
                 type="text"
                 value={tag.name}
-                onClick={this.addsearchingByTag.bind(this)}>{tag.name}</button>
+                onClick={this.addSearchingByTag.bind(this)}>{tag.name}</button>
         ))
 
         let groups = this.props.allExistingGroups.map((grop, index) => (
@@ -203,7 +203,7 @@ class SampleView extends Component {
             tabIndex="0"
             type="text"
             value={grop.name}
-            onClick={this.addsearchingByGroup.bind(this)}>{grop.name}</button>
+            onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
         ))
 
         return(
