@@ -210,86 +210,86 @@ class CreateNewSample extends Component {
     return (
       <div className="conteiner">
         <div>
-          <label>
-            Name:
             <input
               type="text"
               placeholder="Type a name"
               name="name"
+              className="nameInput"
               onChange={event => this.setState({ name: event.target.value })}
             />
-          </label>
           <br />
-          <label>
-            Description:
-            <textarea
-              placeholder="Text..."
-              onChange={event =>
-                this.setState({ description: event.target.value })
-              }
-            />
-          </label>
+              <textarea
+                placeholder="Description..."
+                className="descriptionInput"
+                onChange={event =>
+                  this.setState({ description: event.target.value })
+                }
+              />
           <br />
           {/* Image Uploader */}
-          <label>
-            Upload Images:
+          <label className="uploadImgsConteiner">
+            <span className="uploadImgs">Upload Images</span>
             <input
               type="file"
               multiple={true}
+              className="imgUpload"
               onChange={this.handleImages.bind(this)} />
           </label>
           <br/>
             <div>
               {
                 this.state.images.map((img, index) => (
-                  <img key={index} src={img.url} />
+                  <img key={index} src={img.url} className="image"/>
                 ))
               }
             </div>
           <br/>
-          {
-            this.state.isGroupsBtnClicked
-            ?
-            <div className="groupsContainer">
+          <div>
+              {
+                this.state.isGroupsBtnClicked
+                ?
+                <div className="groupsContainer">
+                    <button
+                      type="button"
+                      id="groupsTitle"
+                      onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                    <br/>
+                    { groups }
+                </div>
+                :
                 <button
                   type="button"
-                  id="groupsTitle"
+                  id="groupsBtn"
                   onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
-                <br/>
-                { groups }
-            </div>
-            :
-            <button
-              type="button"
-              id="groupsBtn"
-              onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
-          }
-          {
-            this.state.isTagsBtnClicked
-            ?
-            <div className="tagsConteiner">
+              }
+              {
+                this.state.isTagsBtnClicked
+                ?
+                <div className="tagsConteiner">
+                    <button
+                      type="button"
+                      id="tagsTitle"
+                      onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                    <br/>
+                    { tags }
+                </div>
+                :
                 <button
                   type="button"
-                  id="tagsTitle"
+                  id="tagsBtn"
                   onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
-                <br/>
-                { tags }
-            </div>
-            :
-            <button
-              type="button"
-              id="tagsBtn"
-              onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
-          }
+              }
+          </div>
           <br />
-          <button type="button" onClick={this.handleSubmit.bind(this)}>SAVE</button>
+          <button type="button"
+          className="saveBtn"
+          onClick={this.handleSubmit.bind(this)}>SAVE</button>
           <Route
             render={({ history }) => (
               <button
                 type="button"
-                onClick={() => { this.props.history.goBack() }}>
-                Backs
-              </button>
+                className="backBtn"
+                onClick={() => { this.props.history.goBack() }}>BACK</button>
             )}
           />
         </div>

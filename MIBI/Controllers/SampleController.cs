@@ -28,8 +28,8 @@
         public IActionResult Post(
             [FromForm] string name,
             [FromForm] string description,
-            [FromForm] string[] groups,
-            [FromForm] string[] tags,
+            [FromForm] string groups,
+            [FromForm] string tags,
             [FromForm]IFormCollection formData)
         {
             if (name == null
