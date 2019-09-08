@@ -157,6 +157,17 @@ class CreateNewSample extends Component {
   async handleSubmit(event) {
     event.preventDefault();
 
+    let groupsNames = []
+    let tagsNames = []
+
+    this.state.selectedGroups.forEach(group => {
+      groupsNames.push(group.name)
+    })
+
+    this.state.selectedTags.forEach(tag => {
+      tagsNames.push(tag.name)
+    })
+
     let formData = new FormData();
     if (this.state.files.length > 0) {
       this.state.files.forEach(file => {
@@ -164,12 +175,10 @@ class CreateNewSample extends Component {
       });
     }
 
-    let tags = this.state.tags.toString();
-
     formData.append("name", this.state.name)
     formData.append("description", this.state.description)
-    formData.append("group", this.state.group)
-    formData.append("tags", tags)
+    formData.append("groups", groupsNames.join())
+    formData.append("tags", tagsNames.join())
 
     await this.props.createSample(formData)
     this.props.history.push("/")
@@ -185,22 +194,22 @@ class CreateNewSample extends Component {
           type="text"
           value={tag.name}
           onClick={this.addSearchingByTag.bind(this)}>{tag.name}</button>
-  ))
+    ))
 
-  let groups = this.props.allExistingGroups.map((grop, index) => (
-      <button
-      key={index}
-      id={grop.id}
-      className="groups"
-      tabIndex="0"
-      type="text"
-      value={grop.name}
-      onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
-  ))
+    let groups = this.props.allExistingGroups.map((grop, index) => (
+        <button
+        key={index}
+        id={grop.id}
+        className="groups"
+        tabIndex="0"
+        type="text"
+        value={grop.name}
+        onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
+    ))
 
     return (
       <div className="conteiner">
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <div>
           <label>
             Name:
             <input
@@ -224,33 +233,56 @@ class CreateNewSample extends Component {
           {/* Image Uploader */}
           <label>
             Upload Images:
-            <input type="file" multiple={true} onChange={this.handleImages.bind(this)} />
+            <input
+              type="file"
+              multiple={true}
+              onChange={this.handleImages.bind(this)} />
           </label>
-          <br />
+          <br/>
+            <div>
+              {
+                this.state.images.map((img, index) => (
+                  <img key={index} src={img.url} />
+                ))
+              }
+            </div>
+          <br/>
           {
             this.state.isGroupsBtnClicked
             ?
             <div className="groupsContainer">
-                <button id="groupsTitle" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                <button
+                  type="button"
+                  id="groupsTitle"
+                  onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
                 <br/>
                 { groups }
             </div>
             :
-            <button id="groupsBtn" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+            <button
+              type="button"
+              id="groupsBtn"
+              onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
           }
           {
             this.state.isTagsBtnClicked
             ?
             <div className="tagsConteiner">
-                <button id="tagsTitle" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                <button
+                  type="button"
+                  id="tagsTitle"
+                  onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
                 <br/>
                 { tags }
             </div>
             :
-            <button id="tagsBtn" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+            <button
+              type="button"
+              id="tagsBtn"
+              onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
           }
           <br />
-          <button type="submit">SAVE</button>
+          <button type="button" onClick={this.handleSubmit.bind(this)}>SAVE</button>
           <Route
             render={({ history }) => (
               <button
@@ -260,7 +292,7 @@ class CreateNewSample extends Component {
               </button>
             )}
           />
-        </form>
+        </div>
       </div>
     );
   }

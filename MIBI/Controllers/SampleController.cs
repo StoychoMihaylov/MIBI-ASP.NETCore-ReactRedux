@@ -28,37 +28,25 @@
         public IActionResult Post(
             [FromForm] string name,
             [FromForm] string description,
-            [FromForm] string group,
-            [FromForm] string tags,
+            [FromForm] string[] groups,
+            [FromForm] string[] tags,
             [FromForm]IFormCollection formData)
         {
             if (name == null
                 && description == null
                 && tags == null
-                && group == null
+                && groups == null
                 && formData == null)
             {
                 return BadRequest("Please field up at least one image! All fields are requered!");
             }
 
-            var sampleGroups = group
-                .ToString()
-                .Split(',')
-                .Select(tag => tag.TrimStart(' ').TrimEnd(' '))
-                .ToArray();
-
-            var sampleTags = tags
-                .ToString()
-                .Split(',')
-                .Select(tag => tag.TrimStart(' ').TrimEnd(' '))
-                .ToArray();
-
             var newSaple = new NewSampleBidingModel()
             {
                 Name = name,
                 Description = description,
-                Groups = sampleGroups,
-                Tags = sampleTags,
+                Groups = groups,
+                Tags = tags,
                 ImgUrls = new List<string>()
             };
 

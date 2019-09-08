@@ -1,8 +1,10 @@
 ﻿namespace MIBI.Data.Entities
 {
+    using System;
+
     public class SampleImage
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Url { get; set; }
 

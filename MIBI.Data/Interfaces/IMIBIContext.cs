@@ -13,6 +13,10 @@
 
         DbSet<Tag> Tags { get; set; }
 
+        DbSet<SampleGroup> SampleGroups { get; set; }
+
+        DbSet<SampleTag> SampleTags { get; set; }
+
         int SaveChanges();
     }
 }
