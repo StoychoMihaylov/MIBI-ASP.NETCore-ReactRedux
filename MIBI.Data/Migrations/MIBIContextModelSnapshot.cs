@@ -4,6 +4,7 @@ using MIBI.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MIBI.Data.Migrations
 {
@@ -20,26 +21,20 @@ namespace MIBI.Data.Migrations
 
             modelBuilder.Entity("MIBI.Data.Entities.Group", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("SampleId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SampleId");
 
                     b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("MIBI.Data.Entities.Sample", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedBy");
 
@@ -54,13 +49,25 @@ namespace MIBI.Data.Migrations
                     b.ToTable("Samples");
                 });
 
+            modelBuilder.Entity("MIBI.Data.Entities.SampleGroup", b =>
+                {
+                    b.Property<Guid>("SampleId");
+
+                    b.Property<Guid>("GroupId");
+
+                    b.HasKey("SampleId", "GroupId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("SampleGroups");
+                });
+
             modelBuilder.Entity("MIBI.Data.Entities.SampleImage", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("SampleId");
+                    b.Property<Guid?>("SampleId");
 
                     b.Property<string>("Url");
 
@@ -71,28 +78,42 @@ namespace MIBI.Data.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("MIBI.Data.Entities.SampleTag", b =>
+                {
+                    b.Property<Guid>("SampleId");
+
+                    b.Property<Guid>("TagId");
+
+                    b.HasKey("SampleId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("SampleTags");
+                });
+
             modelBuilder.Entity("MIBI.Data.Entities.Tag", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("SampleId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("SampleId");
 
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("MIBI.Data.Entities.Group", b =>
+            modelBuilder.Entity("MIBI.Data.Entities.SampleGroup", b =>
                 {
+                    b.HasOne("MIBI.Data.Entities.Group", "Group")
+                        .WithMany("SampleGroups")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("MIBI.Data.Entities.Sample", "Sample")
-                        .WithMany("Groups")
-                        .HasForeignKey("SampleId");
+                        .WithMany("SampleGroups")
+                        .HasForeignKey("SampleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MIBI.Data.Entities.SampleImage", b =>
@@ -102,11 +123,17 @@ namespace MIBI.Data.Migrations
                         .HasForeignKey("SampleId");
                 });
 
-            modelBuilder.Entity("MIBI.Data.Entities.Tag", b =>
+            modelBuilder.Entity("MIBI.Data.Entities.SampleTag", b =>
                 {
                     b.HasOne("MIBI.Data.Entities.Sample", "Sample")
-                        .WithMany("Tags")
-                        .HasForeignKey("SampleId");
+                        .WithMany("SampleTags")
+                        .HasForeignKey("SampleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MIBI.Data.Entities.Tag", "Tag")
+                        .WithMany("SampleTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -5,7 +5,7 @@
 
     public class Sample
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
@@ -17,8 +17,8 @@
 
         public virtual ICollection<SampleImage> ImgURLs { get; set; }
 
-        public virtual ICollection<Tag> Tags { get; set; }
+        public ICollection<SampleTag> SampleTags { get; set; }
 
-        public virtual ICollection<Group> Groups { get; set; }
+        public ICollection<SampleGroup> SampleGroups { get; set; }
     }
 }

@@ -157,6 +157,17 @@ class CreateNewSample extends Component {
   async handleSubmit(event) {
     event.preventDefault();
 
+    let groupsNames = []
+    let tagsNames = []
+
+    this.state.selectedGroups.forEach(group => {
+      groupsNames.push(group.name)
+    })
+
+    this.state.selectedTags.forEach(tag => {
+      tagsNames.push(tag.name)
+    })
+
     let formData = new FormData();
     if (this.state.files.length > 0) {
       this.state.files.forEach(file => {
@@ -164,12 +175,10 @@ class CreateNewSample extends Component {
       });
     }
 
-    let tags = this.state.tags.toString();
-
     formData.append("name", this.state.name)
     formData.append("description", this.state.description)
-    formData.append("group", this.state.group)
-    formData.append("tags", tags)
+    formData.append("groups", groupsNames.join())
+    formData.append("tags", tagsNames.join())
 
     await this.props.createSample(formData)
     this.props.history.push("/")
@@ -185,82 +194,105 @@ class CreateNewSample extends Component {
           type="text"
           value={tag.name}
           onClick={this.addSearchingByTag.bind(this)}>{tag.name}</button>
-  ))
+    ))
 
-  let groups = this.props.allExistingGroups.map((grop, index) => (
-      <button
-      key={index}
-      id={grop.id}
-      className="groups"
-      tabIndex="0"
-      type="text"
-      value={grop.name}
-      onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
-  ))
+    let groups = this.props.allExistingGroups.map((grop, index) => (
+        <button
+        key={index}
+        id={grop.id}
+        className="groups"
+        tabIndex="0"
+        type="text"
+        value={grop.name}
+        onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
+    ))
 
     return (
       <div className="conteiner">
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <label>
-            Name:
+        <div>
             <input
               type="text"
               placeholder="Type a name"
               name="name"
+              className="nameInput"
               onChange={event => this.setState({ name: event.target.value })}
             />
-          </label>
           <br />
-          <label>
-            Description:
-            <textarea
-              placeholder="Text..."
-              onChange={event =>
-                this.setState({ description: event.target.value })
-              }
-            />
-          </label>
+              <textarea
+                placeholder="Description..."
+                className="descriptionInput"
+                onChange={event =>
+                  this.setState({ description: event.target.value })
+                }
+              />
           <br />
           {/* Image Uploader */}
-          <label>
-            Upload Images:
-            <input type="file" multiple={true} onChange={this.handleImages.bind(this)} />
+          <label className="uploadImgsConteiner">
+            <span className="uploadImgs">Upload Images</span>
+            <input
+              type="file"
+              multiple={true}
+              className="imgUpload"
+              onChange={this.handleImages.bind(this)} />
           </label>
-          <br />
-          {
-            this.state.isGroupsBtnClicked
-            ?
-            <div className="groupsContainer">
-                <button id="groupsTitle" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
-                <br/>
-                { groups }
+          <br/>
+            <div>
+              {
+                this.state.images.map((img, index) => (
+                  <img key={index} src={img.url} className="image"/>
+                ))
+              }
             </div>
-            :
-            <button id="groupsBtn" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
-          }
-          {
-            this.state.isTagsBtnClicked
-            ?
-            <div className="tagsConteiner">
-                <button id="tagsTitle" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
-                <br/>
-                { tags }
-            </div>
-            :
-            <button id="tagsBtn" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
-          }
+          <br/>
+          <div>
+              {
+                this.state.isGroupsBtnClicked
+                ?
+                <div className="groupsContainer">
+                    <button
+                      type="button"
+                      id="groupsTitle"
+                      onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                    <br/>
+                    { groups }
+                </div>
+                :
+                <button
+                  type="button"
+                  id="groupsBtn"
+                  onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+              }
+              {
+                this.state.isTagsBtnClicked
+                ?
+                <div className="tagsConteiner">
+                    <button
+                      type="button"
+                      id="tagsTitle"
+                      onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                    <br/>
+                    { tags }
+                </div>
+                :
+                <button
+                  type="button"
+                  id="tagsBtn"
+                  onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+              }
+          </div>
           <br />
-          <button type="submit">SAVE</button>
+          <button type="button"
+          className="saveBtn"
+          onClick={this.handleSubmit.bind(this)}>SAVE</button>
           <Route
             render={({ history }) => (
               <button
                 type="button"
-                onClick={() => { this.props.history.goBack() }}>
-                Backs
-              </button>
+                className="backBtn"
+                onClick={() => { this.props.history.goBack() }}>BACK</button>
             )}
           />
-        </form>
+        </div>
       </div>
     );
   }

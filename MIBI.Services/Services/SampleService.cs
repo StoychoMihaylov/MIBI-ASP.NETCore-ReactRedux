@@ -16,38 +16,9 @@
 
         public void CreateNewSample(NewSampleBidingModel newSampleData)
         {
-            List<Tag> newTags = new List<Tag>();
-            foreach (var name in newSampleData.Tags)
-            {
-                Tag newTag = new Tag()
-                {
-                    Name = name
-                };
-
-                newTags.Add(newTag);
-            }
-
-            List<Group> newGroups = new List<Group>();
-            foreach (var name in newSampleData.Groups)
-            {
-                Group newGroup = new Group()
-                {
-                    Name = name
-                };
-
-                newGroups.Add(newGroup);
-            }
-
-            List<SampleImage> newImgs = new List<SampleImage>();
-            foreach (var url in newSampleData.ImgUrls)
-            {
-                SampleImage newImg = new SampleImage()
-                {
-                    Url = url
-                };
-
-                newImgs.Add(newImg);
-            }
+            List<SampleGroup> sampleGroups = CrateSampleGroupsByGroupName(newSampleData.Groups.Split(','));
+            List<SampleTag> sampleTags = CreateSampleTagsByTagName(newSampleData.Tags.Split(','));
+            List<SampleImage> newImgs = CreateNewImagesByGivenUrls(newSampleData.ImgUrls);
 
             Sample newSample = new Sample()
             {
@@ -55,13 +26,64 @@
                 Description = newSampleData.Description,
                 CreatedOn = DateTime.Now,
                 CreatedBy = "Bai Pesho",
-                Groups = newGroups,
-                Tags = newTags,
+                SampleGroups = sampleGroups,
+                SampleTags = sampleTags,
                 ImgURLs = newImgs
-            };
+            };   
 
             this.Context.Samples.Add(newSample);
             this.Context.SaveChanges();
+        }
+
+        private List<SampleImage> CreateNewImagesByGivenUrls(List<string> imgUrls)
+        {
+            var imgs = new List<SampleImage>();
+
+            foreach (var url in imgUrls)
+            {
+                SampleImage newImg = new SampleImage()
+                {
+                    Url = url
+                };
+
+                imgs.Add(newImg);
+            }
+
+            return imgs;
+        }
+
+        private List<SampleTag> CreateSampleTagsByTagName(string[] tags)
+        {
+            var sampleTags = new List<SampleTag>();
+
+            foreach (var name in tags)
+            {
+                var sampleTag = new SampleTag()
+                {
+                    Tag = this.Context.Tags.Where(t => t.Name == name).First()
+                };
+
+                sampleTags.Add(sampleTag);
+            }
+
+            return sampleTags;
+        }
+
+        private List<SampleGroup> CrateSampleGroupsByGroupName(string[] groups)
+        {
+            var sampleGroups = new List<SampleGroup>();
+
+            foreach (var name in groups)
+            {
+                var sampleGroup = new SampleGroup()
+                {
+                    Group = this.Context.Groups.Where(g => g.Name == name).First()
+                };
+
+                sampleGroups.Add(sampleGroup);
+            }
+
+            return sampleGroups;
         }
 
         public List<GroupViewModel> GetAllGroups()
