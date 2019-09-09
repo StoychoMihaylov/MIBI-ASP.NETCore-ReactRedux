@@ -10,10 +10,14 @@
     REQUEST_GET_ALL_EXISTING_TAGS_FAIL,
     REQUEST_GET_ALL_EXISTING_GROUPS,
     REQUEST_GET_ALL_EXISTING_GROUPS_SUCCESS,
-    REQUEST_GET_ALL_EXISTING_GROUPS_FAIL
+    REQUEST_GET_ALL_EXISTING_GROUPS_FAIL,
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS,
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL
 } from '../../constants/actionTypes'
 
 const initialState = {
+    samples: [],
     autocompleteNamesOfSamples: [],
     allExistingGroups: [],
     allExistingTags: [],
@@ -25,6 +29,23 @@ const SampleReducer = (state, action) => {
     state = state || initialState
 
     switch (action.type) {
+        case FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS:
+            return {
+                ...state,
+                samples: action.payload,
+                isLoading: false
+            }
+        case FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
         case REQUEST_GET_ALL_EXISTING_GROUPS:
             return {
                 ...state,

@@ -24,6 +24,13 @@
             this.env = env;
         }
 
+        [HttpGet]
+        public IActionResult Get(SearchParametersBindingModel searchParameters)
+        {
+
+            return Ok(new object[]{"dsds", "dsdsds" });
+        }
+
         [HttpPost]
         public IActionResult Post(
             [FromForm] string name,
