@@ -10,23 +10,24 @@
     REQUEST_GET_ALL_EXISTING_TAGS_FAIL,
     REQUEST_GET_ALL_EXISTING_GROUPS,
     REQUEST_GET_ALL_EXISTING_GROUPS_SUCCESS,
-    REQUEST_GET_ALL_EXISTING_GROUPS_FAIL
+    REQUEST_GET_ALL_EXISTING_GROUPS_FAIL,
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS,
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL
 } from '../../constants/actionTypes'
-
 import { api } from '../../constants/api'
 import axios from 'axios'
+
+var qs = require('qs');
 
 //********** Create New Sample **********
 
 export function addNewSampleInTheServer(imgFormdata) {
     return function (dispatch) {
         dispatch(createSample()) // Dispatch createNewSample
-        axios.post(api + 'api/sample', imgFormdata, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
+        axios.get(api + 'api/sample', imgFormdata)
         .then(result => {
+            console.log(result)
             dispatch(createSampleSuccess()) // Dispatch Successful created sample
         })
         .catch(err => {
@@ -159,6 +160,49 @@ export function getAllExistingGroupsSuccess(data) {
 export function getAllExistingGroupsFail(error) {
     return {
         type: REQUEST_GET_ALL_EXISTING_GROUPS_FAIL,
+        payload: error
+    }
+}
+
+//**********
+
+export function fetchSamplesByGivenSearchParameters(bateriaParams) {
+    return function (dispatch) {
+        dispatch(fetchSamples())
+        axios.get(api + 'api/sample', {
+            //params: { bacteriaName: obj["bacteriaName"], tags: 'ffff', groups: 'fdf' }
+            params: bateriaParams,
+            paramsSerializer: function(params) {
+                return qs.stringify(params, {arrayFormat: 'repeat'})
+            }
+        })
+        .then(response => {
+            console.log(response)
+            dispatch(fetchSamplesSuccess(response.data))
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(fetchSamplesFail(error))
+        })
+    }
+}
+
+export function fetchSamples() {
+    return {
+        type: FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS,
+    }
+}
+
+export function fetchSamplesSuccess(data) {
+    return {
+        type: FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
+        payload: data
+    }
+}
+
+export function fetchSamplesFail(error) {
+    return {
+        type: FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL,
         payload: error
     }
 }

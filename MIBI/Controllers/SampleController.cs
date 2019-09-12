@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class SampleController : Controller
     {
@@ -24,7 +24,18 @@
             this.env = env;
         }
 
+        [HttpGet]
+        [Route("sample")]
+        public IActionResult Get(SearchParametersBindingModel vm)
+        {
+
+            var req = Request;
+
+            return Ok(new object[]{"dsds", "dsdsds" });
+        }
+
         [HttpPost]
+        [Route("sample")]
         public IActionResult Post(
             [FromForm] string name,
             [FromForm] string description,
@@ -99,12 +110,14 @@
         }
 
         [HttpPut]
+        [Route("sample")]
         public IActionResult Edit()
         {
             return Ok();
         }
 
         [HttpDelete]
+        [Route("sample")]
         public IActionResult Delete()
         {
             return Ok();

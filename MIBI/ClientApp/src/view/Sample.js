@@ -4,7 +4,8 @@ import { Route } from 'react-router'
 import {
     getAllNamesOfExistingSamples,
     getAllExistingTagsFromServer,
-    getAllExistingGroupsFromServer
+    getAllExistingGroupsFromServer,
+    fetchSamplesByGivenSearchParameters
 } from '../store/actions/SampleActions'
 import "../styles/Sample.css"
 
@@ -66,6 +67,27 @@ class SampleView extends Component {
         } else {
             document.getElementById("autocompleateListOfNames").style.display = "none"
         }
+    }
+
+    handleSearchBtnClickEvent() {
+        let tagNames = []
+        let groupNames = []
+
+        this.state.selectedTags.forEach((tag) => {
+            tagNames.push(tag.name)
+        })
+
+        this.state.selectedGroups.forEach((group) => {
+            groupNames.push(group.name)
+        })
+
+        let searchParameters = {
+                bacteriaName: this.state.searchSampleName,
+                tags: tagNames,
+                groups: groupNames
+        }
+
+        this.props.fetchSamplesByGivenParameters(searchParameters)
     }
 
     addSearchingByTag(event) {
@@ -220,45 +242,70 @@ class SampleView extends Component {
                                     onChange={this.showOptionSetOfNames.bind(this)}
                                 />
                                 <div id="autocompleateListOfNames">
-                                    { optionSetOfNames }
+                                    {optionSetOfNames}
                                 </div>
                             </td>
                             <td>
-                                <button id="searchBtn"><img alt=""/></button>
+                                <button
+                                    id="searchBtn"
+                                    onClick={this.handleSearchBtnClickEvent.bind(this)}
+                                    >
+                                        <img alt=""/>
+                                </button>
                             </td>
                             <td>
                                 <Route render={({ history }) => (
-                                <button
-                                    id="addSampleBtn"
+                                    <button
+                                        id="addSampleBtn"
                                         type='button'
-                                    onClick={() => { history.push('/addSample') }}>Add Sample</button>
+                                        onClick={() => { history.push('/addSample') }}
+                                        >Add Sample
+                                    </button>
                                 )} />
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                {
-                    this.state.isGroupsBtnClicked
-                    ?
-                    <div className="groupsContainer">
-                        <button id="groupsTitle" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
-                        <br/>
-                        { groups }
-                    </div>
-                    :
-                    <button id="groupsBtn" onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
-                }
-                {
-                    this.state.isTagsBtnClicked
-                    ?
-                    <div className="tagsConteiner">
-                        <button id="tagsTitle" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
-                        <br/>
-                        { tags }
-                    </div>
-                    :
-                    <button id="tagsBtn" onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
-                }
+                <div>
+                    {
+                        this.state.isGroupsBtnClicked
+                        ?
+                        <div className="groupsContainer">
+                            <button
+                                id="groupsTitle"
+                                onClick={this.handleGroupsBtnClick.bind(this)}
+                                >Groups
+                            </button>
+                            <br/>
+                            {groups}
+                        </div>
+                        :
+                        <button
+                            id="groupsBtn"
+                            onClick={this.handleGroupsBtnClick.bind(this)}
+                            >Groups
+                        </button>
+                    }
+                    {
+                        this.state.isTagsBtnClicked
+                        ?
+                        <div className="tagsConteiner">
+                            <button
+                                id="tagsTitle"
+                                onClick={this.handleTagsBtnClick.bind(this)}
+                                >Tags
+                            </button>
+                            <br/>
+                            {tags}
+                        </div>
+                        :
+                        <button
+                            id="tagsBtn"
+                            onClick={this.handleTagsBtnClick.bind(this)}
+                            >Tags
+                        </button>
+                    }
+                </div>
             </div>
         </div>
         )
@@ -268,6 +315,7 @@ class SampleView extends Component {
 const mapStateToProps = state => {
     console.log(state)
     return {
+        samples: state.sample.samples,
         allExistingGroups: state.sample.allExistingGroups,
         allExistingTags: state.sample.allExistingTags,
         autocompleteNamesOfSamples: state.sample.autocompleteNamesOfSamples,
@@ -278,6 +326,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchSamplesByGivenParameters: (params) => dispatch(fetchSamplesByGivenSearchParameters(params)),
         fetchAllNamesOfExistingSamples: () => dispatch(getAllNamesOfExistingSamples()),
         fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
         fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer())

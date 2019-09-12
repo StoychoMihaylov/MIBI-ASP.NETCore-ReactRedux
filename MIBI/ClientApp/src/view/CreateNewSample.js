@@ -304,16 +304,15 @@ const mapStateToProps = state => {
     allExistingGroups: state.sample.allExistingGroups,
     isLoading: state.sample.isLoading,
     error: state.sample.error
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
-    createSample: imageFormData =>
-      dispatch(addNewSampleInTheServer(imageFormData)),
+    createSample: (formData) => dispatch(addNewSampleInTheServer(formData)),
       fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
       fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer())
-  };
-};
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateNewSample)
