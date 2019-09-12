@@ -15,21 +15,19 @@
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL
 } from '../../constants/actionTypes'
-
 import { api } from '../../constants/api'
 import axios from 'axios'
+
+var qs = require('qs');
 
 //********** Create New Sample **********
 
 export function addNewSampleInTheServer(imgFormdata) {
     return function (dispatch) {
         dispatch(createSample()) // Dispatch createNewSample
-        axios.post(api + 'api/sample', imgFormdata, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
+        axios.get(api + 'api/sample', imgFormdata)
         .then(result => {
+            console.log(result)
             dispatch(createSampleSuccess()) // Dispatch Successful created sample
         })
         .catch(err => {
@@ -168,23 +166,24 @@ export function getAllExistingGroupsFail(error) {
 
 //**********
 
-export function fetchSamplesByGivenSearchParameters(searchParameters) {
+export function fetchSamplesByGivenSearchParameters(bateriaParams) {
     return function (dispatch) {
         dispatch(fetchSamples())
-        console.log(searchParameters)
-        axios.get(api + 'api/sample', searchParameters, {
-            headers: {
-                'Content-Type':'application/x-www-form-urlencoded'
+        axios.get(api + 'api/sample', {
+            //params: { bacteriaName: obj["bacteriaName"], tags: 'ffff', groups: 'fdf' }
+            params: bateriaParams,
+            paramsSerializer: function(params) {
+                return qs.stringify(params, {arrayFormat: 'repeat'})
             }
         })
-            .then(response => {
-                console.log(response)
-                dispatch(fetchSamplesSuccess(response.data))
-            })
-            .catch(error => {
-                console.log(error)
-                dispatch(fetchSamplesFail(error))
-            })
+        .then(response => {
+            console.log(response)
+            dispatch(fetchSamplesSuccess(response.data))
+        })
+        .catch(error => {
+            console.log(error)
+            dispatch(fetchSamplesFail(error))
+        })
     }
 }
 

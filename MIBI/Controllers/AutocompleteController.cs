@@ -7,7 +7,7 @@
     using MIBI.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("api/[controller]")]
+    [Route("api/autocomplete")]
     [ApiController]
     public class AutocompleteController : Controller
     {

@@ -4,8 +4,8 @@
     {
         public string BacteriaName { get; set; }
 
-        public object[] Tags { get; set; }
+        public string[] Tags { get; set; }
 
-        public object[] Groups { get; set; }
+        public string[] Groups { get; set; }
     }
 }

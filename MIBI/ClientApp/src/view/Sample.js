@@ -69,11 +69,22 @@ class SampleView extends Component {
         }
     }
 
-    handleSearchBtnClickEvent(){
+    handleSearchBtnClickEvent() {
+        let tagNames = []
+        let groupNames = []
+
+        this.state.selectedTags.forEach((tag) => {
+            tagNames.push(tag.name)
+        })
+
+        this.state.selectedGroups.forEach((group) => {
+            groupNames.push(group.name)
+        })
+
         let searchParameters = {
-            bacteriaName: this.state.searchSampleName,
-            tags: this.state.selectedTags,
-            groups: this.state.selectedGroups
+                bacteriaName: this.state.searchSampleName,
+                tags: tagNames,
+                groups: groupNames
         }
 
         this.props.fetchSamplesByGivenParameters(searchParameters)
