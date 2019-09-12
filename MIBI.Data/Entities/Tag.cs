@@ -7,6 +7,8 @@
     {
         public Guid Id { get; set; }
 
+        public string Color { get; set; }
+
         public string Name { get; set; }
 
         public ICollection<SampleTag> SampleTags { get; set; }
