@@ -5,7 +5,7 @@
 
     public interface IMIBIContext
     {
-        DbSet<Sample> Samples { get; set; }
+        DbSet<Sample> Samples { get; set; }  
 
         DbSet<Group> Groups { get; set; }
 
@@ -16,6 +16,8 @@
         DbSet<SampleGroup> SampleGroups { get; set; }
 
         DbSet<SampleTag> SampleTags { get; set; }
+
+        DbSet<NutrientAgarPlate> NutrientAgarPlates { get; set; }
 
         int SaveChanges();
     }

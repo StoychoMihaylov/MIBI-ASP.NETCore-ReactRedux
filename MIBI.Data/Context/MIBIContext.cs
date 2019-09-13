@@ -21,10 +21,11 @@
 
         public DbSet<SampleTag> SampleTags { get; set; }
 
+        public DbSet<NutrientAgarPlate> NutrientAgarPlates { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // SampleGroup
-
+            // SampleGroup join tabl
             modelBuilder.Entity<SampleGroup>()
                 .HasKey(sg => new { sg.SampleId, sg.GroupId });
 
@@ -33,7 +34,7 @@
               .WithMany(s => s.SampleGroups)
               .HasForeignKey(sc => sc.SampleId);
 
-            // SampleTag
+            // SampleTag join table
             modelBuilder
                 .Entity<SampleTag>()
                 .HasKey(st => new { st.SampleId, st.TagId });
@@ -42,6 +43,15 @@
                 .HasOne<Tag>(st => st.Tag)
                 .WithMany(st => st.SampleTags)
                 .HasForeignKey(st => st.TagId);
+
+            // SampleNutrientAgarPlateId join table
+            modelBuilder.Entity<SampleNutrientAgarPlate>()
+                .HasKey(sn => new { sn.SampleId, sn.NutrientAgarPlateId });
+
+            modelBuilder.Entity<SampleNutrientAgarPlate>()
+                .HasOne<Sample>(s => s.Sample)
+                .WithMany(s => s.SampleNutrientAgarPlates)
+                .HasForeignKey(sn => sn.SampleId);
         }
     }
 }

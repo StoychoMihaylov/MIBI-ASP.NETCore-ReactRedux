@@ -15,10 +15,12 @@
 
         public string CreatedBy { get; set; }
 
-        public virtual ICollection<SampleImage> ImgURLs { get; set; }
+        public ICollection<SampleImage> ImgURLs { get; set; }
 
         public ICollection<SampleTag> SampleTags { get; set; }
 
         public ICollection<SampleGroup> SampleGroups { get; set; }
+
+        public ICollection<SampleNutrientAgarPlate> SampleNutrientAgarPlates { get; set; }
     }
 }
