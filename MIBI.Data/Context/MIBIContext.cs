@@ -23,6 +23,8 @@
 
         public DbSet<NutrientAgarPlate> NutrientAgarPlates { get; set; }
 
+        public DbSet<SampleNutrientAgarPlate> SampleNutrientAgarPlates { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // SampleGroup join tabl

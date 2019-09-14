@@ -19,6 +19,8 @@
 
         DbSet<NutrientAgarPlate> NutrientAgarPlates { get; set; }
 
+        DbSet<SampleNutrientAgarPlate> SampleNutrientAgarPlates { get; set; }
+
         int SaveChanges();
     }
 }
