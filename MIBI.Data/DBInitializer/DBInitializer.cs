@@ -37,7 +37,7 @@
                 {
                     foreach (var existingTag in existingNutrients)
                     {
-                        if (newNutr == existingTag)
+                        if (newNutr.Name != existingTag.Name)
                         {
                             nutrients.Add(newNutr);
                         }
@@ -49,7 +49,7 @@
             }
             else
             {
-                context.NutrientAgarPlates.AddRange(nutrients);
+                context.NutrientAgarPlates.AddRange(newNutriens);
                 context.SaveChanges();
             }
         }
@@ -130,7 +130,7 @@
                 {
                     foreach (var existingTag in existingTags)
                     {
-                        if (newTag == existingTag)
+                        if (newTag.Name != existingTag.Name)
                         {
                             tags.Add(newTag);
                         }
@@ -169,7 +169,7 @@
                 {
                     foreach (var existingGroup in existingGroups)
                     {
-                        if (newGroup == existingGroup)
+                        if (newGroup.Name != existingGroup.Name)
                         {
                             groups.Add(newGroup);
                         }
