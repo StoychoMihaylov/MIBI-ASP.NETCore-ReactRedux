@@ -2,6 +2,7 @@
 {
     using MIBI.Data.Context;
     using MIBI.Data.Entities;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -12,6 +13,45 @@
             context.Database.EnsureCreated();
             SeedGroups(context);
             SeedTags(context);
+            SeedNutrientAgarPlates(context);
+        }
+
+        private static void SeedNutrientAgarPlates(MIBIContext context)
+        {
+            var nutrients = new List<NutrientAgarPlate>();
+            var existingNutrients = context.NutrientAgarPlates.ToList();
+            var newNutriens = new List<NutrientAgarPlate>()
+            {
+                new NutrientAgarPlate() { Name = "tryptic-soy-agar(TSA)" },
+                new NutrientAgarPlate() { Name = "sabouraud-dextrose-agar(SDA)" },
+                new NutrientAgarPlate() { Name = "malt-extracta-agar(MEA)" },
+                new NutrientAgarPlate() { Name = "malt-extract-agar(MEA)" },
+                new NutrientAgarPlate() { Name = "TTC-tergitol 7 Agar" },
+                new NutrientAgarPlate() { Name = "Slanetz Bartley Agar" },
+                new NutrientAgarPlate() { Name = "Cetrimid Agar" },
+            };
+
+            if (existingNutrients.Count() > 0)
+            {
+                foreach (var newNutr in newNutriens)
+                {
+                    foreach (var existingTag in existingNutrients)
+                    {
+                        if (newNutr == existingTag)
+                        {
+                            nutrients.Add(newNutr);
+                        }
+                    }
+                }
+
+                context.NutrientAgarPlates.AddRange(nutrients);
+                context.SaveChanges();
+            }
+            else
+            {
+                context.NutrientAgarPlates.AddRange(nutrients);
+                context.SaveChanges();
+            }
         }
 
         private static void SeedTags(MIBIContext context)
