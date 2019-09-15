@@ -171,7 +171,8 @@ class SampleView extends Component {
 
         if(state) {
             this.setState({
-                isGroupsBtnClicked: false
+                isGroupsBtnClicked: false,
+                selectedGroups: []
             })
         } else if(! state) {
             this.setState({
@@ -185,7 +186,8 @@ class SampleView extends Component {
 
         if(state) {
             this.setState({
-                isTagsBtnClicked: false
+                isTagsBtnClicked: false,
+                selectedTags: []
             })
         } else if(! state) {
             this.setState({
@@ -206,26 +208,106 @@ class SampleView extends Component {
             </div>
         ))
 
-        let tags = this.props.allExistingTags.map((tag, index) => (
-            <button
-                key={index}
-                id={tag.id}
-                className="tags"
-                tabIndex="0"
-                type="text"
-                value={tag.name}
-                onClick={this.addSearchingByTag.bind(this)}>{tag.name}</button>
-        ))
+        let tagsCategoryColors = this.props.allExistingTags.map((tag, index) => {
+            if(tag.category === "Colors") {
+                return (
+                    <button
+                        key={index}
+                        id={tag.id}
+                        className="tags"
+                        tabIndex="0"
+                        type="text"
+                        value={tag.name}
+                        onClick={this.addSearchingByTag.bind(this)}
+                        >{tag.name}
+                        <span className="tagColor" style={{backgroundColor: tag.color}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </button>
+                )
+            }
+        })
+
+        let tagsCategoryConsistency = this.props.allExistingTags.map((tag, index) => {
+            if(tag.category === "Consistency") {
+                return (
+                    <button
+                        key={index}
+                        id={tag.id}
+                        className="tags"
+                        tabIndex="0"
+                        type="text"
+                        value={tag.name}
+                        onClick={this.addSearchingByTag.bind(this)}
+                        >{tag.name}
+                    </button>
+                )
+            }
+        })
+
+        let tagsCategorySurfaceAppearance = this.props.allExistingTags.map((tag, index) => {
+            if(tag.category === "Surface appearance") {
+                return (
+                    <button
+                        key={index}
+                        id={tag.id}
+                        className="tags"
+                        tabIndex="0"
+                        type="text"
+                        value={tag.name}
+                        onClick={this.addSearchingByTag.bind(this)}
+                        >{tag.name}
+                    </button>
+                )
+            }
+        })
+
+        let tagsCategoryForm = this.props.allExistingTags.map((tag, index) => {
+            if(tag.category === "Form") {
+                return (
+                    <button
+                        key={index}
+                        id={tag.id}
+                        className="tags"
+                        tabIndex="0"
+                        type="text"
+                        value={tag.name}
+                        onClick={this.addSearchingByTag.bind(this)}
+                        >{tag.name}
+                        <img src={require('../content/tagIcons/' + tag.iconUrl)} className="tagIcon"/>
+                    </button>
+                )
+            }
+        })
+
+        let tagsCategoryElevations = this.props.allExistingTags.map((tag, index) => {
+            if(tag.category === "Elevations") {
+                return (
+                    <button
+                        key={index}
+                        id={tag.id}
+                        className="tags"
+                        tabIndex="0"
+                        type="text"
+                        value={tag.name}
+                        onClick={this.addSearchingByTag.bind(this)}
+                        >{tag.name}
+                        <img src={require('../content/tagIcons/' + tag.iconUrl)} className="tagIcon"/>
+                    </button>
+                )
+            }
+        })
 
         let groups = this.props.allExistingGroups.map((grop, index) => (
             <button
-            key={index}
-            id={grop.id}
-            className="groups"
-            tabIndex="0"
-            type="text"
-            value={grop.name}
-            onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
+                key={index}
+                id={grop.id}
+                className="groups"
+                tabIndex="0"
+                type="text"
+                value={grop.name}
+                onClick={this.addSearchingByGroup.bind(this)}
+                >
+                {grop.name}
+            </button>
         ))
 
         return(
@@ -296,7 +378,20 @@ class SampleView extends Component {
                                 >Tags
                             </button>
                             <br/>
-                            {tags}
+                            <h4>Elevations</h4>
+                            { tagsCategoryElevations }
+                            <hr/>
+                            <h4>Form</h4>
+                            { tagsCategoryForm }
+                            <hr/>
+                            <h4>Surface appearance</h4>
+                            { tagsCategorySurfaceAppearance }
+                            <hr/>
+                            <h4>Consistency</h4>
+                            { tagsCategoryConsistency }
+                            <hr/>
+                            <h4>Colors</h4>
+                            { tagsCategoryColors }
                         </div>
                         :
                         <button

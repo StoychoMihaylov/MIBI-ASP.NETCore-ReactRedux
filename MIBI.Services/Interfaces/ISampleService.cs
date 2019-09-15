@@ -1,6 +1,7 @@
 ﻿namespace MIBI.Services.Interfaces
 {
     using System.Collections.Generic;
+    using MIBI.Data.Entities;
     using MIBI.Models.BindingModels;
     using MIBI.Models.ViewModels;
 
@@ -8,7 +9,7 @@
     {
         void CreateNewSample(NewSampleBidingModel newSample);
         List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples();
-        List<TagNameViewModel> GetAllTags();
+        List<Tag> GetAllTags();
         List<GroupViewModel> GetAllGroups();
     }
 }
