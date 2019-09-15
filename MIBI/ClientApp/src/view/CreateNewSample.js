@@ -185,16 +185,92 @@ class CreateNewSample extends Component {
   }
 
   render() {
-    let tags = this.props.allExistingTags.map((tag, index) => (
-      <button
-          key={index}
-          id={tag.id}
-          className="tags"
-          tabIndex="0"
-          type="text"
-          value={tag.name}
-          onClick={this.addSearchingByTag.bind(this)}>{tag.name}</button>
-    ))
+    let tagsCategoryColors = this.props.allExistingTags.map((tag, index) => {
+        if(tag.category == "Colors") {
+            return (
+                <button
+                    key={index}
+                    id={tag.id}
+                    className="tags"
+                    tabIndex="0"
+                    type="text"
+                    value={tag.name}
+                    onClick={this.addSearchingByTag.bind(this)}
+                    >{tag.name}
+                </button>
+            )
+        }
+    })
+
+    let tagsCategoryConsistency = this.props.allExistingTags.map((tag, index) => {
+        if(tag.category == "Consistency") {
+            return (
+                <button
+                    key={index}
+                    id={tag.id}
+                    className="tags"
+                    tabIndex="0"
+                    type="text"
+                    value={tag.name}
+                    onClick={this.addSearchingByTag.bind(this)}
+                    >{tag.name}
+                </button>
+            )
+        }
+    })
+
+    let tagsCategorySurfaceAppearance = this.props.allExistingTags.map((tag, index) => {
+        if(tag.category == "Surface appearance") {
+            return (
+                <button
+                    key={index}
+                    id={tag.id}
+                    className="tags"
+                    tabIndex="0"
+                    type="text"
+                    value={tag.name}
+                    onClick={this.addSearchingByTag.bind(this)}
+                    >{tag.name}
+                </button>
+            )
+        }
+    })
+
+    let tagsCategoryForm = this.props.allExistingTags.map((tag, index) => {
+        if(tag.category == "Form") {
+            return (
+                <button
+                    key={index}
+                    id={tag.id}
+                    className="tags"
+                    tabIndex="0"
+                    type="text"
+                    value={tag.name}
+                    onClick={this.addSearchingByTag.bind(this)}
+                    >{tag.name}
+                    <img src={require('../content/tagIcons/' + tag.iconUrl)} className="tagIcon"/>
+                </button>
+            )
+        }
+    })
+
+    let tagsCategoryElevations = this.props.allExistingTags.map((tag, index) => {
+        if(tag.category == "Elevations") {
+            return (
+                <button
+                    key={index}
+                    id={tag.id}
+                    className="tags"
+                    tabIndex="0"
+                    type="text"
+                    value={tag.name}
+                    onClick={this.addSearchingByTag.bind(this)}
+                    >{tag.name}
+                    <img src={require('../content/tagIcons/' + tag.iconUrl)} className="tagIcon"/>
+                </button>
+            )
+        }
+    })
 
     let groups = this.props.allExistingGroups.map((grop, index) => (
         <button
@@ -252,7 +328,9 @@ class CreateNewSample extends Component {
                     <button
                       type="button"
                       id="groupsTitle"
-                      onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                      onClick={this.handleGroupsBtnClick.bind(this)}
+                      >Groups
+                    </button>
                     <br/>
                     { groups }
                 </div>
@@ -260,7 +338,9 @@ class CreateNewSample extends Component {
                 <button
                   type="button"
                   id="groupsBtn"
-                  onClick={this.handleGroupsBtnClick.bind(this)}>Groups</button>
+                  onClick={this.handleGroupsBtnClick.bind(this)}
+                  >Groups
+                </button>
               }
               {
                 this.state.isTagsBtnClicked
@@ -269,15 +349,32 @@ class CreateNewSample extends Component {
                     <button
                       type="button"
                       id="tagsTitle"
-                      onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                      onClick={this.handleTagsBtnClick.bind(this)}
+                      >Tags
+                    </button>
                     <br/>
-                    { tags }
+                    <h4>Elevations</h4>
+                    { tagsCategoryElevations }
+                    <hr/>
+                    <h4>Form</h4>
+                    { tagsCategoryForm }
+                    <hr/>
+                    <h4>Surface appearance</h4>
+                    { tagsCategorySurfaceAppearance }
+                    <hr/>
+                    <h4>Consistency</h4>
+                    { tagsCategoryConsistency }
+                    <hr/>
+                    <h4>Colors</h4>
+                    { tagsCategoryColors }
                 </div>
                 :
                 <button
                   type="button"
                   id="tagsBtn"
-                  onClick={this.handleTagsBtnClick.bind(this)}>Tags</button>
+                  onClick={this.handleTagsBtnClick.bind(this)}
+                  >Tags
+                </button>
               }
           </div>
           <br />

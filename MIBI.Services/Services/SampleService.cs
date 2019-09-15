@@ -132,27 +132,13 @@
             return namesOfSamples;
         }
 
-        public List<TagNameViewModel> GetAllTags()
+        public List<Tag> GetAllTags()
         {
-            var allTags = new List<TagNameViewModel>();
-
             var tags = this.Context
                 .Tags
-                .Select(b => new { b.Id, b.Name })
                 .ToList();
 
-            foreach (var tag in tags)
-            {
-                var sampleName = new TagNameViewModel()
-                {
-                    Id = tag.Id,
-                    Name = tag.Name
-                };
-
-                allTags.Add(sampleName);
-            }
-
-            return allTags;
+            return tags;
         }
     }
 }
