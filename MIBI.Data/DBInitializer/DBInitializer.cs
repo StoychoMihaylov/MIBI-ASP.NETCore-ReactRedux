@@ -35,12 +35,18 @@
             {
                 foreach (var newNutr in newNutriens)
                 {
+                    var contains = false;
                     foreach (var existingTag in existingNutrients)
                     {
-                        if (newNutr.Name != existingTag.Name)
+                        if (newNutr.Name == existingTag.Name)
                         {
-                            nutrients.Add(newNutr);
+                            contains = true;
                         }
+                    }
+
+                    if (! contains)
+                    {
+                        nutrients.Add(newNutr);
                     }
                 }
 
@@ -63,77 +69,83 @@
                 new Tag() { Name = "small size(<5mm)" },
                 new Tag() { Name = "small size(<5mm)" },
                 new Tag() { Name = "medium size(6-10mm)" },
-                new Tag() { Name = "big size (>10 mm)" },        
-                new Tag() { Name = "flat" },
-                new Tag() { Name = "raised" },
-                new Tag() { Name = "umbonate" },
-                new Tag() { Name = "crateriform" },
-                new Tag() { Name = "convex" },
-                new Tag() { Name = "pulvinate" },
-                new Tag() { Name = "circular" },
-                new Tag() { Name = "irregular" },
-                new Tag() { Name = "filamentous" },
-                new Tag() { Name = "rhizoid" },
-                new Tag() { Name = "curled" },
-                new Tag() { Name = "shiny" },
-                new Tag() { Name = "dull" },
-                new Tag() { Name = "smooth" },
-                new Tag() { Name = "rough" },
-                new Tag() { Name = "wrinkled" },
-                new Tag() { Name = "glistening" },
-                new Tag() { Name = "dry" },
-                new Tag() { Name = "moist" },
-                new Tag() { Name = "brittle/friable" },
-                new Tag() { Name = "mucoid" },
-                new Tag() { Name = "transparent" },
-                new Tag() { Name = "Milky" },
-                new Tag() { Color = "#FFFFFF", Name = "white" },
-                new Tag() { Color = "#DFDEDE", Name = "grey-light" },
-                new Tag() { Color = "#474646", Name = "grey-dark" },
-                new Tag() { Color = "#F6DDD0", Name = "beige-light " },
-                new Tag() { Color = "#F3BFA5", Name = "beige" },
-                new Tag() { Color = "#E48E63", Name = "beige-dark" },
-                new Tag() { Color = "#F2DD55", Name = "yellow" },
-                new Tag() { Color = "#E6C803", Name = "yellow-dark" },
-                new Tag() { Color = "#FFB266", Name = "orange-light" },
-                new Tag() { Color = "#FC9024", Name = "orange" },
-                new Tag() { Color = "#DE6F00", Name = "orange-dark" },
-                new Tag() { Color = "#F7DCDC", Name = "rose-light-1" },
-                new Tag() { Color = "#EFAAAA", Name = "rose-light-2" },
-                new Tag() { Color = "#F7ADAD", Name = "rose" },
-                new Tag() { Color = "#E67878", Name = "rose-dark" },
-                new Tag() { Color = "#B35151", Name = "rose-dark-2" },
-                new Tag() { Color = "#F9D1F2", Name = "pink-light" },
-                new Tag() { Color = "#FF86EB", Name = "pink" },
-                new Tag() { Color = "#E111BE", Name = "pink-dark" },
-                new Tag() { Color = "#FF6F6F", Name = "red-light" },
-                new Tag() { Color = "#FF4343", Name = "red" },
-                new Tag() { Color = "#CE0606", Name = "red-dark" },
-                new Tag() { Color = "#D8B6FF", Name = "purple-light" },
-                new Tag() { Color = "#924FDE", Name = "purple" },
-                new Tag() { Color = "#45177A", Name = "purple-dark" },
-                new Tag() { Color = "#CCE5FF", Name = "blue-light" },
-                new Tag() { Color = "#3C84D5", Name = "blue" },
-                new Tag() { Color = "#07458D", Name = "blue-dark" },
-                new Tag() { Color = "#D1F0CB", Name = "green-light" },
-                new Tag() { Color = "#00CC00", Name = "green" },
-                new Tag() { Color = "#0C610C", Name = "green-dark" },
-                new Tag() { Color = "#C1996B", Name = "brown-light" },
-                new Tag() { Color = "#644829", Name = "brown-dark" },
-                new Tag() { Color = "#39342F", Name = "black" },
-                new Tag() { Color = "#110900", Name = "black-dark" },
+                new Tag() { Name = "big size (>10 mm)" },
+                new Tag() { IconUrl ="flat.png", Name = "flat", Category= "Elevations" },
+                new Tag() { IconUrl ="raised.png", Name = "raised", Category= "Elevations" },
+                new Tag() { IconUrl = "umbonate,png", Name = "umbonate", Category= "Elevations" },
+                new Tag() { IconUrl = "crateriform.png", Name = "crateriform", Category= "Elevations"  },
+                new Tag() { IconUrl = "crateriform.png", Name = "convex", Category= "Elevations" },
+                new Tag() { IconUrl = "pulvinate.png", Name = "pulvinate", Category= "Elevations" },
+                new Tag() { IconUrl = "circular.png", Name = "circular", Category= "Form" },
+                new Tag() { IconUrl = "irregular.png", Name = "irregular", Category= "Form" },
+                new Tag() { IconUrl= "filamentous.png", Name = "filamentous", Category= "Form" },
+                new Tag() { IconUrl = "rhizoid.png", Name = "rhizoid", Category= "Form" },
+                new Tag() { IconUrl = "curled.png", Name = "curled", Category= "Form" },
+                new Tag() { Name = "shiny", Category= "Surface appearance" },
+                new Tag() { Name = "dull", Category= "Surface appearance" },
+                new Tag() { Name = "smooth", Category= "Surface appearance" },
+                new Tag() { Name = "rough", Category= "Surface appearance" },
+                new Tag() { Name = "wrinkled", Category= "Surface appearance" },
+                new Tag() { Name = "glistening", Category= "Surface appearance" },
+                new Tag() { Name = "dry", Category="Consistency" },
+                new Tag() { Name = "moist", Category="Consistency" },
+                new Tag() { Name = "brittle/friable", Category="Consistency" },
+                new Tag() { Name = "mucoid", Category="Consistency" },
+                new Tag() { Name = "transparent", Category="Colors" },
+                new Tag() { Name = "Milky", Category="Colors" },
+                new Tag() { Color = "#FFFFFF", Name = "white", Category="Colors" },
+                new Tag() { Color = "#DFDEDE", Name = "grey-light", Category="Colors" },
+                new Tag() { Color = "#474646", Name = "grey-dark", Category="Colors" },
+                new Tag() { Color = "#F6DDD0", Name = "beige-light ", Category="Colors" },
+                new Tag() { Color = "#F3BFA5", Name = "beige", Category="Colors" },
+                new Tag() { Color = "#E48E63", Name = "beige-dark", Category="Colors" },
+                new Tag() { Color = "#F2DD55", Name = "yellow", Category="Colors" },
+                new Tag() { Color = "#E6C803", Name = "yellow-dark", Category="Colors" },
+                new Tag() { Color = "#FFB266", Name = "orange-light", Category="Colors" },
+                new Tag() { Color = "#FC9024", Name = "orange", Category="Colors" },
+                new Tag() { Color = "#DE6F00", Name = "orange-dark", Category="Colors" },
+                new Tag() { Color = "#F7DCDC", Name = "rose-light-1", Category="Colors" },
+                new Tag() { Color = "#EFAAAA", Name = "rose-light-2", Category="Colors" },
+                new Tag() { Color = "#F7ADAD", Name = "rose", Category="Colors" },
+                new Tag() { Color = "#E67878", Name = "rose-dark", Category="Colors" },
+                new Tag() { Color = "#B35151", Name = "rose-dark-2", Category="Colors" },
+                new Tag() { Color = "#F9D1F2", Name = "pink-light", Category="Colors" },
+                new Tag() { Color = "#FF86EB", Name = "pink", Category="Colors" },
+                new Tag() { Color = "#E111BE", Name = "pink-dark", Category="Colors" },
+                new Tag() { Color = "#FF6F6F", Name = "red-light", Category="Colors" },
+                new Tag() { Color = "#FF4343", Name = "red", Category="Colors" },
+                new Tag() { Color = "#CE0606", Name = "red-dark", Category="Colors" },
+                new Tag() { Color = "#D8B6FF", Name = "purple-light", Category="Colors" },
+                new Tag() { Color = "#924FDE", Name = "purple", Category="Colors" },
+                new Tag() { Color = "#45177A", Name = "purple-dark", Category="Colors" },
+                new Tag() { Color = "#CCE5FF", Name = "blue-light", Category="Colors" },
+                new Tag() { Color = "#3C84D5", Name = "blue", Category="Colors" },
+                new Tag() { Color = "#07458D", Name = "blue-dark", Category="Colors" },
+                new Tag() { Color = "#D1F0CB", Name = "green-light", Category="Colors" },
+                new Tag() { Color = "#00CC00", Name = "green", Category="Colors" },
+                new Tag() { Color = "#0C610C", Name = "green-dark", Category="Colors" },
+                new Tag() { Color = "#C1996B", Name = "brown-light", Category="Colors" },
+                new Tag() { Color = "#644829", Name = "brown-dark", Category="Colors" },
+                new Tag() { Color = "#39342F", Name = "black", Category="Colors" },
+                new Tag() { Color = "#110900", Name = "black-dark", Category="Colors" },
             };
 
             if (existingTags.Count() > 0)
             {
                 foreach (var newTag in newTags)
                 {
+                    var contians = false;
                     foreach (var existingTag in existingTags)
                     {
-                        if (newTag.Name != existingTag.Name)
+                        if (newTag.Name == existingTag.Name)
                         {
-                            tags.Add(newTag);
+                            contians = true;
                         }
+                    }
+
+                    if (! contians)
+                    {
+                        tags.Add(newTag);
                     }
                 }
 
@@ -167,12 +179,18 @@
             {
                 foreach (var newGroup in newGroups)
                 {
+                    var contains = false;
                     foreach (var existingGroup in existingGroups)
                     {
-                        if (newGroup.Name != existingGroup.Name)
+                        if (newGroup.Name == existingGroup.Name)
                         {
-                            groups.Add(newGroup);
+                            contains = true;
                         }
+                    }
+
+                    if (! contains)
+                    {
+                        groups.Add(newGroup);
                     }
                 }
 
