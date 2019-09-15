@@ -171,7 +171,8 @@ class SampleView extends Component {
 
         if(state) {
             this.setState({
-                isGroupsBtnClicked: false
+                isGroupsBtnClicked: false,
+                selectedGroups: []
             })
         } else if(! state) {
             this.setState({
@@ -185,7 +186,8 @@ class SampleView extends Component {
 
         if(state) {
             this.setState({
-                isTagsBtnClicked: false
+                isTagsBtnClicked: false,
+                selectedTags: []
             })
         } else if(! state) {
             this.setState({
@@ -207,7 +209,7 @@ class SampleView extends Component {
         ))
 
         let tagsCategoryColors = this.props.allExistingTags.map((tag, index) => {
-            if(tag.category == "Colors") {
+            if(tag.category === "Colors") {
                 return (
                     <button
                         key={index}
@@ -225,7 +227,7 @@ class SampleView extends Component {
         })
 
         let tagsCategoryConsistency = this.props.allExistingTags.map((tag, index) => {
-            if(tag.category == "Consistency") {
+            if(tag.category === "Consistency") {
                 return (
                     <button
                         key={index}
@@ -242,7 +244,7 @@ class SampleView extends Component {
         })
 
         let tagsCategorySurfaceAppearance = this.props.allExistingTags.map((tag, index) => {
-            if(tag.category == "Surface appearance") {
+            if(tag.category === "Surface appearance") {
                 return (
                     <button
                         key={index}
@@ -259,7 +261,7 @@ class SampleView extends Component {
         })
 
         let tagsCategoryForm = this.props.allExistingTags.map((tag, index) => {
-            if(tag.category == "Form") {
+            if(tag.category === "Form") {
                 return (
                     <button
                         key={index}
@@ -277,7 +279,7 @@ class SampleView extends Component {
         })
 
         let tagsCategoryElevations = this.props.allExistingTags.map((tag, index) => {
-            if(tag.category == "Elevations") {
+            if(tag.category === "Elevations") {
                 return (
                     <button
                         key={index}
@@ -296,13 +298,16 @@ class SampleView extends Component {
 
         let groups = this.props.allExistingGroups.map((grop, index) => (
             <button
-            key={index}
-            id={grop.id}
-            className="groups"
-            tabIndex="0"
-            type="text"
-            value={grop.name}
-            onClick={this.addSearchingByGroup.bind(this)}>{grop.name}</button>
+                key={index}
+                id={grop.id}
+                className="groups"
+                tabIndex="0"
+                type="text"
+                value={grop.name}
+                onClick={this.addSearchingByGroup.bind(this)}
+                >
+                {grop.name}
+            </button>
         ))
 
         return(
