@@ -8,11 +8,16 @@
     using System.Collections.Generic;
     using MIBI.Models.ViewModels;
     using System.Linq;
+    using AutoMapper;
 
     public class SampleService : Service, ISampleService
     {
-        public SampleService(IMIBIContext context)
-            : base(context) { }
+        private readonly IMapper mapper;
+        public SampleService(IMIBIContext context, IMapper mapper)
+            : base(context)
+        {
+            this.mapper = mapper;
+        }
 
         public void CreateNewSample(NewSampleBidingModel newSampleData)
         {
@@ -139,6 +144,28 @@
                 .ToList();
 
             return tags;
+        }
+
+        public List<NutrientAgarPlateViewModel> GetAllNutrientAgarPlates()
+        {
+            var result = new List<NutrientAgarPlateViewModel>();
+
+            var nutrientAgarPlates = this.Context
+                .NutrientAgarPlates
+                .ToList();
+
+            foreach (var nut in nutrientAgarPlates)
+            {
+                var newNut = new NutrientAgarPlateViewModel()
+                {
+                    Id = nut.Id,
+                    Name = nut.Name
+                };
+
+                result.Add(newNut);
+            }
+
+            return result;
         }
     }
 }
