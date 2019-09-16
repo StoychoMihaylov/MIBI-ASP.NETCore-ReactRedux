@@ -45,5 +45,14 @@
 
             return Ok(groups);
         }
+
+        [HttpGet]
+        [Route("nutrientAgarPlates")]
+        public IActionResult GetNutrientAgarPlates()
+        {
+            var nutrientAgarPlates = this.service.GetAllNutrientAgarPlates();
+
+            return Ok(nutrientAgarPlates);
+        }
     }
 }

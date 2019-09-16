@@ -11,5 +11,6 @@
         List<AutocompleteBacteriaNamesViewModel> GetAllNamesOfSamples();
         List<Tag> GetAllTags();
         List<GroupViewModel> GetAllGroups();
+        List<NutrientAgarPlateViewModel> GetAllNutrientAgarPlates();
     }
 }

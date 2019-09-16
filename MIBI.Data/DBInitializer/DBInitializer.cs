@@ -99,6 +99,7 @@
                 new Tag() { Color = "#F6DDD0", Name = "beige-light ", Category="Colors" },
                 new Tag() { Color = "#F3BFA5", Name = "beige", Category="Colors" },
                 new Tag() { Color = "#E48E63", Name = "beige-dark", Category="Colors" },
+                new Tag() { Color = "#FCEE94", Name = "yellow-white", Category="Colors" },
                 new Tag() { Color = "#F2DD55", Name = "yellow", Category="Colors" },
                 new Tag() { Color = "#E6C803", Name = "yellow-dark", Category="Colors" },
                 new Tag() { Color = "#FFB266", Name = "orange-light", Category="Colors" },
