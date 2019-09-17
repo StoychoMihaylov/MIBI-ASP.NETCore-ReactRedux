@@ -5,7 +5,8 @@ import {
     getAllNamesOfExistingSamples,
     getAllExistingTagsFromServer,
     getAllExistingGroupsFromServer,
-    fetchSamplesByGivenSearchParameters
+    fetchSamplesByGivenSearchParameters,
+    fetchAllExistingNutrientAgarPlates
 } from '../store/actions/SampleActions'
 import "../styles/Sample.css"
 
@@ -16,8 +17,10 @@ class SampleView extends Component {
         this.state = {
             searchSampleName: "",
             optionSetNames: [],
+            selectedNutrientAgarPlates: [],
             selectedTags: [],
             selectedGroups: [],
+            isNutrientAgarPlateBtnClicked: false,
             isTagsBtnClicked: false,
             isGroupsBtnClicked: false
         }
@@ -27,6 +30,7 @@ class SampleView extends Component {
         this.props.fetchAllNamesOfExistingSamples()
         this.props.fetchAllExistingTags()
         this.props.fetchAllExistingGroups()
+        this.props.fetchAllNutrientAgarPlates()
     }
 
     setTheSelectedOption(event) {
@@ -166,6 +170,61 @@ class SampleView extends Component {
         }
     }
 
+    addSearchingByNutrientAgarPlate(event) {
+        let id = event.target.id
+        let value = event.target.value
+        let tabIndex = event.target.tabIndex
+        let nutrients = this.state.selectedNutrientAgarPlates
+
+        if(tabIndex === 0) {
+            let element = document.getElementById(id)
+            element.style.backgroundColor = "#66B2FF"
+            element.tabIndex = "1"
+
+            this.props.allExistingNutrientAgarPlates.forEach(nutrient => {
+                if(nutrient.name.toLowerCase() === value.toLowerCase()) {
+                    nutrients.push(nutrient)
+                }
+            })
+
+            this.setState({
+                selectedNutrientAgarPlates: nutrients
+            })
+
+        } else if (tabIndex === 1) {
+            let element = document.getElementById(id)
+            element.style.backgroundColor = "grey"
+            element.tabIndex = "0"
+
+            this.props.allExistingNutrientAgarPlates.forEach(nutrient => {
+                if(nutrient.name.toLowerCase() === value.toLowerCase()) {
+                    nutrients.splice(nutrients.indexOf(value), 1)
+                }
+            })
+
+            this.setState({
+                selectedNutrientAgarPlates: nutrients
+            })
+        }
+
+        console.log(this.state.selectedNutrientAgarPlates)
+    }
+
+    handleNutrientAgarPlatesBtnClick() {
+        let state = this.state.isNutrientAgarPlateBtnClicked
+
+        if(state) {
+            this.setState({
+                isNutrientAgarPlateBtnClicked: false,
+                selectedNutrientAgarPlates: []
+            })
+        } else if(! state) {
+            this.setState({
+                isNutrientAgarPlateBtnClicked: true
+            })
+        }
+    }
+
     handleGroupsBtnClick() {
         let state = this.state.isGroupsBtnClicked
 
@@ -207,6 +266,20 @@ class SampleView extends Component {
                     onClick={this.setTheSelectedOption.bind(this)}/>
             </div>
         ))
+
+        let nutrientAgarPlates = this.props.allExistingNutrientAgarPlates.map((nutrient, index) => {
+            return (
+                <button
+                    key={index}
+                    id={nutrient.id}
+                    tabIndex="0"
+                    className="nutrients"
+                    value={nutrient.name}
+                    onClick={this.addSearchingByNutrientAgarPlate.bind(this)}
+                    >{nutrient.name}
+                </button>
+            )
+        })
 
         let tagsCategoryColors = this.props.allExistingTags.map((tag, index) => {
             if(tag.category === "Colors") {
@@ -359,13 +432,32 @@ class SampleView extends Component {
                                 >Groups
                             </button>
                             <br/>
-                            {groups}
+                            { groups }
                         </div>
                         :
                         <button
                             id="groupsBtn"
                             onClick={this.handleGroupsBtnClick.bind(this)}
                             >Groups
+                        </button>
+                    }
+                    {
+                        this.state.isNutrientAgarPlateBtnClicked
+                        ?
+                        <div className="nutrientAgarPlatesContainer">
+                            <button
+                                id="nutriensTitle"
+                                onClick={this.handleNutrientAgarPlatesBtnClick.bind(this)}
+                                >Nutrient Agar Plates
+                            </button>
+                            <br/>
+                            { nutrientAgarPlates }
+                        </div>
+                        :
+                        <button
+                            id="nutriensBtn"
+                            onClick={this.handleNutrientAgarPlatesBtnClick.bind(this)}
+                            >Nutrient Agar Plates
                         </button>
                     }
                     {
@@ -411,6 +503,7 @@ const mapStateToProps = state => {
     console.log(state)
     return {
         samples: state.sample.samples,
+        allExistingNutrientAgarPlates: state.sample.allExistingNutrientAgarPlates,
         allExistingGroups: state.sample.allExistingGroups,
         allExistingTags: state.sample.allExistingTags,
         autocompleteNamesOfSamples: state.sample.autocompleteNamesOfSamples,
@@ -424,7 +517,8 @@ const mapDispatchToProps = dispatch => {
         fetchSamplesByGivenParameters: (params) => dispatch(fetchSamplesByGivenSearchParameters(params)),
         fetchAllNamesOfExistingSamples: () => dispatch(getAllNamesOfExistingSamples()),
         fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
-        fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer())
+        fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer()),
+        fetchAllNutrientAgarPlates: () => dispatch(fetchAllExistingNutrientAgarPlates())
     };
   };
 

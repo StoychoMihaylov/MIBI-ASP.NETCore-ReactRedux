@@ -11,6 +11,9 @@
     REQUEST_GET_ALL_EXISTING_GROUPS,
     REQUEST_GET_ALL_EXISTING_GROUPS_SUCCESS,
     REQUEST_GET_ALL_EXISTING_GROUPS_FAIL,
+    REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES,
+    REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_SUCCESS,
+    REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_FAIL,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL
@@ -19,6 +22,7 @@
 const initialState = {
     samples: [],
     autocompleteNamesOfSamples: [],
+    allExistingNutrientAgarPlates: [],
     allExistingGroups: [],
     allExistingTags: [],
     isLoading: false,
@@ -41,6 +45,23 @@ const SampleReducer = (state, action) => {
                 isLoading: false
             }
         case FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
+        case REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_SUCCESS:
+            return {
+                ...state,
+                allExistingNutrientAgarPlates: action.payload,
+                isLoading: false
+            }
+        case REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_FAIL:
             return {
                 ...state,
                 isLoading: false,
