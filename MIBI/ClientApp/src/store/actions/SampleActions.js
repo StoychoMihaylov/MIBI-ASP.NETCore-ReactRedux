@@ -11,6 +11,9 @@
     REQUEST_GET_ALL_EXISTING_GROUPS,
     REQUEST_GET_ALL_EXISTING_GROUPS_SUCCESS,
     REQUEST_GET_ALL_EXISTING_GROUPS_FAIL,
+    REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES,
+    REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_SUCCESS,
+    REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_FAIL,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL
@@ -160,6 +163,42 @@ export function getAllExistingGroupsSuccess(data) {
 export function getAllExistingGroupsFail(error) {
     return {
         type: REQUEST_GET_ALL_EXISTING_GROUPS_FAIL,
+        payload: error
+    }
+}
+
+//**********
+
+export function fetchAllExistingNutrientAgarPlates() {
+    return function (dispatch) {
+        dispatch(getAllExistingNutrientAgarPlates()) // Dispatch get all ezisting names of samples
+        axios.get(api + 'api/autocomplete/nutrientAgarPlates')
+        .then(response => {
+            dispatch(getAllExistingNutrientAgarPlatesSuccess(response["data"])) // Dispatch Successful request
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(getAllExistingNutrientAgarPlatesSuccess(err)) // Dispatch an error
+        })
+    }
+}
+
+export function getAllExistingNutrientAgarPlates() {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES,
+    }
+}
+
+export function getAllExistingNutrientAgarPlatesSuccess(data) {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_SUCCESS,
+        payload: data
+    }
+}
+
+export function getAllExistingNutrientAgarPlatesFail(error) {
+    return {
+        type: REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_FAIL,
         payload: error
     }
 }
