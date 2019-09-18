@@ -7,5 +7,7 @@
         public string[] Tags { get; set; }
 
         public string[] Groups { get; set; }
+
+        public string[] NutrientAgarPlates { get; set; }
     }
 }
