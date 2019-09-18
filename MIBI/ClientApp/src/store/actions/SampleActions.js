@@ -209,7 +209,6 @@ export function fetchSamplesByGivenSearchParameters(bateriaParams) {
     return function (dispatch) {
         dispatch(fetchSamples())
         axios.get(api + 'api/sample', {
-            //params: { bacteriaName: obj["bacteriaName"], tags: 'ffff', groups: 'fdf' }
             params: bateriaParams,
             paramsSerializer: function(params) {
                 return qs.stringify(params, {arrayFormat: 'repeat'})

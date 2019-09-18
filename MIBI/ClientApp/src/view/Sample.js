@@ -76,6 +76,7 @@ class SampleView extends Component {
     handleSearchBtnClickEvent() {
         let tagNames = []
         let groupNames = []
+        let nutrientAgarPlateNames = []
 
         this.state.selectedTags.forEach((tag) => {
             tagNames.push(tag.name)
@@ -85,10 +86,15 @@ class SampleView extends Component {
             groupNames.push(group.name)
         })
 
+        this.state.selectedNutrientAgarPlates.forEach((nutrient) => {
+            nutrientAgarPlateNames.push(nutrient.name)
+        })
+
         let searchParameters = {
-                bacteriaName: this.state.searchSampleName,
-                tags: tagNames,
-                groups: groupNames
+            bacteriaName: this.state.searchSampleName,
+            tags: tagNames,
+            groups: groupNames,
+            nutrientAgarPlates: nutrientAgarPlateNames
         }
 
         this.props.fetchSamplesByGivenParameters(searchParameters)
