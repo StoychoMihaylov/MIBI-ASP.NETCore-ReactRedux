@@ -28,9 +28,6 @@
         [Route("sample")]
         public IActionResult Get(SearchParametersBindingModel vm)
         {
-
-            var req = Request;
-
             return Ok(new object[]{"dsds", "dsdsds" });
         }
 
