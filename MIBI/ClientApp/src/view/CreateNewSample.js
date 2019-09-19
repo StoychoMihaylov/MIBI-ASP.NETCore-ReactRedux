@@ -4,7 +4,8 @@ import { Route } from "react-router"
 import { addNewSampleInTheServer } from "../store/actions/SampleActions"
 import {
   getAllExistingTagsFromServer,
-  getAllExistingGroupsFromServer
+  getAllExistingGroupsFromServer,
+  fetchAllExistingNutrientAgarPlates
 } from '../store/actions/SampleActions'
 import "../styles/CreateNewSample.css"
 
@@ -26,58 +27,59 @@ class CreateNewSample extends Component {
   }
 
   async componentWillMount() {
-    this.props.fetchAllExistingTags()
-    this.props.fetchAllExistingGroups()
-}
+      this.props.fetchAllExistingTags()
+      this.props.fetchAllExistingGroups()
+      this.props.fetchAllNutrientAgarPlates()
+  }
 
   handleImages(images) {
     let imgs = Array.from(images.target.files)
     let previewImages = [];
 
     for (var i = 0; i < imgs.length; i++) {
-      if (imgs[i].type === "image/jpeg") {
-        let newImg = {
-          url: URL.createObjectURL(imgs[i])
-        };
+        if (imgs[i].type === "image/jpeg") {
+          let newImg = {
+            url: URL.createObjectURL(imgs[i])
+          };
 
-        previewImages.push(newImg)
-      }
+          previewImages.push(newImg)
+        }
     }
 
     this.setState({
-      images: previewImages,
-      files: imgs
+        images: previewImages,
+        files: imgs
     });
   }
 
   handleGroupsBtnClick() {
-    let state = this.state.isGroupsBtnClicked
+      let state = this.state.isGroupsBtnClicked
 
-    if(state) {
-        this.setState({
-            isGroupsBtnClicked: false,
-            selectedGroups: []
-        })
-    } else if(! state) {
-        this.setState({
-            isGroupsBtnClicked: true
-        })
-    }
+      if(state) {
+          this.setState({
+              isGroupsBtnClicked: false,
+              selectedGroups: []
+          })
+      } else if(! state) {
+          this.setState({
+              isGroupsBtnClicked: true
+          })
+      }
   }
 
   handleTagsBtnClick(){
-    let state = this.state.isTagsBtnClicked
+      let state = this.state.isTagsBtnClicked
 
-    if(state) {
-        this.setState({
-            isTagsBtnClicked: false,
-            selectedTags: []
-        })
-    } else if(! state) {
-        this.setState({
-            isTagsBtnClicked: true
-        })
-    }
+      if(state) {
+          this.setState({
+              isTagsBtnClicked: false,
+              selectedTags: []
+          })
+      } else if(! state) {
+          this.setState({
+              isTagsBtnClicked: true
+          })
+      }
   }
 
   addSearchingByTag(event) {
@@ -101,22 +103,22 @@ class CreateNewSample extends Component {
             selectedTags: tags
         })
 
-    } else if (tabIndex === 1) {
-        let element = document.getElementById(id)
-        element.style.backgroundColor = "grey"
-        element.tabIndex = "0"
+        } else if (tabIndex === 1) {
+          let element = document.getElementById(id)
+          element.style.backgroundColor = "grey"
+          element.tabIndex = "0"
 
-        this.props.allExistingTags.forEach(tag => {
-            if(tag.name.toLowerCase() === value.toLowerCase()) {
-                tags.splice(tags.indexOf(value), 1)
-            }
-        })
+          this.props.allExistingTags.forEach(tag => {
+              if(tag.name.toLowerCase() === value.toLowerCase()) {
+                  tags.splice(tags.indexOf(value), 1)
+              }
+          })
 
-        this.setState({
-            selectedTags: tags
+          this.setState({
+              selectedTags: tags
         })
-    }
-}
+      }
+  }
 
   addSearchingByGroup(event) {
     let id = event.target.id
@@ -154,6 +156,61 @@ class CreateNewSample extends Component {
             selectedGroups: groups
         })
     }
+  }
+
+  addSearchingByNutrientAgarPlate(event) {
+      let id = event.target.id
+      let value = event.target.value
+      let tabIndex = event.target.tabIndex
+      let nutrients = this.state.selectedNutrientAgarPlates
+
+      if(tabIndex === 0) {
+          let element = document.getElementById(id)
+          element.style.backgroundColor = "#66B2FF"
+          element.tabIndex = "1"
+
+          this.props.allExistingNutrientAgarPlates.forEach(nutrient => {
+              if(nutrient.name.toLowerCase() === value.toLowerCase()) {
+                  nutrients.push(nutrient)
+              }
+          })
+
+          this.setState({
+              selectedNutrientAgarPlates: nutrients
+          })
+
+      } else if (tabIndex === 1) {
+          let element = document.getElementById(id)
+          element.style.backgroundColor = "grey"
+          element.tabIndex = "0"
+
+          this.props.allExistingNutrientAgarPlates.forEach(nutrient => {
+              if(nutrient.name.toLowerCase() === value.toLowerCase()) {
+                  nutrients.splice(nutrients.indexOf(value), 1)
+              }
+          })
+
+          this.setState({
+              selectedNutrientAgarPlates: nutrients
+          })
+      }
+
+      console.log(this.state.selectedNutrientAgarPlates)
+  }
+
+  handleNutrientAgarPlatesBtnClick() {
+      let state = this.state.isNutrientAgarPlateBtnClicked
+
+      if(state) {
+          this.setState({
+              isNutrientAgarPlateBtnClicked: false,
+              selectedNutrientAgarPlates: []
+          })
+      } else if(! state) {
+          this.setState({
+              isNutrientAgarPlateBtnClicked: true
+          })
+      }
   }
 
   async handleSubmit(event) {
@@ -205,6 +262,20 @@ class CreateNewSample extends Component {
                 </button>
             )
         }
+    })
+
+    let nutrientAgarPlates = this.props.allExistingNutrientAgarPlates.map((nutrient, index) => {
+      return (
+          <button
+              key={index}
+              id={nutrient.id}
+              tabIndex="0"
+              className="nutrients"
+              value={nutrient.name}
+              onClick={this.addSearchingByNutrientAgarPlate.bind(this)}
+              >{nutrient.name}
+          </button>
+      )
     })
 
     let tagsCategoryConsistency = this.props.allExistingTags.map((tag, index) => {
@@ -329,59 +400,78 @@ class CreateNewSample extends Component {
           <br/>
           <div>
               {
-                this.state.isGroupsBtnClicked
-                ?
-                <div className="groupsContainer">
-                    <button
-                      type="button"
-                      id="groupsTitle"
-                      onClick={this.handleGroupsBtnClick.bind(this)}
-                      >Groups
-                    </button>
-                    <br/>
-                    { groups }
-                </div>
-                :
-                <button
-                  type="button"
-                  id="groupsBtn"
-                  onClick={this.handleGroupsBtnClick.bind(this)}
-                  >Groups
-                </button>
+                  this.state.isGroupsBtnClicked
+                  ?
+                  <div className="groupsContainer">
+                      <button
+                        type="button"
+                        id="groupsTitle"
+                        onClick={this.handleGroupsBtnClick.bind(this)}
+                        >Groups
+                      </button>
+                      <br/>
+                      { groups }
+                  </div>
+                  :
+                  <button
+                    type="button"
+                    id="groupsBtn"
+                    onClick={this.handleGroupsBtnClick.bind(this)}
+                    >Groups
+                  </button>
               }
               {
-                this.state.isTagsBtnClicked
-                ?
-                <div className="tagsConteiner">
-                    <button
-                      type="button"
-                      id="tagsTitle"
-                      onClick={this.handleTagsBtnClick.bind(this)}
-                      >Tags
-                    </button>
-                    <br/>
-                    <h4>Elevations</h4>
-                    { tagsCategoryElevations }
-                    <hr/>
-                    <h4>Form</h4>
-                    { tagsCategoryForm }
-                    <hr/>
-                    <h4>Surface appearance</h4>
-                    { tagsCategorySurfaceAppearance }
-                    <hr/>
-                    <h4>Consistency</h4>
-                    { tagsCategoryConsistency }
-                    <hr/>
-                    <h4>Colors</h4>
-                    { tagsCategoryColors }
-                </div>
-                :
-                <button
-                  type="button"
-                  id="tagsBtn"
-                  onClick={this.handleTagsBtnClick.bind(this)}
-                  >Tags
-                </button>
+                  this.state.isNutrientAgarPlateBtnClicked
+                  ?
+                  <div className="nutrientAgarPlatesContainer">
+                      <button
+                          id="nutriensTitle"
+                          onClick={this.handleNutrientAgarPlatesBtnClick.bind(this)}
+                          >Nutrient Agar Plates
+                      </button>
+                      <br/>
+                      { nutrientAgarPlates }
+                  </div>
+                  :
+                  <button
+                      id="nutriensBtn"
+                      onClick={this.handleNutrientAgarPlatesBtnClick.bind(this)}
+                      >Nutrient Agar Plates
+                  </button>
+              }
+              {
+                  this.state.isTagsBtnClicked
+                  ?
+                  <div className="tagsConteiner">
+                      <button
+                        type="button"
+                        id="tagsTitle"
+                        onClick={this.handleTagsBtnClick.bind(this)}
+                        >Tags
+                      </button>
+                      <br/>
+                      <h4>Elevations</h4>
+                      { tagsCategoryElevations }
+                      <hr/>
+                      <h4>Form</h4>
+                      { tagsCategoryForm }
+                      <hr/>
+                      <h4>Surface appearance</h4>
+                      { tagsCategorySurfaceAppearance }
+                      <hr/>
+                      <h4>Consistency</h4>
+                      { tagsCategoryConsistency }
+                      <hr/>
+                      <h4>Colors</h4>
+                      { tagsCategoryColors }
+                  </div>
+                  :
+                  <button
+                    type="button"
+                    id="tagsBtn"
+                    onClick={this.handleTagsBtnClick.bind(this)}
+                    >Tags
+                  </button>
               }
           </div>
           <br />
@@ -404,6 +494,7 @@ class CreateNewSample extends Component {
 
 const mapStateToProps = state => {
   return {
+    allExistingNutrientAgarPlates: state.sample.allExistingNutrientAgarPlates,
     allExistingTags: state.sample.allExistingTags,
     allExistingGroups: state.sample.allExistingGroups,
     isLoading: state.sample.isLoading,
@@ -415,7 +506,8 @@ const mapDispatchToProps = dispatch => {
   return {
     createSample: (formData) => dispatch(addNewSampleInTheServer(formData)),
       fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
-      fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer())
+      fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer()),
+      fetchAllNutrientAgarPlates: () => dispatch(fetchAllExistingNutrientAgarPlates())
   }
 }
 
