@@ -212,8 +212,6 @@ class SampleView extends Component {
                 selectedNutrientAgarPlates: nutrients
             })
         }
-
-        console.log(this.state.selectedNutrientAgarPlates)
     }
 
     handleNutrientAgarPlatesBtnClick() {

@@ -16,6 +16,7 @@ class CreateNewSample extends Component {
     this.state = {
       name: "",
       description: "",
+      selectedNutrientAgarPlates: [],
       selectedTags: [],
       selectedGroups: [],
       images: [],
@@ -218,26 +219,32 @@ class CreateNewSample extends Component {
 
     let groupsNames = []
     let tagsNames = []
+    let nutrientAgarPlates = []
+
+    this.state.selectedNutrientAgarPlates.forEach(nutrient => {
+        nutrientAgarPlates.push(nutrient.name)
+    })
 
     this.state.selectedGroups.forEach(group => {
-      groupsNames.push(group.name)
+        groupsNames.push(group.name)
     })
 
     this.state.selectedTags.forEach(tag => {
-      tagsNames.push(tag.name)
+        tagsNames.push(tag.name)
     })
 
     let formData = new FormData();
     if (this.state.files.length > 0) {
-      this.state.files.forEach(file => {
-        formData.append("image", file)
-      });
+        this.state.files.forEach(file => {
+          formData.append("image", file)
+        });
     }
 
     formData.append("name", this.state.name)
     formData.append("description", this.state.description)
     formData.append("groups", groupsNames.join())
     formData.append("tags", tagsNames.join())
+    formData.append("nutrientAgarPlates", nutrientAgarPlates.join())
 
     await this.props.createSample(formData)
     this.props.history.push("/")

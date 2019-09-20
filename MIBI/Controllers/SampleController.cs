@@ -60,22 +60,7 @@
 
             try
             {
-                foreach (var image in formData.Files)
-                {
-                    var isImage = CheckIfFileIsAnImage(image);
-                    if (! isImage)
-                    {
-                        return BadRequest("The file is not an image. Allowed image formats are image/jpg(jpeg) or image/png.");
-                    }
-
-                    string path = Path.Combine(this.env.ContentRootPath + "\\Images");
-                    var newImgName = Guid.NewGuid().ToString() + (image.FileName.Substring(image.FileName.LastIndexOf('.')));
-                    using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
-                    {
-                        image.CopyToAsync(img);
-                        newSaple.ImgUrls.Add(newImgName);
-                    }
-                }
+                SaveImages(formData, newSaple);
             }
             catch (Exception ex)
             {
@@ -92,6 +77,26 @@
             }
 
             return Ok();
+        }
+
+        private void SaveImages(IFormCollection formData, NewSampleBidingModel newSaple)
+        {
+            foreach (var image in formData.Files)
+            {
+                var isImage = CheckIfFileIsAnImage(image);
+                if (!isImage)
+                {
+                    BadRequest("Allowed image formats are image/jpg(jpeg) or image/png.");
+                }
+
+                string path = Path.Combine(this.env.ContentRootPath + "\\Images");
+                var newImgName = Guid.NewGuid().ToString() + (image.FileName.Substring(image.FileName.LastIndexOf('.')));
+                using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
+                {
+                    image.CopyToAsync(img);
+                    newSaple.ImgUrls.Add(newImgName);
+                }
+            }
         }
 
         private bool CheckIfFileIsAnImage(IFormFile image)

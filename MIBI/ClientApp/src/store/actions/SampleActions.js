@@ -28,7 +28,7 @@ var qs = require('qs');
 export function addNewSampleInTheServer(imgFormdata) {
     return function (dispatch) {
         dispatch(createSample()) // Dispatch createNewSample
-        axios.get(api + 'api/sample', imgFormdata)
+        axios.post(api + 'api/sample', imgFormdata)
         .then(result => {
             console.log(result)
             dispatch(createSampleSuccess()) // Dispatch Successful created sample
