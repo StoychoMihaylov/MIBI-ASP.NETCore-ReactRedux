@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MIBI.Data.Migrations
 {
     [DbContext(typeof(MIBIContext))]
-    [Migration("20190915161116_tags-updated")]
-    partial class tagsupdated
+    [Migration("20190924004703_startMg")]
+    partial class startMg
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -9,6 +9,7 @@
     using MIBI.Models.ViewModels;
     using System.Linq;
     using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
 
     public class SampleService : Service, ISampleService
     {
@@ -34,7 +35,7 @@
                 SampleGroups = sampleGroups,
                 SampleTags = sampleTags,
                 ImgURLs = newImgs
-            };   
+            };
 
             this.Context.Samples.Add(newSample);
             this.Context.SaveChanges();
@@ -166,6 +167,20 @@
             }
 
             return result;
+        }
+
+        public object GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams)
+        {
+            if (searchParams.BacteriaName != null)
+            {
+                // TO DO: retrieve samples that contains the name
+            }
+            else if (searchParams.BacteriaName == null)
+            {
+                // TO DO: retrieve all samples by given params
+            }
+
+            return 1;
         }
     }
 }

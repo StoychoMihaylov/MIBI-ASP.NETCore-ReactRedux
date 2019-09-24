@@ -44,7 +44,7 @@
                         }
                     }
 
-                    if (! contains)
+                    if (!contains)
                     {
                         nutrients.Add(newNutr);
                     }
@@ -144,7 +144,7 @@
                         }
                     }
 
-                    if (! contians)
+                    if (!contians)
                     {
                         tags.Add(newTag);
                     }
@@ -189,7 +189,7 @@
                         }
                     }
 
-                    if (! contains)
+                    if (!contains)
                     {
                         groups.Add(newGroup);
                     }

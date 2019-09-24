@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MIBI.Data.Migrations
 {
-    public partial class test : Migration
+    public partial class startMg : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,6 +17,18 @@ namespace MIBI.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Groups", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NutrientAgarPlates",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NutrientAgarPlates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,6 +51,9 @@ namespace MIBI.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    IconUrl = table.Column<string>(nullable: true),
+                    Category = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -90,6 +105,30 @@ namespace MIBI.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SampleNutrientAgarPlates",
+                columns: table => new
+                {
+                    SampleId = table.Column<Guid>(nullable: false),
+                    NutrientAgarPlateId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SampleNutrientAgarPlates", x => new { x.SampleId, x.NutrientAgarPlateId });
+                    table.ForeignKey(
+                        name: "FK_SampleNutrientAgarPlates_NutrientAgarPlates_NutrientAgarPlateId",
+                        column: x => x.NutrientAgarPlateId,
+                        principalTable: "NutrientAgarPlates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SampleNutrientAgarPlates_Samples_SampleId",
+                        column: x => x.SampleId,
+                        principalTable: "Samples",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SampleTags",
                 columns: table => new
                 {
@@ -124,6 +163,11 @@ namespace MIBI.Data.Migrations
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SampleNutrientAgarPlates_NutrientAgarPlateId",
+                table: "SampleNutrientAgarPlates",
+                column: "NutrientAgarPlateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SampleTags_TagId",
                 table: "SampleTags",
                 column: "TagId");
@@ -138,10 +182,16 @@ namespace MIBI.Data.Migrations
                 name: "SampleGroups");
 
             migrationBuilder.DropTable(
+                name: "SampleNutrientAgarPlates");
+
+            migrationBuilder.DropTable(
                 name: "SampleTags");
 
             migrationBuilder.DropTable(
                 name: "Groups");
+
+            migrationBuilder.DropTable(
+                name: "NutrientAgarPlates");
 
             migrationBuilder.DropTable(
                 name: "Samples");
