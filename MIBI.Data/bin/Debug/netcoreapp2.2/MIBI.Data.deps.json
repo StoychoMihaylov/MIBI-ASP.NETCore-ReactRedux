@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v2.2": {
       "MIBI.Data/1.0.0": {
         "dependencies": {
+          "AutoMapper": "9.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
           "Microsoft.AspNetCore.Mvc": "2.2.0",

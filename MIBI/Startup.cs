@@ -14,6 +14,7 @@ namespace MIBI
     using AutoMapper;
     using MIBI.Data.Context;
     using MIBI.Data.DBInitilizer;
+    using global::AutoMapper;
 
     public class Startup
     {
@@ -34,8 +35,16 @@ namespace MIBI
             services.AddDbContext<MIBIContext>(options => 
                 options.UseSqlServer(connection));
 
-            //Automapper
-            services.AddAutoMapper(typeof(Startup));
+            // Auto Mapper Configurations
+            //var mappingConfig = new MapperConfiguration(mc =>
+            //{
+            //    mc.AddProfile(new MapperInitializer());
+            //});
+
+            //IMapper mapper = mappingConfig.CreateMapper();
+            //services.AddSingleton(mapper);
+
+            services.AddAutoMapper(typeof(MapperInitializer));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .ConfigureApiBehaviorOptions(options =>

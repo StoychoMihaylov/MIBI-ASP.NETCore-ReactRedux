@@ -32,28 +32,42 @@
                 .HasKey(sg => new { sg.SampleId, sg.GroupId });
 
             modelBuilder.Entity<SampleGroup>()
-              .HasOne<Sample>(s => s.Sample)
+              .HasOne(s => s.Sample)
               .WithMany(s => s.SampleGroups)
               .HasForeignKey(sc => sc.SampleId);
 
-            // SampleTag join table
-            modelBuilder
-                .Entity<SampleTag>()
+            modelBuilder.Entity<SampleGroup>()
+                .HasOne(g => g.Group)
+                .WithMany(g => g.SampleGroups)
+                .HasForeignKey(g => g.GroupId);
+
+            //SampleTag join table
+            modelBuilder.Entity<SampleTag>()
                 .HasKey(st => new { st.SampleId, st.TagId });
 
             modelBuilder.Entity<SampleTag>()
-                .HasOne<Tag>(st => st.Tag)
-                .WithMany(st => st.SampleTags)
-                .HasForeignKey(st => st.TagId);
+             .HasOne(s => s.Sample)
+             .WithMany(s => s.SampleTags)
+             .HasForeignKey(sc => sc.SampleId);
+
+            modelBuilder.Entity<SampleTag>()
+                .HasOne(t => t.Tag)
+                .WithMany(t => t.SampleTags)
+                .HasForeignKey(t => t.TagId);
 
             // SampleNutrientAgarPlateId join table
             modelBuilder.Entity<SampleNutrientAgarPlate>()
                 .HasKey(sn => new { sn.SampleId, sn.NutrientAgarPlateId });
 
             modelBuilder.Entity<SampleNutrientAgarPlate>()
-                .HasOne<Sample>(s => s.Sample)
+                .HasOne(s => s.Sample)
                 .WithMany(s => s.SampleNutrientAgarPlates)
                 .HasForeignKey(sn => sn.SampleId);
+
+            modelBuilder.Entity<SampleNutrientAgarPlate>()
+                .HasOne(n => n.NutrientAgarPlate)
+                .WithMany(n => n.SampleNutrientAgarPlates)
+                .HasForeignKey(n => n.NutrientAgarPlateId);
         }
     }
 }

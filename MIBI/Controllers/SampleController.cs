@@ -26,9 +26,19 @@
 
         [HttpGet]
         [Route("sample")]
-        public IActionResult Get(SearchParametersBindingModel vm)
+        public IActionResult Get(SearchParametersBindingModel searchParams)
         {
-            return Ok(new object[]{"dsds", "dsdsds" });
+            if (searchParams.BacteriaName == null &&
+                searchParams.Tags == null && 
+                searchParams.Groups == null &&
+                searchParams.NutrientAgarPlates == null)
+            {
+                return BadRequest("No search params has been sent.");
+            }
+
+            var result = this.service.GetAllSamplesByGivenSearchParams(searchParams);
+
+            return Ok(result);
         }
 
         [HttpPost]

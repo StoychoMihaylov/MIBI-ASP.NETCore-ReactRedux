@@ -34,7 +34,7 @@
                 SampleGroups = sampleGroups,
                 SampleTags = sampleTags,
                 ImgURLs = newImgs
-            };   
+            };
 
             this.Context.Samples.Add(newSample);
             this.Context.SaveChanges();
@@ -166,6 +166,37 @@
             }
 
             return result;
+        }
+
+        public object GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams)
+        {
+            var foundSamples = FindSampleDependingOnGivenParams(searchParams);
+
+            var sampleViewModels = this.mapper.Map<List<SampleViewModel>>(foundSamples);
+
+            return sampleViewModels;
+        }
+
+        private List<Sample> FindSampleDependingOnGivenParams(SearchParametersBindingModel searchParams)
+        {
+            var samples = new List<Sample>();
+
+            if(searchParams.Tags == null &&
+                searchParams.Groups == null &&
+                searchParams.BacteriaName != null &&
+                searchParams.NutrientAgarPlates == null)
+            {
+                samples = this.Context
+                    .Samples
+                    .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
+                    .ToList();
+            }
+            else if (searchParams.BacteriaName == null)
+            {
+                // TO DO: retrieve all samples by given params
+            }
+
+            return samples;
         }
     }
 }
