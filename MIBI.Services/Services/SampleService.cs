@@ -9,6 +9,7 @@
     using MIBI.Models.ViewModels;
     using System.Linq;
     using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
 
     public class SampleService : Service, ISampleService
     {
@@ -168,7 +169,7 @@
             return result;
         }
 
-        public object GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams)
+        public List<SampleViewModel> GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams)
         {
             var foundSamples = FindSampleDependingOnGivenParams(searchParams);
 
@@ -181,21 +182,81 @@
         {
             var samples = new List<Sample>();
 
-            if(searchParams.Tags == null &&
-                searchParams.Groups == null &&
-                searchParams.BacteriaName != null &&
-                searchParams.NutrientAgarPlates == null)
+            // Searching by given name
+            if (searchParams.Tags == null &&
+               searchParams.Groups == null &&
+               searchParams.BacteriaName != null &&
+               searchParams.NutrientAgarPlates == null)
             {
                 samples = this.Context
                     .Samples
+                    .Include(s => s.ImgURLs)
                     .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
                     .ToList();
-            }
-            else if (searchParams.BacteriaName == null)
+            } // Searching by Name and any other provided search params
+            else if (searchParams.BacteriaName != null && 
+                        (searchParams.Tags != null || searchParams.Groups != null || searchParams.NutrientAgarPlates != null))
             {
-                // TO DO: retrieve all samples by given params
-            }
+                var samplesFromDB = this.Context
+                    .Samples
+                    .Include(s => s.ImgURLs)
+                    .Include(s => s.SampleTags)
+                        .ThenInclude(st => st.Tag)
+                    .Include(s => s.SampleGroups)
+                        .ThenInclude(sg => sg.Group)
+                    .Include(s => s.SampleNutrientAgarPlates)
+                        .ThenInclude(sn => sn.NutrientAgarPlate)
+                    .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
+                    .ToList();
 
+                // Filtering the samples containing certan name by any other given search param
+                foreach (var sample in samplesFromDB)
+                {
+                    var IsMatch = true;
+
+                    if (searchParams.Tags != null)
+                    {
+                        foreach (var sampleTag in sample.SampleTags)
+                        {
+                            if (!searchParams.Tags.Contains(sampleTag.Tag.Name))
+                            {
+                                IsMatch = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (searchParams.Groups != null)
+                    {
+                        foreach (var sampleGroup in sample.SampleGroups)
+                        {
+                            if (! searchParams.Groups.Contains(sampleGroup.Group.Name))
+                            {
+                                IsMatch = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (searchParams.NutrientAgarPlates != null)
+                    {
+                        foreach (var sampleNutrient in sample.SampleNutrientAgarPlates)
+                        {
+                            if (! searchParams.NutrientAgarPlates.Contains(sampleNutrient.NutrientAgarPlate.Name))
+                            {
+                                IsMatch = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (IsMatch)
+                    {
+                        samples.Add(sample);
+                    }
+                }       
+            }
+ 
             return samples;
         }
     }

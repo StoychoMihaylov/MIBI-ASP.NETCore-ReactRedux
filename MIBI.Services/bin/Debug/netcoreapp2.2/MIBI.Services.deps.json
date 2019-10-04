@@ -1940,7 +1940,8 @@
       "MIBI.Models/1.0.0": {
         "dependencies": {
           "AutoMapper": "9.0.0",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0"
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "MIBI.Data": "1.0.0"
         },
         "runtime": {
           "MIBI.Models.dll": {}
