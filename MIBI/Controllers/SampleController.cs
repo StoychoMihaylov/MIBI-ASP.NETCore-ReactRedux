@@ -96,7 +96,7 @@
                 var isImage = CheckIfFileIsAnImage(image);
                 if (!isImage)
                 {
-                    BadRequest("Allowed image formats are image/jpg(jpeg) or image/png.");
+                    BadRequest("Allowed image format is image/jpg(jpeg).");
                 }
 
                 string path = Path.Combine(this.env.ContentRootPath + "\\Images");
