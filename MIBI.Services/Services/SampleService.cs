@@ -193,7 +193,7 @@
                     .Include(s => s.ImgURLs)
                     .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
                     .ToList();
-            } // Searching by Name and any other provided search params
+            } // Searching by Name plus any other provided search params
             else if (searchParams.BacteriaName != null && 
                         (searchParams.Tags != null || searchParams.Groups != null || searchParams.NutrientAgarPlates != null))
             {
