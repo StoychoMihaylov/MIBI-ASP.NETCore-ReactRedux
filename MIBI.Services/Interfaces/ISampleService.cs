@@ -12,6 +12,6 @@
         List<Tag> GetAllTags();
         List<GroupViewModel> GetAllGroups();
         List<NutrientAgarPlateViewModel> GetAllNutrientAgarPlates();
-        object GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams);
+        List<SampleViewModel> GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams);
     }
 }

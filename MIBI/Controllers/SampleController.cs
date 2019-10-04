@@ -36,9 +36,9 @@
                 return BadRequest("No search params has been sent.");
             }
 
-            var result = this.service.GetAllSamplesByGivenSearchParams(searchParams);
+            var sampleViewModels = this.service.GetAllSamplesByGivenSearchParams(searchParams);
 
-            return Ok(result);
+            return Ok(sampleViewModels);
         }
 
         [HttpPost]
@@ -111,9 +111,7 @@
 
         private bool CheckIfFileIsAnImage(IFormFile image)
         {
-            if (image.ContentType == "image/jpg" 
-                || image.ContentType == "image/jpeg"
-                || image.ContentType == "image/png")
+            if (image.ContentType == "image/jpg" || image.ContentType == "image/jpeg")
             {
                 return true;
             }

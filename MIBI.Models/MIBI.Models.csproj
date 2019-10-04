@@ -9,4 +9,8 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MIBI.Data\MIBI.Data.csproj" />
+  </ItemGroup>
+
 </Project>
