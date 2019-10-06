@@ -498,7 +498,7 @@ class SampleView extends Component {
                     }
                 </div>
             </div>
-            <img src={"https://localhost:44376/04d87d6a-4877-4a57-ac36-2f050debf350.jpg"} alt="test" />
+            <img src={'https://localhost:44376/Images/04d87d6a-4877-4a57-ac36-2f050debf350.jpg'} alt="test" />
         </div>
         )
     }

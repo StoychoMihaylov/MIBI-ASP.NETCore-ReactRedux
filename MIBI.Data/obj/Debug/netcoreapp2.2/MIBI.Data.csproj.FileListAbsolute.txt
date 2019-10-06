@@ -3,6 +3,7 @@ C:\Users\stmih\source\repos\MIBI\MIBI.Data\bin\Debug\netcoreapp2.2\MIBI.Data.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\bin\Debug\netcoreapp2.2\MIBI.Data.pdb
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.xml
+C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.csprojAssemblyReference.cache
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.csproj.CoreCompileInputs.cache
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.AssemblyInfoInputs.cache
 C:\Users\stmih\source\repos\MIBI\MIBI.Data\obj\Debug\netcoreapp2.2\MIBI.Data.AssemblyInfo.cs
