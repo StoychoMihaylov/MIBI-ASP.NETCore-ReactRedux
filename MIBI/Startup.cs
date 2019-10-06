@@ -15,6 +15,9 @@ namespace MIBI
     using MIBI.Data.Context;
     using MIBI.Data.DBInitilizer;
     using global::AutoMapper;
+    using System.IO;
+    using Microsoft.Extensions.FileProviders;
+    using Microsoft.AspNetCore.Http;
 
     public class Startup
     {
@@ -35,15 +38,7 @@ namespace MIBI
             services.AddDbContext<MIBIContext>(options => 
                 options.UseSqlServer(connection));
 
-            // Auto Mapper Configurations
-            //var mappingConfig = new MapperConfiguration(mc =>
-            //{
-            //    mc.AddProfile(new MapperInitializer());
-            //});
-
-            //IMapper mapper = mappingConfig.CreateMapper();
-            //services.AddSingleton(mapper);
-
+            // AutoMapper config
             services.AddAutoMapper(typeof(MapperInitializer));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -118,6 +113,9 @@ namespace MIBI
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            // Enable static files
+            app.UseStaticFiles();
         }
     }
 }

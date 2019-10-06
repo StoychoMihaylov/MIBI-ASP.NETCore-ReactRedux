@@ -3,8 +3,10 @@ C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\MIBI.Serv
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\MIBI.Services.pdb
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\MIBI.Data.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\MIBI.Models.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\MIBI.Data.pdb
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\MIBI.Models.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.xml
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\obj\Debug\netcoreapp2.2\MIBI.Services.csprojAssemblyReference.cache
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\obj\Debug\netcoreapp2.2\MIBI.Services.csproj.CoreCompileInputs.cache
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\obj\Debug\netcoreapp2.2\MIBI.Services.AssemblyInfoInputs.cache
@@ -12,5 +14,3 @@ C:\Users\stmih\source\repos\MIBI\MIBI.Services\obj\Debug\netcoreapp2.2\MIBI.Serv
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\obj\Debug\netcoreapp2.2\MIBI.Services.csproj.CopyComplete
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\obj\Debug\netcoreapp2.2\MIBI.Services.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.Services\obj\Debug\netcoreapp2.2\MIBI.Services.pdb
-C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.dll
-C:\Users\stmih\source\repos\MIBI\MIBI.Services\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.xml

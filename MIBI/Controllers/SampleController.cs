@@ -99,7 +99,7 @@
                     BadRequest("Allowed image format is image/jpg(jpeg).");
                 }
 
-                string path = Path.Combine(this.env.ContentRootPath + "\\Images");
+                string path = Path.Combine(this.env.ContentRootPath + "\\wwwroot\\Images");
                 var newImgName = Guid.NewGuid().ToString() + (image.FileName.Substring(image.FileName.LastIndexOf('.')));
                 using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
                 {
