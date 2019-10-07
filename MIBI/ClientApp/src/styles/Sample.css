@@ -231,7 +231,7 @@
     padding-bottom: 3px;
     border-radius: 12px;
     color: white;
-    background-color:  grey;
+    background-color: grey;
     border: none;
 }
 
@@ -250,4 +250,19 @@
     width: 25px;
     margin-left: 5px;
     border-radius: 100%
+}
+
+.sampleResult {
+    color: white;
+    height: 200px;
+    width: 300px;
+    margin: 10px;
+    border-radius: 1px;
+    background-color: grey;
+    border-radius: 5px;
+}
+
+.sampleImg {
+    height: 140px;
+    width: 300px;
 }

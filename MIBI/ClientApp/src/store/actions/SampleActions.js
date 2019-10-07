@@ -215,7 +215,6 @@ export function fetchSamplesByGivenSearchParameters(bateriaParams) {
             }
         })
         .then(response => {
-            console.log(response)
             dispatch(fetchSamplesSuccess(response.data))
         })
         .catch(error => {

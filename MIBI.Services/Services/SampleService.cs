@@ -34,7 +34,7 @@
                 CreatedBy = "Bai Pesho",
                 SampleGroups = sampleGroups,
                 SampleTags = sampleTags,
-                ImgURLs = newImgs
+                Images = newImgs
             };
 
             this.Context.Samples.Add(newSample);
@@ -49,7 +49,8 @@
             {
                 SampleImage newImg = new SampleImage()
                 {
-                    Url = url
+                    Url = url,
+                    Sample = null
                 };
 
                 imgs.Add(newImg);
@@ -190,16 +191,26 @@
             {
                 samples = this.Context
                     .Samples
-                    .Include(s => s.ImgURLs)
+                    .Include(s => s.Images)
                     .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
                     .ToList();
+
+                // Stoping reference loop
+                foreach (var sample in samples)
+                {
+                    foreach (var img in sample.Images)
+                    {
+                        img.Sample = null;
+                    }
+                }
+
             } // Searching by Name plus any other provided search params
             else if (searchParams.BacteriaName != null && 
                         (searchParams.Tags != null || searchParams.Groups != null || searchParams.NutrientAgarPlates != null))
             {
                 var samplesFromDB = this.Context
                     .Samples
-                    .Include(s => s.ImgURLs)
+                    .Include(s => s.Images)
                     .Include(s => s.SampleTags)
                         .ThenInclude(st => st.Tag)
                     .Include(s => s.SampleGroups)

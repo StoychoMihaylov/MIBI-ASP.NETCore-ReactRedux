@@ -260,6 +260,14 @@ class SampleView extends Component {
     }
 
     render() {
+        let samples = this.props.samples.map((sample, index) => (
+            <div key={index} id={sample.id} className="sampleResult">
+                <h5>{sample.name}</h5>
+                <img className="sampleImg" src={'https://localhost:44376/Images/' + sample.images[0].url} alt="sample" />
+                <span>Date: {sample.createdOn.split("T")[0]}</span>
+            </div>
+        ))
+
         let optionSetOfNames = this.state.optionSetNames.map((rec, index) => (
             <div key={index}>
                 <input
@@ -498,7 +506,9 @@ class SampleView extends Component {
                     }
                 </div>
             </div>
-            <img src={'https://localhost:44376/Images/04d87d6a-4877-4a57-ac36-2f050debf350.jpg'} alt="test" />
+            <div>
+                { samples }
+            </div>
         </div>
         )
     }
