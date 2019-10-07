@@ -15,7 +15,7 @@
 
         public string CreatedBy { get; set; }
 
-        public ICollection<SampleImage> ImgURLs { get; set; }
+        public ICollection<SampleImage> Images { get; set; }
 
         public ICollection<SampleTag> SampleTags { get; set; }
 

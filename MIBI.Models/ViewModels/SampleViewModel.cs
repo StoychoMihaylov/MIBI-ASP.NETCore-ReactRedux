@@ -12,7 +12,7 @@
 
         public string Description { get; set; }
 
-        public ICollection<SampleImage> ImgURLs { get; set; }
+        public ICollection<SampleImage> Images { get; set; }
 
         public DateTime CreatedOn { get; set; }
     }
