@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using MIBI.Models.BindingModels;
     using MIBI.Models.ViewModels;
     using MIBI.Services.Interfaces;
@@ -43,7 +44,7 @@
 
         [HttpPost]
         [Route("sample")]
-        public IActionResult Post(
+        public async Task<IActionResult> Post(
             [FromForm] string name,
             [FromForm] string description,
             [FromForm] string groups,
@@ -70,7 +71,7 @@
 
             try
             {
-                SaveImages(formData, newSaple);
+                await SaveImages(formData, newSaple);
             }
             catch (Exception ex)
             {
@@ -89,23 +90,31 @@
             return Ok();
         }
 
-        private void SaveImages(IFormCollection formData, NewSampleBidingModel newSaple)
+        private async Task SaveImages(IFormCollection formData, NewSampleBidingModel newSaple)
         {
             foreach (var image in formData.Files)
             {
                 var isImage = CheckIfFileIsAnImage(image);
                 if (!isImage)
                 {
-                    BadRequest("Allowed image format is image/jpg(jpeg).");
+                    throw new Exception("Allowed image format is image/jpg(jpeg).");
                 }
 
-                string path = Path.Combine(this.env.ContentRootPath + "\\wwwroot\\Images");
-                var newImgName = Guid.NewGuid().ToString() + (image.FileName.Substring(image.FileName.LastIndexOf('.')));
-                using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
+                try
                 {
-                    image.CopyToAsync(img);
-                    newSaple.ImgUrls.Add(newImgName);
+                    string path = Path.Combine(this.env.ContentRootPath + "\\wwwroot\\Images");
+                    var newImgName = Guid.NewGuid().ToString() + (image.FileName.Substring(image.FileName.LastIndexOf('.')));
+                    using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
+                    {
+                        await image.CopyToAsync(img);
+                        newSaple.ImgUrls.Add(newImgName);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                
             }
         }
 

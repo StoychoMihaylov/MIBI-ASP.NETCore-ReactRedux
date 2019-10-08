@@ -47,6 +47,10 @@ class SampleView extends Component {
         })
     }
 
+    hideOptionSetOfNames(){
+        document.getElementById("autocompleateListOfNames").style.display = "none"
+    }
+
     showOptionSetOfNames(event) {
         let value = event.target.value
         let newOptSet = []
@@ -261,11 +265,11 @@ class SampleView extends Component {
 
     render() {
         let samples = this.props.samples.map((sample, index) => (
-            <div key={index} id={sample.id} className="sampleResult">
-                <h5>{sample.name}</h5>
-                <img className="sampleImg" src={'https://localhost:44376/Images/' + sample.images[0].url} alt="sample" />
-                <span>Date: {sample.createdOn.split("T")[0]}</span>
-            </div>
+                <div key={index} id={sample.id} className="sampleResult">
+                    <h5>{sample.name}</h5>
+                    <img className="sampleImg" src={'https://localhost:44376/Images/' + sample.images[0].url} alt="sample" />
+                    <span>Date: {sample.createdOn.split("T")[0]}</span>
+                </div>
         ))
 
         let optionSetOfNames = this.state.optionSetNames.map((rec, index) => (
@@ -406,6 +410,7 @@ class SampleView extends Component {
                                     id="searchInput"
                                     placeholder="Search..."
                                     value={this.state.searchSampleName}
+                                    onBlur={this.hideOptionSetOfNames.bind(this)}
                                     onChange={this.showOptionSetOfNames.bind(this)}
                                 />
                                 <div id="autocompleateListOfNames">
@@ -506,9 +511,7 @@ class SampleView extends Component {
                     }
                 </div>
             </div>
-            <div>
-                { samples }
-            </div>
+            { samples }
         </div>
         )
     }

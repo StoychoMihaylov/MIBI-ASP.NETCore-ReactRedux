@@ -257,12 +257,22 @@
     height: 200px;
     width: 300px;
     margin: 10px;
+    margin-top: 20px;
     border-radius: 1px;
     background-color: grey;
     border-radius: 5px;
+    display: inline-block;
+}
+
+.sampleResult:hover {
+    opacity: 0.5;
 }
 
 .sampleImg {
     height: 140px;
     width: 300px;
+}
+
+.sampleImg:hover {
+    opacity: 0.5;
 }
