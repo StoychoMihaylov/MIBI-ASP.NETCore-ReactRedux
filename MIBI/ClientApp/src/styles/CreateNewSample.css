@@ -79,3 +79,8 @@
     width: 25px;
     margin-left: 5px;
 }
+
+.errorMessage {
+    color: red;
+    margin: 2px;
+}
