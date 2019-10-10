@@ -1,11 +1,11 @@
 ﻿namespace MIBI.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using MIBI.Services.Interfaces;
+    using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
+    using MIBI.Services.Interfaces;  
 
     [Route("api/autocomplete")]
     [ApiController]
@@ -22,7 +22,6 @@
         [Route("names")]
         public IActionResult GetNames()
         {
-
             var bacteriaNames = this.service.GetAllNamesOfSamples();
 
             return Ok(bacteriaNames);

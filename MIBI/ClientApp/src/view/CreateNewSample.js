@@ -22,8 +22,16 @@ class CreateNewSample extends Component {
       images: [],
       files: {},
 
+      nameError: "",
+      descriptionError: "",
+      nutrientAgarPlatesError: "",
+      tagsError: "",
+      groupsError: "",
+      imagesError: "",
+
       isTagsBtnClicked: false,
-      isGroupsBtnClicked: false
+      isGroupsBtnClicked: false,
+      isNutrientAgarPlateBtnClicked: false
     }
   }
 
@@ -81,6 +89,21 @@ class CreateNewSample extends Component {
               isTagsBtnClicked: true
           })
       }
+  }
+
+  handleNutrientAgarPlatesBtnClick() {
+    let state = this.state.isNutrientAgarPlateBtnClicked
+
+    if(state) {
+        this.setState({
+            isNutrientAgarPlateBtnClicked: false,
+            selectedNutrientAgarPlates: []
+        })
+    } else if(! state) {
+        this.setState({
+            isNutrientAgarPlateBtnClicked: true
+        })
+    }
   }
 
   addSearchingByTag(event) {
@@ -195,31 +218,83 @@ class CreateNewSample extends Component {
               selectedNutrientAgarPlates: nutrients
           })
       }
-
-      console.log(this.state.selectedNutrientAgarPlates)
   }
 
-  handleNutrientAgarPlatesBtnClick() {
-      let state = this.state.isNutrientAgarPlateBtnClicked
+  formValidation(name, description, groupsNames, tagsNames, nutrientAgarPlates, files) {
+    let isFormValid = true;
 
-      if(state) {
-          this.setState({
-              isNutrientAgarPlateBtnClicked: false,
-              selectedNutrientAgarPlates: []
-          })
-      } else if(! state) {
-          this.setState({
-              isNutrientAgarPlateBtnClicked: true
-          })
-      }
+    if (name == "") {
+        this.setState({
+            nameError: "Name can't be empty!"
+        })
+
+        isFormValid = false;
+    } else {
+        this.setState({ nameError: "" })
+    }
+
+    if (description == "") {
+        this.setState({
+            descriptionError: "Description can't be empty!"
+        })
+
+        isFormValid = false;
+    } else {
+        this.setState({ descriptionError: "" })
+    }
+
+    if (groupsNames.length == 0) {
+        this.setState({
+            groupsError: "At least one group type should be specified!"
+        })
+
+        isFormValid = false;
+    } else {
+        this.setState({ groupsError: "" })
+    }
+
+    if (tagsNames.length == 0) {
+        this.setState({
+            tagsError: "At least one tag type should be specified!"
+        })
+
+        isFormValid = false;
+    } else {
+        this.setState({ tagsError: "" })
+    }
+
+    if (nutrientAgarPlates.length == 0) {
+        this.setState({
+            nutrientAgarPlatesError: "At least one nutrient agar plate type should be specified!"
+        })
+
+        isFormValid = false;
+    } else {
+        this.setState({ nutrientAgarPlatesError: "" })
+    }
+
+    if (files.length == null) {
+        this.setState({
+            imagesError: "At least one image should be uploaded!"
+        })
+
+        isFormValid = false;
+    } else {
+        this.setState({ imagesError: "" })
+    }
+
+    return isFormValid
   }
 
   async handleSubmit(event) {
     event.preventDefault();
 
+    let name = this.state.name
+    let description = this.state.description
     let groupsNames = []
     let tagsNames = []
     let nutrientAgarPlates = []
+    let files = this.state.files
 
     this.state.selectedNutrientAgarPlates.forEach(nutrient => {
         nutrientAgarPlates.push(nutrient.name)
@@ -233,15 +308,20 @@ class CreateNewSample extends Component {
         tagsNames.push(tag.name)
     })
 
+    let isFormValid = this.formValidation(name, description, groupsNames, tagsNames, nutrientAgarPlates, files)
+    if (!isFormValid) {
+        return;
+    }
+
     let formData = new FormData();
-    if (this.state.files.length > 0) {
-        this.state.files.forEach(file => {
+    if (files.length > 0) {
+        files.forEach(file => {
           formData.append("image", file)
         });
     }
 
-    formData.append("name", this.state.name)
-    formData.append("description", this.state.description)
+    formData.append("name", name)
+    formData.append("description", description)
     formData.append("groups", groupsNames.join())
     formData.append("tags", tagsNames.join())
     formData.append("nutrientAgarPlates", nutrientAgarPlates.join())
@@ -251,8 +331,6 @@ class CreateNewSample extends Component {
   }
 
   render() {
-    console.log(this.state.selectedTags)
-    console.log(this.state.selectedGroups)
     let tagsCategoryColors = this.props.allExistingTags.map((tag, index) => {
         if(tag.category === "Colors") {
             return (
@@ -371,6 +449,7 @@ class CreateNewSample extends Component {
     return (
       <div className="conteiner">
         <div>
+            <div className="errorMessage">{this.state.nameError}</div>
             <input
               type="text"
               placeholder="Type a name"
@@ -379,6 +458,7 @@ class CreateNewSample extends Component {
               onChange={event => this.setState({ name: event.target.value })}
             />
           <br />
+            <div className="errorMessage">{this.state.descriptionError}</div>
               <textarea
                 placeholder="Description..."
                 className="descriptionInput"
@@ -388,6 +468,7 @@ class CreateNewSample extends Component {
               />
           <br />
           {/* Image Uploader */}
+          <div className="errorMessage">{this.state.imagesError}</div>
           <label className="uploadImgsConteiner">
             <span className="uploadImgs">Upload Images</span>
             <input
@@ -406,6 +487,7 @@ class CreateNewSample extends Component {
             </div>
           <br/>
           <div>
+            <div className="errorMessage">{this.state.groupsError}</div>
               {
                   this.state.isGroupsBtnClicked
                   ?
@@ -427,6 +509,7 @@ class CreateNewSample extends Component {
                     >Groups
                   </button>
               }
+              <div className="errorMessage">{this.state.nutrientAgarPlatesError}</div>
               {
                   this.state.isNutrientAgarPlateBtnClicked
                   ?
@@ -446,6 +529,7 @@ class CreateNewSample extends Component {
                       >Nutrient Agar Plates
                   </button>
               }
+              <div className="errorMessage">{this.state.tagsError}</div>
               {
                   this.state.isTagsBtnClicked
                   ?
