@@ -245,7 +245,13 @@ class CreateNewSample extends Component {
 
     if (groupsNames.length == 0) {
         this.setState({
-            groupsError: "At least one group type should be specified!"
+            groupsError: "Group type should be specified!"
+        })
+
+        isFormValid = false;
+    } else if (groupsNames.length > 1) {
+        this.setState({
+            groupsError: "Only one group type should be specified!"
         })
 
         isFormValid = false;
@@ -273,9 +279,9 @@ class CreateNewSample extends Component {
         this.setState({ nutrientAgarPlatesError: "" })
     }
 
-    if (files.length == null) {
+    if (files.length == null || files.length < 3) {
         this.setState({
-            imagesError: "At least one image should be uploaded!"
+            imagesError: "At least 3 images should be uploaded!"
         })
 
         isFormValid = false;
