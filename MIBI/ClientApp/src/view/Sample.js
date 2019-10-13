@@ -268,7 +268,7 @@ class SampleView extends Component {
                 <div key={index} id={sample.id} className="sampleResult">
                     <h5>{sample.name}</h5>
                     <img className="sampleImg" src={'https://localhost:44376/Images/' + sample.images[0].url} alt="sample" />
-                    <span>Date: {sample.createdOn.split("T")[0]}</span>
+                    <span>Created on: {sample.createdOn.split("T")[0]}</span>
                 </div>
         ))
 
