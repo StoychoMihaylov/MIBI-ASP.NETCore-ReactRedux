@@ -151,34 +151,54 @@ class CreateNewSample extends Component {
     let groups = this.state.selectedGroups
 
     if(tabIndex === 0) {
-        let element = document.getElementById(id)
-        element.style.backgroundColor = "#66B2FF"
-        element.tabIndex = "1"
-
         this.props.allExistingGroups.forEach(group => {
             if(group.name.toLowerCase() === value.toLowerCase()) {
                 groups.push(group)
             }
         })
 
+        // Form validation message
+        this.checkIfMoreThanOneGroupIsSelected(groups)
+
+        let element = document.getElementById(id)
+        element.style.backgroundColor = "#66B2FF"
+        element.tabIndex = "1"
+
         this.setState({
             selectedGroups: groups
         })
 
     } else if (tabIndex === 1) {
-        let element = document.getElementById(id)
-        element.style.backgroundColor = "grey"
-        element.tabIndex = "0"
-
         this.props.allExistingGroups.forEach(group => {
             if(group.name.toLowerCase() === value.toLowerCase()) {
                 groups.splice(groups.indexOf(value), 1)
             }
         })
 
+        // Form validation message
+        this.checkIfMoreThanOneGroupIsSelected(groups)
+
+        let element = document.getElementById(id)
+        element.style.backgroundColor = "grey"
+        element.tabIndex = "0"
+
         this.setState({
             selectedGroups: groups
         })
+    }
+  }
+
+  checkIfMoreThanOneGroupIsSelected(selectedGroups) {
+    if(selectedGroups.length > 1){
+        this.setState({
+            groupsError: "Only one group could be selected for a sample!"
+        })
+        return true;
+    } else {
+        this.setState({
+            groupsError: ""
+        })
+        return false;
     }
   }
 
