@@ -157,7 +157,7 @@ class CreateNewSample extends Component {
             }
         })
 
-        // Form validation message
+        // Form validation, only message
         this.checkIfMoreThanOneGroupIsSelected(groups)
 
         let element = document.getElementById(id)
@@ -175,7 +175,7 @@ class CreateNewSample extends Component {
             }
         })
 
-        // Form validation message
+        // Form validation, only message
         this.checkIfMoreThanOneGroupIsSelected(groups)
 
         let element = document.getElementById(id)

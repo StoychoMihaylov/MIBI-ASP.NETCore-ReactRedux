@@ -230,3 +230,8 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+wwwroot/Images
+MIBI/wwwroot/Images/
+.jpg
+.jpeg
