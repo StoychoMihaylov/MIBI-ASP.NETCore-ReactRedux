@@ -178,6 +178,8 @@ class SampleView extends Component {
                 selectedGroups: groups
             })
         }
+
+        console.log(this.state.selectedGroups)
     }
 
     addSearchingByNutrientAgarPlate(event) {

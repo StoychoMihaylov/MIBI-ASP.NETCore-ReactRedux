@@ -195,18 +195,9 @@
                     .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
                     .ToList();
 
-                // Stoping reference loop
-                foreach (var sample in samples)
-                {
-                    foreach (var img in sample.Images)
-                    {
-                        img.Sample = null;
-                    }
-                }
-
             } // Searching by Name plus any other provided search params
             else if (searchParams.BacteriaName != null && 
-                        (searchParams.Tags != null || searchParams.Groups != null || searchParams.NutrientAgarPlates != null))
+                (searchParams.Tags != null || searchParams.Groups != null || searchParams.NutrientAgarPlates != null))
             {
                 var samplesFromDB = this.Context
                     .Samples
@@ -267,7 +258,16 @@
                     }
                 }       
             }
- 
+
+            // Stoping reference loop
+            foreach (var sample in samples)
+            {
+                foreach (var img in sample.Images)
+                {
+                    img.Sample = null;
+                }
+            }
+
             return samples;
         }
     }
