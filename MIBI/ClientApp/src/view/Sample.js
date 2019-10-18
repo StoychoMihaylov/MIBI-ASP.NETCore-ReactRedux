@@ -106,7 +106,7 @@ class SampleView extends Component {
 
     addSearchingByTag(event) {
         let id = event.target.id
-        let value = event.target.value
+        let value = event.target.value.toLowerCase()
         let tabIndex = event.target.tabIndex
         let tags = this.state.selectedTags
 
@@ -116,7 +116,7 @@ class SampleView extends Component {
             element.tabIndex = "1"
 
             this.props.allExistingTags.forEach(tag => {
-                if(tag.name.toLowerCase() === value.toLowerCase()) {
+                if(tag.name.toLowerCase() === value) {
                     tags.push(tag)
                 }
             })
@@ -131,8 +131,8 @@ class SampleView extends Component {
             element.tabIndex = "0"
 
             this.props.allExistingTags.forEach(tag => {
-                if(tag.name.toLowerCase() === value.toLowerCase()) {
-                    tags.splice(tags.indexOf(value), 1)
+                if(tag.name.toLowerCase() === value) {
+                    tags.splice(tags.findIndex(x => x.name === value), 1)
                 }
             })
 
@@ -154,7 +154,7 @@ class SampleView extends Component {
             element.tabIndex = "1"
 
             this.props.allExistingGroups.forEach(group => {
-                if(group.name.toLowerCase() === value.toLowerCase()) {
+                if(group.name.toLowerCase() === value) {
                     groups.push(group)
                 }
             })
@@ -178,13 +178,11 @@ class SampleView extends Component {
                 selectedGroups: groups
             })
         }
-
-        console.log(this.state.selectedGroups)
     }
 
     addSearchingByNutrientAgarPlate(event) {
         let id = event.target.id
-        let value = event.target.value
+        let value = event.target.value.toLowerCase()
         let tabIndex = event.target.tabIndex
         let nutrients = this.state.selectedNutrientAgarPlates
 
@@ -194,7 +192,7 @@ class SampleView extends Component {
             element.tabIndex = "1"
 
             this.props.allExistingNutrientAgarPlates.forEach(nutrient => {
-                if(nutrient.name.toLowerCase() === value.toLowerCase()) {
+                if(nutrient.name.toLowerCase() === value) {
                     nutrients.push(nutrient)
                 }
             })
@@ -209,8 +207,8 @@ class SampleView extends Component {
             element.tabIndex = "0"
 
             this.props.allExistingNutrientAgarPlates.forEach(nutrient => {
-                if(nutrient.name.toLowerCase() === value.toLowerCase()) {
-                    nutrients.splice(nutrients.indexOf(value), 1)
+                if(nutrient.name.toLowerCase() === value) {
+                    nutrients.splice(nutrients.findIndex(x => x.name === value), 1)
                 }
             })
 
