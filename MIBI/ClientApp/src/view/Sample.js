@@ -144,7 +144,7 @@ class SampleView extends Component {
 
     addSearchingByGroup(event) {
         let id = event.target.id
-        let value = event.target.value
+        let value = event.target.value.toLowerCase()
         let tabIndex = event.target.tabIndex
         let groups = this.state.selectedGroups
 
@@ -169,8 +169,8 @@ class SampleView extends Component {
             element.tabIndex = "0"
 
             this.props.allExistingGroups.forEach(group => {
-                if(group.name.toLowerCase() === value.toLowerCase()) {
-                    groups.splice(groups.indexOf(value), 1)
+                if(group.name.toLowerCase() === value) {
+                    groups.splice(groups.findIndex(x => x.name === value), 1)
                 }
             })
 
