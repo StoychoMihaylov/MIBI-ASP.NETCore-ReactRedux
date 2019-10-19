@@ -1,12 +1,15 @@
 import React from 'react';
 import { Route } from 'react-router';
 import Layout from './components/Layout';
-import SampleView from './view/Sample'
+import SearchSampleView from './view/SearchSamples'
 import CreateNewSample from './view/CreateNewSample'
+import SampleDetails from './view/SampleDetails'
 
 export default () => (
     <Layout>
-        <Route exact path='/' component={SampleView} />
+        <Route exact path='/' component={SearchSampleView} />
+        <Route exact path='/searchSamples' component={SearchSampleView} />
         <Route path='/addSample' component={CreateNewSample} />
+        <Route path='/sample/:id' component={SampleDetails} />
     </Layout>
 );

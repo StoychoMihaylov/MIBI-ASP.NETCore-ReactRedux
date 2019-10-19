@@ -16,14 +16,56 @@
     REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_FAIL,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
-    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL,
+    REQUEST_GET_DETAILED_SAMPLE,
+    REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
+    REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL
 } from '../../constants/actionTypes'
 import { api } from '../../constants/api'
 import axios from 'axios'
 
 var qs = require('qs');
 
-//********** Create New Sample **********
+//*************************** Detailed Sample actions ***************************
+
+export function fetchDetailedSampleById(id) {
+    return function (dispatch) {
+        dispatch(fetchSampleById())
+        axios.get(api + 'api/sample/' + id)
+        .then(response => {
+            console.log(response)
+            dispatch(fetchSampleByIdSuccess(response))
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch(fetchSampleByIdFail(err))
+        })
+    }
+}
+
+export function fetchSampleById() {
+    return {
+        type: REQUEST_GET_DETAILED_SAMPLE
+    }
+}
+
+export function fetchSampleByIdSuccess(data) {
+    return {
+        type: REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
+        payload: data
+    }
+}
+
+export function fetchSampleByIdFail(error) {
+    return {
+        type: REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL,
+        payload: error
+    }
+}
+
+
+
+//*************************** Create New Sample actions ***************************
 
 export function addNewSampleInTheServer(imgFormdata) {
     return function (dispatch) {
@@ -59,7 +101,9 @@ export function createSampleFail(error) {
     }
 }
 
-//********** Sample actions **********
+
+
+//*************************** Search Samples actions ***************************
 
 export function getAllNamesOfExistingSamples() {
     return function (dispatch) {
@@ -95,7 +139,7 @@ export function getAllExistingNamesOfSamplesFail(error) {
     }
 }
 
-//**********
+//**********************************************************************
 
 export function getAllExistingTagsFromServer() {
     return function (dispatch) {
@@ -131,7 +175,7 @@ export function getAllExistingTagsFail(error) {
     }
 }
 
-//**********
+//**********************************************************************
 
 export function getAllExistingGroupsFromServer() {
     return function (dispatch) {
@@ -167,7 +211,7 @@ export function getAllExistingGroupsFail(error) {
     }
 }
 
-//**********
+//**********************************************************************
 
 export function fetchAllExistingNutrientAgarPlates() {
     return function (dispatch) {
@@ -203,7 +247,7 @@ export function getAllExistingNutrientAgarPlatesFail(error) {
     }
 }
 
-//**********
+//**********************************************************************
 
 export function fetchSamplesByGivenSearchParameters(bateriaParams) {
     return function (dispatch) {

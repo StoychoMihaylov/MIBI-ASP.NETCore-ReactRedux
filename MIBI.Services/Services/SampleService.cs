@@ -303,6 +303,28 @@
                 .Where(s => s.Id == new Guid(id))
                 .First();
 
+
+            // Delete thr reference loop
+            foreach (var img in sample.Images)
+            {
+                img.Sample = null;
+            }
+            foreach (var sg in sample.SampleGroups)
+            {
+                sg.Group.SampleGroups = null;
+                sg.Sample = null;
+            }
+            foreach (var st in sample.SampleTags)
+            {
+                st.Tag.SampleTags = null;
+                st.Sample = null;
+            }
+            foreach (var sn in sample.SampleNutrientAgarPlates)
+            {
+                sn.NutrientAgarPlate.SampleNutrientAgarPlates = null;
+                sn.Sample = null;
+            }
+
             return sample;
         }
     }

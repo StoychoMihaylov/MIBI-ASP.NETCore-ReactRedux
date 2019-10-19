@@ -10,7 +10,7 @@ import {
 } from '../store/actions/SampleActions'
 import "../styles/Sample.css"
 
-class SampleView extends Component {
+class SearchSampleView extends Component {
     constructor(props) {
         super(props)
 
@@ -265,11 +265,13 @@ class SampleView extends Component {
 
     render() {
         let samples = this.props.samples.map((sample, index) => (
-                <div key={index} id={sample.id} className="sampleResult">
+            <Route render={({ history }) => (
+                <div key={index} id={sample.id} className="sampleResult" onClick={() => history.push('/sample/' + sample.id)}>
                     <div className="sampleTitle"><div className="title">{sample.name}</div></div>
                     <img className="sampleImg" src={'https://localhost:44376/Images/' + sample.images[0].url} alt="sample" />
                     <div className="sampleFooter"><div className="footerDate">Created on: {sample.createdOn.split("T")[0]}</div></div>
                 </div>
+             )} />
         ))
 
         let optionSetOfNames = this.state.optionSetNames.map((rec, index) => (
@@ -518,7 +520,6 @@ class SampleView extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         samples: state.sample.samples,
         allExistingNutrientAgarPlates: state.sample.allExistingNutrientAgarPlates,
@@ -527,8 +528,8 @@ const mapStateToProps = state => {
         autocompleteNamesOfSamples: state.sample.autocompleteNamesOfSamples,
         isLoading: state.sample.isLoading,
         error: state.sample.error
-    };
-  };
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -537,7 +538,7 @@ const mapDispatchToProps = dispatch => {
         fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
         fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer()),
         fetchAllNutrientAgarPlates: () => dispatch(fetchAllExistingNutrientAgarPlates())
-    };
-  };
+    }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SampleView)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchSampleView)
