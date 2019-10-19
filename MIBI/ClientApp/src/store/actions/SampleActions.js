@@ -208,7 +208,7 @@ export function getAllExistingNutrientAgarPlatesFail(error) {
 export function fetchSamplesByGivenSearchParameters(bateriaParams) {
     return function (dispatch) {
         dispatch(fetchSamples())
-        axios.get(api + 'api/sample', {
+        axios.get(api + 'api/samples', {
             params: bateriaParams,
             paramsSerializer: function(params) {
                 return qs.stringify(params, {arrayFormat: 'repeat'})

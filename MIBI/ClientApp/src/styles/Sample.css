@@ -254,14 +254,15 @@
 
 .sampleResult {
     color: white;
-    height: 260px;
+    height: 230px;
     width: 200px;
     margin: 10px;
     margin-top: 20px;
-    border-radius: 1px;
     background-color: black;
     border-radius: 5px;
     display: inline-block;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .sampleResult:hover {
@@ -269,6 +270,38 @@
 }
 
 .sampleImg {
-    height: 200px;
+    height: 100%;
     width: 200px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
+
+.sampleTitle {
+    height: 0%;
+    background-color: black;
+    position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.title {
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.671);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.sampleFooter {
+    height: 10%;
+    position: relative;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.footerDate {
+    padding: 5px;
+    background-color: rgba(0, 0, 0);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+

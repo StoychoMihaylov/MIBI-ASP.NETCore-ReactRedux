@@ -12,6 +12,8 @@
 
         public string Tags { get; set; }
 
+        public string NutrientAgarPlates { get; set; }
+
         public List<string> ImgUrls { get; set; }
     }
 }
