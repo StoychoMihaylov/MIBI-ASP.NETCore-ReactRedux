@@ -16,7 +16,10 @@
     REQUEST_GET_ALL_EXISTING_NUTRIENTAGARPLATES_FAIL,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS,
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_SUCCESS,
-    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL
+    FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL,
+    REQUEST_GET_DETAILED_SAMPLE,
+    REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
+    REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL
 } from '../../constants/actionTypes'
 
 const initialState = {
@@ -33,6 +36,23 @@ const SampleReducer = (state, action) => {
     state = state || initialState
 
     switch (action.type) {
+        case REQUEST_GET_DETAILED_SAMPLE:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case REQUEST_GET_DETAILED_SAMPLE_SUCCESS:
+            return {
+                ...state,
+                ditailedSample: action.payload,
+                isLoading: false
+            }
+        case REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
         case FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS:
             return {
                 ...state,
