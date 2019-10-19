@@ -266,9 +266,9 @@ class SampleView extends Component {
     render() {
         let samples = this.props.samples.map((sample, index) => (
                 <div key={index} id={sample.id} className="sampleResult">
-                    <h5>{sample.name}</h5>
+                    <div className="sampleTitle"><div className="title">{sample.name}</div></div>
                     <img className="sampleImg" src={'https://localhost:44376/Images/' + sample.images[0].url} alt="sample" />
-                    <span>Created on: {sample.createdOn.split("T")[0]}</span>
+                    <div className="sampleFooter"><div className="footerDate">Created on: {sample.createdOn.split("T")[0]}</div></div>
                 </div>
         ))
 

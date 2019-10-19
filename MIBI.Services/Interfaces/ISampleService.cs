@@ -13,5 +13,6 @@
         List<GroupViewModel> GetAllGroups();
         List<NutrientAgarPlateViewModel> GetAllNutrientAgarPlates();
         List<SampleViewModel> GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams);
+        Sample GetSampleById(string id);
     }
 }

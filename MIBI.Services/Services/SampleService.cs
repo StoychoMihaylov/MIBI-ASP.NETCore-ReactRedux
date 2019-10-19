@@ -25,6 +25,8 @@
             List<SampleGroup> sampleGroups = CrateSampleGroupsByGroupName(newSampleData.Groups.Split(','));
             List<SampleTag> sampleTags = CreateSampleTagsByTagName(newSampleData.Tags.Split(','));
             List<SampleImage> newImgs = CreateNewImagesByGivenUrls(newSampleData.ImgUrls);
+            List<SampleNutrientAgarPlate> sampleNutrientAgarPlates = 
+                CreateNewSampleNutrientAgarPlatesByNutrientAgarPlates(newSampleData.NutrientAgarPlates.Split(','));
 
             Sample newSample = new Sample()
             {
@@ -34,11 +36,29 @@
                 CreatedBy = "Bai Pesho",
                 SampleGroups = sampleGroups,
                 SampleTags = sampleTags,
+                SampleNutrientAgarPlates = sampleNutrientAgarPlates,
                 Images = newImgs
             };
 
             this.Context.Samples.Add(newSample);
             this.Context.SaveChanges();
+        }
+
+        private List<SampleNutrientAgarPlate> CreateNewSampleNutrientAgarPlatesByNutrientAgarPlates(string[] newNutrientAgarPlates)
+        {
+            var nutrientAgarPlates = new List<SampleNutrientAgarPlate>();
+
+            foreach (var name in newNutrientAgarPlates)
+            {
+                SampleNutrientAgarPlate newNutrient = new SampleNutrientAgarPlate()
+                {
+                    NutrientAgarPlate = this.Context.NutrientAgarPlates.Where(t => t.Name == name).First()
+                };
+
+                nutrientAgarPlates.Add(newNutrient);
+            }
+
+            return nutrientAgarPlates;
         }
 
         private List<SampleImage> CreateNewImagesByGivenUrls(List<string> imgUrls)
@@ -49,8 +69,7 @@
             {
                 SampleImage newImg = new SampleImage()
                 {
-                    Url = url,
-                    Sample = null
+                    Url = url
                 };
 
                 imgs.Add(newImg);
@@ -269,6 +288,22 @@
             }
 
             return samples;
+        }
+
+        public Sample GetSampleById(string id)
+        {
+            var sample = this.Context.Samples
+                .Include(s => s.Images)
+                .Include(s => s.SampleTags)
+                    .ThenInclude(st => st.Tag)
+                .Include(s => s.SampleGroups)
+                    .ThenInclude(sg => sg.Group)
+                .Include(s => s.SampleNutrientAgarPlates)
+                    .ThenInclude(sn => sn.NutrientAgarPlate)
+                .Where(s => s.Id == new Guid(id))
+                .First();
+
+            return sample;
         }
     }
 }

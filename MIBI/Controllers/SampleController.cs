@@ -27,8 +27,27 @@
         }
 
         [HttpGet]
-        [Route("sample")]
-        public IActionResult Get(SearchParametersBindingModel searchParams)
+        [Route("sample/{id}")]
+        public IActionResult Get(string id)
+        {
+            if (id == null || id == "")
+            {
+                return BadRequest("Please provide sample id.");
+            }
+
+            var sample = this.service.GetSampleById(id);
+
+            if (sample == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(sample);
+        }
+
+        [HttpGet]
+        [Route("samples")]
+        public IActionResult GetList(SearchParametersBindingModel searchParams)
         {
             if (searchParams.BacteriaName == null &&
                 searchParams.Tags == null && 
@@ -50,13 +69,15 @@
             [FromForm] string description,
             [FromForm] string groups,
             [FromForm] string tags,
+            [FromForm] string nutrientAgarPlates,
             [FromForm]IFormCollection formData)
         {
             if (name == null
                 && description == null
                 && tags == null
                 && groups == null
-                && formData == null)
+                && formData == null
+                && nutrientAgarPlates == null)
             {
                 return BadRequest("Please field up at least one image! All fields are requered!");
             }
@@ -67,6 +88,7 @@
                 Description = description,
                 Groups = groups,
                 Tags = tags,
+                NutrientAgarPlates = nutrientAgarPlates,
                 ImgUrls = new List<string>()
             };
 
