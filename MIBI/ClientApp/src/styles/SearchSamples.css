@@ -52,7 +52,6 @@
 }
 
 #autocompleateListOfNames {
-    display: none;
     position: absolute;
     border: none;
     background-color: transparent;
@@ -61,7 +60,12 @@
     min-width: 400px;
 }
 
-#optionName {
+#autocompleateListOfNames {
+    z-index: 10;
+}
+
+.optionNames {
+    position: relative;
     padding: 5px;
     padding-left: 10px;
     border-radius: 10px;
@@ -70,12 +74,12 @@
     background-color: rgba(255,255,255,0.9);
 }
 
-#optionName:hover {
+.optionNames:hover {
     cursor: pointer;
     background-color: rgb(102, 178, 255);
 }
 
-#optionName:active {
+.optionNames:active {
     cursor: pointer;
     background-color: grey;
 }
