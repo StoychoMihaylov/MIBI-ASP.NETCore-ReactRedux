@@ -8,13 +8,14 @@ import {
     fetchSamplesByGivenSearchParameters,
     fetchAllExistingNutrientAgarPlates
 } from '../store/actions/SampleActions'
-import "../styles/Sample.css"
+import "../styles/SearchSamples.css"
 
 class SearchSampleView extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
+            showHideOptionSetOfNames: false,
             searchSampleName: "",
             optionSetNames: [],
             selectedNutrientAgarPlates: [],
@@ -42,13 +43,17 @@ class SearchSampleView extends Component {
                     searchSampleName: value
                 })
 
-                document.getElementById("autocompleateListOfNames").style.display = "none"
+                this.setState({
+                    showHideOptionSetOfNames: false
+                })
             }
         })
     }
 
-    hideOptionSetOfNames(){
-        document.getElementById("autocompleateListOfNames").style.display = "none"
+    hideOptionSetOfNames() {
+        this.setState({
+            showHideOptionSetOfNames: false
+        })
     }
 
     showOptionSetOfNames(event) {
@@ -69,11 +74,13 @@ class SearchSampleView extends Component {
             })
 
             this.setState({
-                optionSetNames: newOptSet
+                optionSetNames: newOptSet,
+                showHideOptionSetOfNames: true
             })
-            document.getElementById("autocompleateListOfNames").style.display = "block"
         } else {
-            document.getElementById("autocompleateListOfNames").style.display = "none"
+            this.setState({
+                showHideOptionSetOfNames: false
+            })
         }
     }
 
@@ -274,16 +281,18 @@ class SearchSampleView extends Component {
              )} />
         ))
 
-        let optionSetOfNames = this.state.optionSetNames.map((rec, index) => (
-            <div key={index}>
-                <input
-                    id="optionName"
-                    readOnly
-                    type="text"
-                    value={rec.name}
-                    onClick={this.setTheSelectedOption.bind(this)}/>
-            </div>
-        ))
+        let optionSetOfNames = this.state.optionSetNames.map((rec, index) => {
+            return (
+                <div key={index}>
+                    <input
+                        className="optionNames"
+                        type="text"
+                        value={rec.name}
+                        onClick={this.setTheSelectedOption.bind(this)}
+                    />
+                </div>
+            )
+        })
 
         let nutrientAgarPlates = this.props.allExistingNutrientAgarPlates.map((nutrient, index) => {
             return (
@@ -412,12 +421,18 @@ class SearchSampleView extends Component {
                                     id="searchInput"
                                     placeholder="Search..."
                                     value={this.state.searchSampleName}
-                                    onBlur={this.hideOptionSetOfNames.bind(this)}
                                     onChange={this.showOptionSetOfNames.bind(this)}
+                                    onBlur={() => setTimeout(this.hideOptionSetOfNames.bind(this), 100)} // When optionSetOfNames is clicked it takes time to sate the name chosen name
                                 />
-                                <div id="autocompleateListOfNames">
-                                    {optionSetOfNames}
-                                </div>
+                                {
+                                    this.state.showHideOptionSetOfNames
+                                    ?
+                                    <div id="autocompleateListOfNames">
+                                        {optionSetOfNames}
+                                    </div>
+                                    :
+                                    ""
+                                }
                             </td>
                             <td>
                                 <button

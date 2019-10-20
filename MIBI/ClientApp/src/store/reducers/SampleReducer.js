@@ -19,11 +19,12 @@
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL,
     REQUEST_GET_DETAILED_SAMPLE,
     REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
-    REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL
+    REQUEST_GET_DETAILED_SAMPLE_FAIL
 } from '../../constants/actionTypes'
 
 const initialState = {
     samples: [],
+    detailedSample: {},
     autocompleteNamesOfSamples: [],
     allExistingNutrientAgarPlates: [],
     allExistingGroups: [],
@@ -44,10 +45,10 @@ const SampleReducer = (state, action) => {
         case REQUEST_GET_DETAILED_SAMPLE_SUCCESS:
             return {
                 ...state,
-                ditailedSample: action.payload,
+                detailedSample: action.payload,
                 isLoading: false
             }
-        case REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL:
+        case REQUEST_GET_DETAILED_SAMPLE_FAIL:
             return {
                 ...state,
                 isLoading: false,

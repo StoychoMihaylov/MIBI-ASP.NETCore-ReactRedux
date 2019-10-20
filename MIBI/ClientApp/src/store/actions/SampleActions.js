@@ -19,7 +19,7 @@
     FETCH_SAMPLE_BY_GIVEN_SEARCH_PARAMETERS_FAIL,
     REQUEST_GET_DETAILED_SAMPLE,
     REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
-    REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL
+    REQUEST_GET_DETAILED_SAMPLE_FAIL
 } from '../../constants/actionTypes'
 import { api } from '../../constants/api'
 import axios from 'axios'
@@ -34,7 +34,7 @@ export function fetchDetailedSampleById(id) {
         axios.get(api + 'api/sample/' + id)
         .then(response => {
             console.log(response)
-            dispatch(fetchSampleByIdSuccess(response))
+            dispatch(fetchSampleByIdSuccess(response["data"]))
         })
         .catch(err => {
             console.log(err)
@@ -58,7 +58,7 @@ export function fetchSampleByIdSuccess(data) {
 
 export function fetchSampleByIdFail(error) {
     return {
-        type: REQUEST_GET_DETAILED_SAMPLE_SUCCESS_FAIL,
+        type: REQUEST_GET_DETAILED_SAMPLE_FAIL,
         payload: error
     }
 }
