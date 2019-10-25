@@ -2,13 +2,13 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Route } from "react-router"
 import { fetchDetailedSampleById } from "../store/actions/SampleActions"
+import "../styles/DetailedSample.css"
 
 class SampleDetails extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            group: ""
         }
     }
 
@@ -21,6 +21,7 @@ class SampleDetails extends Component {
     }
 
     render() {
+        console.log(this.props.detailedSample.sampleNutrientAgarPlates)
         return(
             <div>
                 <h1>Name: {this.props.detailedSample.name}</h1>
@@ -30,8 +31,8 @@ class SampleDetails extends Component {
                         ?
                         this.props.detailedSample.images.map((img, index) => {
                             return (
-                            <div key={index}>
-                                <img className="image" id={img.id} src={'https://localhost:44376/Images/' + img.url} alt="image" />
+                            <div key={index} className="imgDiv">
+                                <img id={img.id} src={'https://localhost:44376/Images/' + img.url} className="imageDetail" alt="image" />
                             </div>
                             )
                         })
@@ -39,17 +40,20 @@ class SampleDetails extends Component {
                         ""
                     }
                 </div>
-                <p>Description: {this.props.detailedSample.description}</p>
-                <h2>Group: {this.props.detailedSample.sampleGroups != undefined ? this.props.detailedSample.sampleGroups[0].group.name : ""}</h2>
+                <div>
+                    <h3>Description:</h3>
+                    <p>{this.props.detailedSample.description}</p>
+                </div>
+                <h3>Group: {this.props.detailedSample.sampleGroups != undefined ? this.props.detailedSample.sampleGroups[0].group.name : ""}</h3>
                 <div>
                     <h2>Nutrient Agar Plates</h2>
                     {
                         this.props.detailedSample.sampleNutrientAgarPlates != undefined
                         ?
-                        this.props.detailedSample.sampleNutrientAgarPlates.map((nutrient, index) => {
+                        this.props.detailedSample.sampleNutrientAgarPlates.map((nutrientObj, index) => {
                             return (
                             <div key={index}>
-                                {nutrient.name}
+                                {nutrientObj.nutrientAgarPlate.name}
                             </div>
                             )
                         })
@@ -62,10 +66,10 @@ class SampleDetails extends Component {
                     {
                         this.props.detailedSample.sampleTags != undefined
                         ?
-                        this.props.detailedSample.sampleTags.map((tag, index) => {
+                        this.props.detailedSample.sampleTags.map((tagObj, index) => {
                             return (
                             <div key={index}>
-                                {tag.name}
+                                {tagObj.tag.name}
                             </div>
                             )
                         })
@@ -75,6 +79,13 @@ class SampleDetails extends Component {
                 </div>
                 <h2>Created on: {this.props.detailedSample.createdOn}</h2>
                 <h2>Created by: {this.props.detailedSample.createdBy}</h2>
+                <Route
+                    render={({ history }) => (
+                    <button
+                        type="button"
+                        onClick={() => { this.props.history.goBack() }}>BACK</button>
+                    )}
+                />
             </div>
         )
     }

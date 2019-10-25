@@ -410,7 +410,7 @@ class SearchSampleView extends Component {
             </button>
         ))
 
-        return(
+    return(
         <div className="conteiner">
             <div className="searchingBar">
                 <table>

@@ -1,0 +1,16 @@
+.imageDetail {
+    margin: 5px;
+    height: 250px;
+    width: 250px;
+    border-radius: 3px;
+    transition: all .3s ease-in-out;
+}
+
+.imageDetail:hover {
+    margin: 50px;
+    transform: scale(2);
+}
+
+.imgDiv {
+    display: inline-block;
+}
