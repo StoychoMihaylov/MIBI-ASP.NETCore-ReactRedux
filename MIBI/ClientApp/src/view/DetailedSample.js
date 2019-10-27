@@ -44,23 +44,34 @@ class SampleDetails extends Component {
                     <h3>Description:</h3>
                     <p>{this.props.detailedSample.description}</p>
                 </div>
-                <h3>Group: {this.props.detailedSample.sampleGroups != undefined ? this.props.detailedSample.sampleGroups[0].group.name : ""}</h3>
+                <br/>
+                <h3>Group:
+                    {
+                        this.props.detailedSample.sampleGroups != undefined
+                        ?
+                        <span className="sampleGroup">{this.props.detailedSample.sampleGroups[0].group.name}</span>
+                        :
+                        ""
+                    }
+                </h3>
+                <br/>
                 <div>
-                    <h2>Nutrient Agar Plates</h2>
+                    <h2>Nutrient Agar Plates:</h2>
                     {
                         this.props.detailedSample.sampleNutrientAgarPlates != undefined
                         ?
                         this.props.detailedSample.sampleNutrientAgarPlates.map((nutrientObj, index) => {
                             return (
-                            <div key={index}>
+                            <span key={index} className="sampleNutrintAgarPlates">
                                 {nutrientObj.nutrientAgarPlate.name}
-                            </div>
+                            </span>
                             )
                         })
                         :
                         ""
                     }
                 </div>
+                <br/>
                 <div>
                     <h2>Tags</h2>
                     {
@@ -68,17 +79,24 @@ class SampleDetails extends Component {
                         ?
                         this.props.detailedSample.sampleTags.map((tagObj, index) => {
                             return (
-                            <div key={index}>
+                            <span key={index} className="tags">
                                 {tagObj.tag.name}
-                            </div>
+                            </span>
                             )
                         })
                         :
                         ""
                     }
                 </div>
-                <h2>Created on: {this.props.detailedSample.createdOn}</h2>
-                <h2>Created by: {this.props.detailedSample.createdBy}</h2>
+                <br/>
+                <span>Created by: <strong>{this.props.detailedSample.createdBy}</strong></span>
+                <span> on {this.props.detailedSample.createdOn != undefined
+                    ?
+                    `${this.props.detailedSample.createdOn.split('T')[1].split('.')[0]}h - ${this.props.detailedSample.createdOn.split('T')[0].split('-')[2]}.${this.props.detailedSample.createdOn.split('T')[0].split('-')[1]}.${this.props.detailedSample.createdOn.split('T')[0].split('-')[0]}`
+                    :
+                    ""}
+                </span>
+                <br/>
                 <Route
                     render={({ history }) => (
                     <button
