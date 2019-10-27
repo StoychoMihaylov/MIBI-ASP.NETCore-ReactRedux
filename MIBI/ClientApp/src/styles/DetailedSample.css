@@ -38,3 +38,24 @@
     border-radius: 15px;
     background-color:  rgb(102, 178, 255);
 }
+
+.sampleNutrientAgarPlatesContainer {
+    padding: 30px;
+}
+
+.tagContainer {
+    padding: 30px;
+}
+
+.backBtnDiv {
+    text-align: center;
+}
+
+.sampleBackBtn {
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    background-color: red;
+}
+
