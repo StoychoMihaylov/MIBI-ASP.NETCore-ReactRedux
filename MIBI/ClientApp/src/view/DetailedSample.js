@@ -25,6 +25,7 @@ class SampleDetails extends Component {
         return(
             <div>
                 <h1>Name: {this.props.detailedSample.name}</h1>
+                <hr></hr>
                 <div>
                     {
                         this.props.detailedSample.sampleTags != undefined
@@ -40,11 +41,14 @@ class SampleDetails extends Component {
                         ""
                     }
                 </div>
+                <br/>
+                <hr></hr>
                 <div>
                     <h3>Description:</h3>
                     <p>{this.props.detailedSample.description}</p>
                 </div>
                 <br/>
+                <hr></hr>
                 <h3>Group:
                     {
                         this.props.detailedSample.sampleGroups != undefined
@@ -55,40 +59,126 @@ class SampleDetails extends Component {
                     }
                 </h3>
                 <br/>
+                <hr></hr>
                 <div>
                     <h2>Nutrient Agar Plates:</h2>
-                    {
-                        this.props.detailedSample.sampleNutrientAgarPlates != undefined
-                        ?
-                        this.props.detailedSample.sampleNutrientAgarPlates.map((nutrientObj, index) => {
-                            return (
-                            <span key={index} className="sampleNutrintAgarPlates">
-                                {nutrientObj.nutrientAgarPlate.name}
-                            </span>
-                            )
-                        })
-                        :
-                        ""
-                    }
+                    <div className="sampleNutrientAgarPlatesContainer">
+                        {
+                            this.props.detailedSample.sampleNutrientAgarPlates != undefined
+                            ?
+                            this.props.detailedSample.sampleNutrientAgarPlates.map((nutrientObj, index) => {
+                                return (
+                                <button key={index} className="nutrients">
+                                    {nutrientObj.nutrientAgarPlate.name}
+                                </button>
+                                )
+                            })
+                            :
+                            ""
+                        }
+                    </div>
                 </div>
                 <br/>
+                <hr></hr>
                 <div>
-                    <h2>Tags</h2>
-                    {
-                        this.props.detailedSample.sampleTags != undefined
-                        ?
-                        this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                            return (
-                            <span key={index} className="tags">
-                                {tagObj.tag.name}
-                            </span>
-                            )
-                        })
-                        :
-                        ""
-                    }
+                    <h2>Tags:</h2>
+                    <div className="tagContainer">
+                        <div>
+                            <h4>Elevations</h4>
+                            {
+                                this.props.detailedSample.sampleTags != undefined
+                                ?
+                                this.props.detailedSample.sampleTags.map((tagObj, index) => {
+                                    if (tagObj.tag.category === "Elevations")
+                                    return (
+                                    <button key={index} className="tags">
+                                        {tagObj.tag.name}
+                                        <img src={require('../content/tagIcons/' + tagObj.tag.iconUrl)} className="tagIcon"/>
+                                    </button>
+                                    )
+                                })
+                                :
+                                ""
+                            }
+                        </div>
+                        <br/>
+                        <div>
+                            <h4>Form</h4>
+                            {
+                                this.props.detailedSample.sampleTags != undefined
+                                ?
+                                this.props.detailedSample.sampleTags.map((tagObj, index) => {
+                                    if (tagObj.tag.category === "Form")
+                                    return (
+                                    <button key={index} className="tags">
+                                        {tagObj.tag.name}
+                                        <img src={require('../content/tagIcons/' + tagObj.tag.iconUrl)} className="tagIcon"/>
+                                    </button>
+                                    )
+                                })
+                                :
+                                ""
+                            }
+                        </div>
+                        <br/>
+                        <div>
+                            <h4>Surface appearance</h4>
+                            {
+                                this.props.detailedSample.sampleTags != undefined
+                                ?
+                                this.props.detailedSample.sampleTags.map((tagObj, index) => {
+                                    if (tagObj.tag.category === "Surface appearance")
+                                    return (
+                                    <button key={index} className="tags">
+                                        {tagObj.tag.name}
+                                    </button>
+                                    )
+                                })
+                                :
+                                ""
+                            }
+                        </div>
+                        <br/>
+                        <div>
+                            <h4>Consistency</h4>
+                            {
+                                this.props.detailedSample.sampleTags != undefined
+                                ?
+                                this.props.detailedSample.sampleTags.map((tagObj, index) => {
+                                    if (tagObj.tag.category === "Consistency")
+                                    return (
+                                    <button key={index} className="tags">
+                                        {tagObj.tag.name}
+                                    </button>
+                                    )
+                                })
+                                :
+                                ""
+                            }
+                        </div>
+                        <br/>
+                        <div>
+                            <h4>Colors</h4>
+                            {
+                                this.props.detailedSample.sampleTags != undefined
+                                ?
+                                this.props.detailedSample.sampleTags.map((tagObj, index) => {
+                                    if (tagObj.tag.category === "Colors")
+                                    return (
+                                    <button key={index} className="tags">
+                                        {tagObj.tag.name}
+                                        <span className="tagColor" style={{backgroundColor: tagObj.tag.color}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    </button>
+                                    )
+                                })
+                                :
+                                ""
+                            }
+                        </div>
+                    </div>
                 </div>
                 <br/>
+                <hr></hr>
                 <span>Created by: <strong>{this.props.detailedSample.createdBy}</strong></span>
                 <span> on {this.props.detailedSample.createdOn != undefined
                     ?
@@ -97,13 +187,17 @@ class SampleDetails extends Component {
                     ""}
                 </span>
                 <br/>
-                <Route
-                    render={({ history }) => (
-                    <button
-                        type="button"
-                        onClick={() => { this.props.history.goBack() }}>BACK</button>
-                    )}
-                />
+                <hr></hr>
+                <div className="backBtnDiv">
+                    <Route
+                        render={({ history }) => (
+                        <button
+                            type="button"
+                            className="sampleBackBtn"
+                            onClick={() => { this.props.history.goBack() }}>BACK</button>
+                        )}
+                    />
+                </div>
             </div>
         )
     }
