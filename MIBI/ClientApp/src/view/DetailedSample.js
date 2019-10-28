@@ -24,7 +24,7 @@ class SampleDetails extends Component {
         console.log(this.props.detailedSample.sampleNutrientAgarPlates)
         return(
             <div>
-                <h1>Name: {this.props.detailedSample.name}</h1>
+                <h2>Name: {this.props.detailedSample.name}</h2>
                 <hr></hr>
                 <div>
                     {
@@ -61,7 +61,7 @@ class SampleDetails extends Component {
                 <br/>
                 <hr></hr>
                 <div>
-                    <h2>Nutrient Agar Plates:</h2>
+                    <h3>Nutrient Agar Plates:</h3>
                     <div className="sampleNutrientAgarPlatesContainer">
                         {
                             this.props.detailedSample.sampleNutrientAgarPlates != undefined
@@ -74,14 +74,16 @@ class SampleDetails extends Component {
                                 )
                             })
                             :
-                            ""
+                            <div>
+                                <p>No "Nutrient Agar Plates" have been found.</p>
+                            </div>
                         }
                     </div>
                 </div>
                 <br/>
                 <hr></hr>
                 <div>
-                    <h2>Tags:</h2>
+                    <h3>Tags:</h3>
                     <div className="tagContainer">
                         <div>
                             <h4>Elevations</h4>
@@ -98,7 +100,9 @@ class SampleDetails extends Component {
                                     )
                                 })
                                 :
-                                ""
+                                <div>
+                                    <p>No "Elevations" tags.</p>
+                                </div>
                             }
                         </div>
                         <br/>
@@ -117,7 +121,9 @@ class SampleDetails extends Component {
                                     )
                                 })
                                 :
-                                ""
+                                <div>
+                                    <p>No "Form" tags.</p>
+                                </div>
                             }
                         </div>
                         <br/>
@@ -135,7 +141,9 @@ class SampleDetails extends Component {
                                     )
                                 })
                                 :
-                                ""
+                                <div>
+                                    <p>No "Surface appearance" tags.</p>
+                                </div>
                             }
                         </div>
                         <br/>
@@ -153,7 +161,9 @@ class SampleDetails extends Component {
                                     )
                                 })
                                 :
-                                ""
+                                <div>
+                                    <p>No "Consistency" tags.</p>
+                                </div>
                             }
                         </div>
                         <br/>
@@ -172,7 +182,9 @@ class SampleDetails extends Component {
                                     )
                                 })
                                 :
-                                ""
+                                <div>
+                                    <p>No "Color" tags.</p>
+                                </div>
                             }
                         </div>
                     </div>
@@ -181,10 +193,10 @@ class SampleDetails extends Component {
                 <hr></hr>
                 <span>Created by: <strong>{this.props.detailedSample.createdBy}</strong></span>
                 <span> on {this.props.detailedSample.createdOn != undefined
-                    ?
-                    `${this.props.detailedSample.createdOn.split('T')[1].split('.')[0]}h - ${this.props.detailedSample.createdOn.split('T')[0].split('-')[2]}.${this.props.detailedSample.createdOn.split('T')[0].split('-')[1]}.${this.props.detailedSample.createdOn.split('T')[0].split('-')[0]}`
-                    :
-                    ""}
+                        ?
+                        `${this.props.detailedSample.createdOn.split('T')[1].split('.')[0]}h - ${this.props.detailedSample.createdOn.split('T')[0].split('-')[2]}.${this.props.detailedSample.createdOn.split('T')[0].split('-')[1]}.${this.props.detailedSample.createdOn.split('T')[0].split('-')[0]}`
+                        :
+                        ""}
                 </span>
                 <br/>
                 <hr></hr>
