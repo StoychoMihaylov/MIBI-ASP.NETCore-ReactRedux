@@ -9,6 +9,7 @@ class SampleDetails extends Component {
         super(props)
 
         this.state = {
+            isTagConsistencyEmpty: true
         }
     }
 
@@ -26,7 +27,7 @@ class SampleDetails extends Component {
             <div className="detailedSampleContainer">
                 <h2>Name: {this.props.detailedSample.name}</h2>
                 <hr></hr>
-                <div>
+                <div className="detaildSampleImgsContainer">
                     {
                         this.props.detailedSample.sampleTags != undefined
                         ?
@@ -55,7 +56,7 @@ class SampleDetails extends Component {
                         ?
                         <span className="sampleGroup">{this.props.detailedSample.sampleGroups[0].group.name}</span>
                         :
-                        ""
+                        null
                     }
                 </h3>
                 <br/>
@@ -74,9 +75,7 @@ class SampleDetails extends Component {
                                 )
                             })
                             :
-                            <div>
-                                <p>No "Nutrient Agar Plates" have been found.</p>
-                            </div>
+                            null
                         }
                     </div>
                 </div>
@@ -91,9 +90,7 @@ class SampleDetails extends Component {
                                 this.props.detailedSample.sampleTags != undefined
                                 ?
                                 this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                    let isEmpty = true
                                     if (tagObj.tag.category === "Elevations") {
-                                        isEmpty = false
                                         return (
                                         <button key={index} className="tags">
                                             {tagObj.tag.name}
@@ -101,19 +98,9 @@ class SampleDetails extends Component {
                                         </button>
                                         )
                                     }
-
-                                    if (isEmpty) {
-                                        return (
-                                            <div className="emptyTags">
-                                                <p>No "Elevations" tags.</p>
-                                            </div>
-                                        )
-                                    }
                                 })
                                 :
-                                <div className="emptyTags">
-                                    <p>No "Elevations" tags.</p>
-                                </div>
+                                null
                             }
                         </div>
                         <br/>
@@ -123,9 +110,7 @@ class SampleDetails extends Component {
                                 this.props.detailedSample.sampleTags != undefined
                                 ?
                                 this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                    let isEmpty = true
                                     if (tagObj.tag.category === "Form") {
-                                        isEmpty = false
                                         return (
                                         <button key={index} className="tags">
                                             {tagObj.tag.name}
@@ -133,19 +118,9 @@ class SampleDetails extends Component {
                                         </button>
                                         )
                                     }
-
-                                    if (isEmpty) {
-                                        return (
-                                            <div className="emptyTags">
-                                                <p>No "Form" tags.</p>
-                                            </div>
-                                        )
-                                    }
                                 })
                                 :
-                                <div className="emptyTags">
-                                    <p>No "Form" tags.</p>
-                                </div>
+                                null
                             }
                         </div>
                         <br/>
@@ -155,28 +130,16 @@ class SampleDetails extends Component {
                                 this.props.detailedSample.sampleTags != undefined
                                 ?
                                 this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                    let isEmpty = true
                                     if (tagObj.tag.category === "Surface appearance") {
-                                        isEmpty = false
                                         return (
                                         <button key={index} className="tags">
                                             {tagObj.tag.name}
                                         </button>
                                         )
                                     }
-
-                                    if (isEmpty) {
-                                        return (
-                                            <div className="emptyTags">
-                                                <p>No "Surface appearance" tags.</p>
-                                            </div>
-                                        )
-                                    }
                                 })
                                 :
-                                <div className="emptyTags">
-                                    <p>No "Surface appearance" tags.</p>
-                                </div>
+                                null
                             }
                         </div>
                         <br/>
@@ -186,28 +149,16 @@ class SampleDetails extends Component {
                                 this.props.detailedSample.sampleTags != undefined
                                 ?
                                 this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                    let isEmpty = true
                                     if (tagObj.tag.category === "Consistency") {
-                                        isEmpty = false
                                         return (
                                             <button key={index} className="tags">
                                                 {tagObj.tag.name}
                                             </button>
                                         )
                                     }
-
-                                    if(isEmpty){
-                                        return (
-                                            <div className="emptyTags">
-                                                <p>No "Consistency" tags.</p>
-                                            </div>
-                                        )
-                                    }
                                 })
                                 :
-                                <div className="emptyTags">
-                                    <p>No "Consistency" tags.</p>
-                                </div>
+                                null
                             }
                         </div>
                         <br/>
@@ -217,9 +168,7 @@ class SampleDetails extends Component {
                                 this.props.detailedSample.sampleTags != undefined
                                 ?
                                 this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                    let isEmpty = true
                                     if (tagObj.tag.category === "Colors") {
-                                        isEmpty = false
                                         return (
                                             <button key={index} className="tags">
                                                 {tagObj.tag.name}
@@ -227,19 +176,9 @@ class SampleDetails extends Component {
                                             </button>
                                         )
                                     }
-
-                                    if (isEmpty) {
-                                        return (
-                                            <div className="emptyTags">
-                                                <p>No "Color" tags.</p>
-                                            </div>
-                                        )
-                                    }
                                 })
                                 :
-                                <div className="emptyTags">
-                                    <p>No "Color" tags.</p>
-                                </div>
+                                null
                             }
                         </div>
                     </div>
