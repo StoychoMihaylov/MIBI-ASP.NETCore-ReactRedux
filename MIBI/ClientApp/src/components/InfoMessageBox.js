@@ -41,10 +41,12 @@ class InfoMessageBox extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log("here!")
+    console.log(state)
     return {
-        infoMessage: state.sample.infoMessage,
-        successMessage: state.sample.successMessage,
-        errorMessage: state.sample.errorMessage,
+        infoMessage: state.common.infoMessage,
+        successMessage: state.common.successMessage,
+        errorMessage: state.common.errorMessage,
         isLoading: state.sample.isLoading
     }
 }
