@@ -614,8 +614,7 @@ const mapStateToProps = state => {
     allExistingNutrientAgarPlates: state.sample.allExistingNutrientAgarPlates,
     allExistingTags: state.sample.allExistingTags,
     allExistingGroups: state.sample.allExistingGroups,
-    isLoading: state.sample.isLoading,
-    error: state.sample.error
+    isLoading: state.sample.isLoading
   }
 }
 

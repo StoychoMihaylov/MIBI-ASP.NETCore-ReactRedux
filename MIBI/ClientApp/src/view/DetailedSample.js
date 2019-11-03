@@ -22,7 +22,6 @@ class SampleDetails extends Component {
     }
 
     render() {
-        console.log(this.props.detailedSample.sampleNutrientAgarPlates)
         return(
             <div className="detailedSampleContainer">
                 <h2>Name: {this.props.detailedSample.name}</h2>

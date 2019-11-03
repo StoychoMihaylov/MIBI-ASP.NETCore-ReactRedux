@@ -544,8 +544,7 @@ const mapStateToProps = state => {
         allExistingGroups: state.sample.allExistingGroups,
         allExistingTags: state.sample.allExistingTags,
         autocompleteNamesOfSamples: state.sample.autocompleteNamesOfSamples,
-        isLoading: state.sample.isLoading,
-        error: state.sample.error
+        isLoading: state.sample.isLoading
     }
 }
 

@@ -73,7 +73,8 @@ export function addNewSampleInTheServer(imgFormdata) {
         axios.post(api + 'api/sample', imgFormdata)
         .then(result => {
             console.log(result)
-            dispatch(createSampleSuccess()) // Dispatch Successful created sample
+            let successMessage = "Congrats! New 'Sample' has been created!"
+            dispatch(createSampleSuccess(successMessage)) // Dispatch Successful created sample
         })
         .catch(err => {
             console.log(err)
