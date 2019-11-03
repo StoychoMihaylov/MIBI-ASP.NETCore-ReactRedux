@@ -29,6 +29,10 @@ const initialState = {
     allExistingNutrientAgarPlates: [],
     allExistingGroups: [],
     allExistingTags: [],
+
+    infoMessage: "",
+    successMessage: "",
+    errorMessage: "",
     isLoading: false,
     error: false
 }
@@ -130,6 +134,7 @@ const SampleReducer = (state, action) => {
         case REQUEST_ADD_NEW_SAMPLE_SUCCESS:
             return {
                 ...state,
+                successMessage: action.payload,
                 isLoading: false,
             }
         case REQUEST_ADD_NEW_SAMPLE_FAIL:
