@@ -20,7 +20,7 @@
     REQUEST_GET_DETAILED_SAMPLE,
     REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
     REQUEST_GET_DETAILED_SAMPLE_FAIL
-} from '../../constants/actionTypes'
+} from '../../constants/SampleActionTypes'
 import { api } from '../../constants/api'
 import axios from 'axios'
 
@@ -43,20 +43,20 @@ export function fetchDetailedSampleById(id) {
     }
 }
 
-export function fetchSampleById() {
+function fetchSampleById() {
     return {
         type: REQUEST_GET_DETAILED_SAMPLE
     }
 }
 
-export function fetchSampleByIdSuccess(data) {
+function fetchSampleByIdSuccess(data) {
     return {
         type: REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
         payload: data
     }
 }
 
-export function fetchSampleByIdFail(error) {
+function fetchSampleByIdFail(error) {
     return {
         type: REQUEST_GET_DETAILED_SAMPLE_FAIL,
         payload: error
@@ -73,8 +73,7 @@ export function addNewSampleInTheServer(imgFormdata) {
         axios.post(api + 'api/sample', imgFormdata)
         .then(result => {
             console.log(result)
-            let successMessage = "Congrats! New 'Sample' has been created!"
-            dispatch(createSampleSuccess(successMessage)) // Dispatch Successful created sample
+            dispatch(createSampleSuccess()) // Dispatch Successful created sample
         })
         .catch(err => {
             console.log(err)
@@ -89,9 +88,10 @@ export function createSample() {
     }
 }
 
-export function createSampleSuccess() {
+export function createSampleSuccess(successMessage) {
     return {
         type: REQUEST_ADD_NEW_SAMPLE_SUCCESS,
+        infoMessage: successMessage
     }
 }
 

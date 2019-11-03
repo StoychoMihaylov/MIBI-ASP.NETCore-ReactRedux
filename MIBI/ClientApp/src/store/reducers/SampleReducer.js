@@ -20,7 +20,7 @@
     REQUEST_GET_DETAILED_SAMPLE,
     REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
     REQUEST_GET_DETAILED_SAMPLE_FAIL
-} from '../../constants/actionTypes'
+} from '../../constants/SampleActionTypes'
 
 const initialState = {
     samples: [],
@@ -30,9 +30,6 @@ const initialState = {
     allExistingGroups: [],
     allExistingTags: [],
 
-    infoMessage: "",
-    successMessage: "",
-    errorMessage: "",
     isLoading: false,
     error: false
 }
@@ -134,7 +131,6 @@ const SampleReducer = (state, action) => {
         case REQUEST_ADD_NEW_SAMPLE_SUCCESS:
             return {
                 ...state,
-                successMessage: action.payload,
                 isLoading: false,
             }
         case REQUEST_ADD_NEW_SAMPLE_FAIL:

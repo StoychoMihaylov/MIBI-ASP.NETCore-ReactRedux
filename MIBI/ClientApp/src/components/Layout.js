@@ -6,8 +6,8 @@ import InfoMessageBox from '../components/InfoMessageBox'
 export default props => (
   <div>
     <NavMenu />
+    <InfoMessageBox />
     <Container>
-      <InfoMessageBox />
       {props.children}
     </Container>
   </div>
