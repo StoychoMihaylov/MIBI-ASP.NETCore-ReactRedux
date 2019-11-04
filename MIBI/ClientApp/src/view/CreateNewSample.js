@@ -7,9 +7,6 @@ import {
   getAllExistingGroupsFromServer,
   fetchAllExistingNutrientAgarPlates
 } from '../store/actions/SampleActions'
-import {
-    setSuccessfulMessageBox
-} from '../store/actions/CommonActions'
 import "../styles/CreateNewSample.css"
 
 class CreateNewSample extends Component {
@@ -356,7 +353,6 @@ class CreateNewSample extends Component {
     formData.append("nutrientAgarPlates", nutrientAgarPlates.join())
 
     await this.props.createSample(formData)
-    setSuccessfulMessageBox("Congrats! You have created new 'Sample' successfuly ")
     this.props.history.push("/")
   }
 
@@ -628,7 +624,6 @@ const mapDispatchToProps = dispatch => {
       fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
       fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer()),
       fetchAllNutrientAgarPlates: () => dispatch(fetchAllExistingNutrientAgarPlates()),
-      setSuccessfulMessageBox: (message) => dispatch(setSuccessfulMessageBox(message))
   }
 }
 
