@@ -63,8 +63,6 @@ function fetchSampleByIdFail(error) {
     }
 }
 
-
-
 //*************************** Create New Sample actions ***************************
 
 export function addNewSampleInTheServer(imgFormdata) {
