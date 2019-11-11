@@ -72,6 +72,7 @@ export function addNewSampleInTheServer(imgFormdata) {
         .then(result => {
             console.log(result)
             dispatch(createSampleSuccess()) // Dispatch Successful created sample
+            dispatch(fetchSampleById("8a6eeab7-93c7-4a49-556a-08d7549cc191"))
         })
         .catch(err => {
             console.log(err)

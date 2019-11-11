@@ -112,6 +112,8 @@ class SearchSampleView extends Component {
     }
 
     addSearchingByTag(event) {
+        if(event.target.value === undefined) return //Prevent error when btn's icon is clicked
+
         let id = event.target.id
         let value = event.target.value.toLowerCase()
         let tabIndex = event.target.tabIndex
