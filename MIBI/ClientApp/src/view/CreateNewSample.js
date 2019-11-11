@@ -314,7 +314,7 @@ class CreateNewSample extends Component {
     return isFormValid
   }
 
-  async handleSubmit(event) {
+   async handleSubmit(event) {
     event.preventDefault();
 
     let name = this.state.name
@@ -355,6 +355,13 @@ class CreateNewSample extends Component {
     formData.append("nutrientAgarPlates", nutrientAgarPlates.join())
 
     await this.props.createSample(formData)
+        .then(response => {
+            if (response.status === 200) {
+                alert("here") // TO DO: Show SUCCES NOTIFICATION
+            } else {
+                alert("there") // TO DO: Show ERROR NOTIFICATION
+            }
+        })
     this.props.history.push("/")
   }
 

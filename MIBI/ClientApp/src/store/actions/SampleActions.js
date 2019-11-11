@@ -66,17 +66,16 @@ function fetchSampleByIdFail(error) {
 //*************************** Create New Sample actions ***************************
 
 export function addNewSampleInTheServer(imgFormdata) {
-    return function (dispatch) {
+    return dispatch => {
         dispatch(createSample()) // Dispatch createNewSample
-        axios.post(api + 'api/sample', imgFormdata)
+        return axios.post(api + 'api/sample', imgFormdata)
         .then(result => {
-            console.log(result)
             dispatch(createSampleSuccess()) // Dispatch Successful created sample
-            dispatch(fetchSampleById("8a6eeab7-93c7-4a49-556a-08d7549cc191"))
+            return result
         })
         .catch(err => {
-            console.log(err)
             dispatch(createSampleFail(err)) // Dispatch for error
+            return err
         })
     }
 }
