@@ -7,6 +7,11 @@ import {
   getAllExistingGroupsFromServer,
   fetchAllExistingNutrientAgarPlates
 } from '../store/actions/SampleActions'
+import {
+    infoNotification,
+    successfulNotification,
+    errorNotification
+} from '../store/actions/CommonActions'
 import "../styles/CreateNewSample.css"
 
 class CreateNewSample extends Component {
@@ -357,11 +362,12 @@ class CreateNewSample extends Component {
     await this.props.createSample(formData)
         .then(response => {
             if (response.status === 200) {
-                alert("here") // TO DO: Show SUCCES NOTIFICATION
+                this.props.successfulNotification("Congratulations! The 'Sample' has been succesfully created!")
             } else {
-                alert("there") // TO DO: Show ERROR NOTIFICATION
+                this.props.errorNotification("Something went wrong. Pleas try again")
             }
         })
+
     this.props.history.push("/")
   }
 
@@ -633,6 +639,11 @@ const mapDispatchToProps = dispatch => {
       fetchAllExistingTags: () => dispatch(getAllExistingTagsFromServer()),
       fetchAllExistingGroups: () => dispatch(getAllExistingGroupsFromServer()),
       fetchAllNutrientAgarPlates: () => dispatch(fetchAllExistingNutrientAgarPlates()),
+
+      // Notifications
+      infoNotification: (message) => dispatch(infoNotification(message)),
+      successfulNotification: (message) => dispatch(successfulNotification(message)),
+      errorNotification: (message) => dispatch(successfulNotification(message))
   }
 }
 

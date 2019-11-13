@@ -43,20 +43,20 @@ export function fetchDetailedSampleById(id) {
     }
 }
 
-function fetchSampleById() {
+export function fetchSampleById() {
     return {
         type: REQUEST_GET_DETAILED_SAMPLE
     }
 }
 
-function fetchSampleByIdSuccess(data) {
+export function fetchSampleByIdSuccess(data) {
     return {
         type: REQUEST_GET_DETAILED_SAMPLE_SUCCESS,
         payload: data
     }
 }
 
-function fetchSampleByIdFail(error) {
+export function fetchSampleByIdFail(error) {
     return {
         type: REQUEST_GET_DETAILED_SAMPLE_FAIL,
         payload: error

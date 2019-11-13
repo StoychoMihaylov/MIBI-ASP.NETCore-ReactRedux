@@ -4,14 +4,14 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
+    using System.Collections.Generic;
     using Microsoft.AspNetCore.Hosting;
-    using MIBI.Models.BindingModels;
     using MIBI.Models.ViewModels;
     using MIBI.Services.Interfaces;
-    
+    using MIBI.Models.BindingModels;
+
 
     [Route("api")]
     [ApiController]
