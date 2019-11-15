@@ -1,9 +1,12 @@
 ﻿namespace MIBI.Services.Interfaces
 {
     using System.Collections.Generic;
+
     using MIBI.Data.Entities;
-    using MIBI.Models.BindingModels;
-    using MIBI.Models.ViewModels;
+    using MIBI.Models.ViewModels.Sample;
+    using MIBI.Models.BindingModels.Sample;
+    using MIBI.Models.ViewModels.AutocompleateSuggestions;
+    
 
     public interface ISampleService
     {

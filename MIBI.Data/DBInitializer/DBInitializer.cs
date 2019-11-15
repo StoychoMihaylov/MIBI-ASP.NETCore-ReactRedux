@@ -1,10 +1,10 @@
 ﻿namespace MIBI.Data.DBInitilizer
 {
+    using System.Linq;
+    using System.Collections.Generic;
+
     using MIBI.Data.Context;
     using MIBI.Data.Entities;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public static class DBInitializer
     {

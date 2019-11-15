@@ -1,15 +1,17 @@
 ﻿namespace MIBI.Services.Services
 {
     using System;
+    using AutoMapper;
+    using System.Linq;
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
+
     using MIBI.Data.Entities;
     using MIBI.Data.Interfaces;
-    using MIBI.Models.BindingModels;
     using MIBI.Services.Interfaces;
-    using System.Collections.Generic;
-    using MIBI.Models.ViewModels;
-    using System.Linq;
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
+    using MIBI.Models.ViewModels.Sample;
+    using MIBI.Models.BindingModels.Sample;
+    using MIBI.Models.ViewModels.AutocompleateSuggestions;
 
     public class SampleService : Service, ISampleService
     {

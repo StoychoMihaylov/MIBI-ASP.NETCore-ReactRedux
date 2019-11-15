@@ -5,6 +5,10 @@
 
     public interface IMIBIContext
     {
+        DbSet<User> Users { get; set; }
+
+        DbSet<TokenManager> Tokens { get; set; }
+
         DbSet<Sample> Samples { get; set; }  
 
         DbSet<Group> Groups { get; set; }
