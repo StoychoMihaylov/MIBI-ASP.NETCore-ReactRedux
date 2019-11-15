@@ -134,6 +134,49 @@ namespace MIBI.Data.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("MIBI.Data.Entities.TokenManager", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<string>("Value")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Tokens");
+                });
+
+            modelBuilder.Entity("MIBI.Data.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired();
+
+                    b.Property<string>("Salt")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("MIBI.Data.Entities.SampleGroup", b =>
                 {
                     b.HasOne("MIBI.Data.Entities.Group", "Group")
@@ -179,6 +222,13 @@ namespace MIBI.Data.Migrations
                         .WithMany("SampleTags")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MIBI.Data.Entities.TokenManager", b =>
+                {
+                    b.HasOne("MIBI.Data.Entities.User", "User")
+                        .WithMany("Tokens")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,5 @@
 ﻿namespace MIBI.Services
 {
-    using AutoMapper;
     using MIBI.Data.Interfaces;
 
     public class Service

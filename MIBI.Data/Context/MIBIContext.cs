@@ -9,6 +9,10 @@
         public MIBIContext(DbContextOptions<MIBIContext> options)
             : base(options){}
 
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<TokenManager> Tokens { get; set; }
+
         public DbSet<Sample> Samples { get; set; }
 
         public DbSet<Group> Groups { get; set; }
@@ -27,7 +31,7 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // SampleGroup join tabl
+            // SampleGroup join table
             modelBuilder.Entity<SampleGroup>()
                 .HasKey(sg => new { sg.SampleId, sg.GroupId });
 

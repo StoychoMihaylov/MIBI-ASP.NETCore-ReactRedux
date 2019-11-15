@@ -1,23 +1,25 @@
 namespace MIBI
 {
+    using System.IO;
+    using AutoMapper;
+    using global::AutoMapper;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.FileProviders;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+
     using MIBI.Data;
+    using MIBI.Data.Context;
+    using MIBI.Data.DBInitilizer;
     using MIBI.Data.Interfaces;
     using MIBI.Services.Services;
     using MIBI.Services.Interfaces;
-    using AutoMapper;
-    using MIBI.Data.Context;
-    using MIBI.Data.DBInitilizer;
-    using global::AutoMapper;
-    using System.IO;
-    using Microsoft.Extensions.FileProviders;
-    using Microsoft.AspNetCore.Http;
+
 
     public class Startup
     {
