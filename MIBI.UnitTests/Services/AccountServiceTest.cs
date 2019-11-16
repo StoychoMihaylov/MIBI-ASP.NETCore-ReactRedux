@@ -3,7 +3,6 @@
     using System;
     using Xunit;
     using System.Linq;
-
     using MIBI.Data.Context;
     using MIBI.Data.Entities;
     using MIBI.Models.BindingModels.Account;

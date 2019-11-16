@@ -12,7 +12,6 @@ namespace MIBI
     using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-
     using MIBI.Data;
     using MIBI.Data.Context;
     using MIBI.Data.DBInitilizer;
@@ -75,6 +74,7 @@ namespace MIBI
             // Service Injection
             services.AddTransient<IMIBIContext, MIBIContext>();
             services.AddTransient<ISampleService, SampleService>();
+            services.AddTransient<IAutocompleteService, AutocompleteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

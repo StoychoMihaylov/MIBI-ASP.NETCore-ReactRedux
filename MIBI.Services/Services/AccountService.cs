@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Security.Cryptography;
-
     using MIBI.Data.Entities;
     using MIBI.Data.Interfaces;
     using MIBI.Services.Utilities;
