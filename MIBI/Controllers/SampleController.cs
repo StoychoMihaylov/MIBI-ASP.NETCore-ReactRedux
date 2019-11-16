@@ -8,7 +8,6 @@
     using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Hosting;
-
     using MIBI.Models.ViewModels;
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels;

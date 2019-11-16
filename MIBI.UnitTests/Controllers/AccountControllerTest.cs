@@ -1,14 +1,14 @@
 ﻿namespace MIBI.UnitTests.Controllers
 {
+    using Moq;
     using Xunit;
-    using Microsoft.AspNetCore.Mvc;
-    
+    using System;
+    using Microsoft.AspNetCore.Mvc; 
     using MIBI.Controllers;
     using MIBI.Models.BindingModels.Account;
     using MIBI.Models.ViewModels.Account;
     using MIBI.Services.Interfaces;
-    using System;
-    using Moq;
+  
 
     public class AccountControllerTest
     {

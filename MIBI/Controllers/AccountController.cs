@@ -1,7 +1,6 @@
 ﻿namespace MIBI.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels.Account;
 

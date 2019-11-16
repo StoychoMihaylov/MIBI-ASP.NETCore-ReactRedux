@@ -5,23 +5,22 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
-
     using MIBI.Services.Interfaces;  
 
     [Route("api/autocomplete")]
     [ApiController]
     public class AutocompleteController : Controller
     {
-        private ISampleService service;
+        private IAutocompleteService service;
 
-        public AutocompleteController(ISampleService service)
+        public AutocompleteController(IAutocompleteService service)
         {
             this.service = service;
         }
 
         [HttpGet]
         [Route("names")]
-        public IActionResult GetNames()
+        public IActionResult GetSampleNames()
         {
             var bacteriaNames = this.service.GetAllNamesOfSamples();
 
