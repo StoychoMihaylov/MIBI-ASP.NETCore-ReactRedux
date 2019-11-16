@@ -12,3 +12,16 @@ C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\obj\Debug\netcoreapp2.2\MIBI.Uni
 C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\obj\Debug\netcoreapp2.2\MIBI.UnitTests.AssemblyInfo.cs
 C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\obj\Debug\netcoreapp2.2\MIBI.UnitTests.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\obj\Debug\netcoreapp2.2\MIBI.UnitTests.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Views.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Views.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Data.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Models.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Services.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Models.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Services.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Data.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.xml
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\obj\Debug\netcoreapp2.2\MIBI.UnitTests.csproj.CopyComplete
