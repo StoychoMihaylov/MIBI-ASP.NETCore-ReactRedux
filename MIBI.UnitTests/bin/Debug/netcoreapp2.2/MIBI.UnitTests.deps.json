@@ -15,7 +15,8 @@
           "Microsoft.NET.Test.Sdk": "15.9.0",
           "Moq": "4.13.1",
           "xunit": "2.4.0",
-          "xunit.runner.visualstudio": "2.4.0"
+          "xunit.runner.visualstudio": "2.4.0",
+          "Microsoft.Extensions.Hosting": "2.2.0.0"
         },
         "runtime": {
           "MIBI.UnitTests.dll": {}
@@ -2868,6 +2869,14 @@
           "MIBI.Services.dll": {}
         }
       },
+      "Microsoft.Extensions.Hosting/2.2.0.0": {
+        "runtime": {
+          "Microsoft.Extensions.Hosting.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.SqlServer.Reference/2.2.0.0": {
         "runtime": {
           "Microsoft.EntityFrameworkCore.SqlServer.dll": {
@@ -4469,6 +4478,11 @@
     },
     "MIBI.Services/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Hosting/2.2.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     },

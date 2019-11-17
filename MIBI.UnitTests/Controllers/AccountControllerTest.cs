@@ -23,9 +23,9 @@
                 Password = "P@ssl0rd",
                 ConfirmPassword = "P@ssl0rd"
             };
-            var userCredentials = new AccountLoginViewModel()
+            var userCredentials = new AccountCredentialsViewModel()
             {
-                UserId = new Guid(),
+                UserId = new Guid("12354321-3123-1122-4332-123456789231"),
                 Token = "Token-Token-Token"
             };
 
@@ -40,7 +40,12 @@
             var response = controller.RegisterAndLogin(bidingModel);
 
             // Assert
+            Assert.NotNull(response);
             Assert.IsType<OkObjectResult>(response);
+            var result = response as OkObjectResult;
+            var model = result.Value as AccountCredentialsViewModel;
+            var userId = model.UserId;
+            Assert.Equal(new Guid("12354321-3123-1122-4332-123456789231"), userId);
         }
     }
 }

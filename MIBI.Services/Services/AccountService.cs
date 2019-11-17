@@ -16,7 +16,7 @@
         public AccountService(IMIBIContext context)
             : base(context) { }
 
-        public AccountLoginViewModel CreateNewUserAccount(RegisterUserBindingModel bm)
+        public AccountCredentialsViewModel CreateNewUserAccount(RegisterUserBindingModel bm)
         {
             try
             {
@@ -78,7 +78,7 @@
             }
         }
 
-        public AccountLoginViewModel LoginUser(LoginUserBindingModel bm)
+        public AccountCredentialsViewModel LoginUser(LoginUserBindingModel bm)
         {
             string tokenBearer = string.Empty;
             Guid userId = Guid.Empty;
@@ -113,7 +113,7 @@
                 return null;
             }
 
-            AccountLoginViewModel viewModel = new AccountLoginViewModel()
+            AccountCredentialsViewModel viewModel = new AccountCredentialsViewModel()
             {
                 UserId = userId,
                 Token = tokenBearer

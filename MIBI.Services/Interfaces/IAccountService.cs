@@ -5,7 +5,7 @@
 
     public interface IAccountService
     {
-        AccountLoginViewModel CreateNewUserAccount(RegisterUserBindingModel bm);
-        AccountLoginViewModel LoginUser(LoginUserBindingModel bm);
+        AccountCredentialsViewModel CreateNewUserAccount(RegisterUserBindingModel bm);
+        AccountCredentialsViewModel LoginUser(LoginUserBindingModel bm);
     }
 }
