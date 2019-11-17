@@ -39,13 +39,16 @@
 
             // Assert
             Assert.NotNull(createdUser);
+            var userId = tokenResponse.UserId;
+            Assert.IsType<Guid>(userId);
+            Assert.NotEqual(0, userId.ToString().Length);
         }
 
         [Fact]
         public void LoginUser_CalledWithRelevantInputData_ShouldReturnTokenBearer()
         {
             // Arrange
-            var userCredentials = new AccountLoginViewModel();
+            var userCredentials = new AccountCredentialsViewModel();
             var db = this.GetDatabase();
             var service = new AccountService(db);
 
@@ -73,6 +76,9 @@
 
             // Assert
             Assert.NotNull(userCredentials);
+            var userId = userCredentials.UserId;
+            Assert.IsType<Guid>(userId);
+            Assert.NotEqual(0, userId.ToString().Length);
         }
 
         private MIBIContext GetDatabase()
