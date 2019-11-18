@@ -12,6 +12,8 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels;
     using MIBI.Models.BindingModels.Sample;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
 
     [Route("api")]
     [ApiController]
@@ -59,7 +61,15 @@
 
             var sampleViewModels = this.service.GetAllSamplesByGivenSearchParams(searchParams);
 
-            return Ok(sampleViewModels);
+            // Prevent reference loop
+            var JsonSamplesModels = JsonConvert
+                .SerializeObject(sampleViewModels, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+
+            return Ok(JsonSamplesModels);
         }
 
         [HttpPost]
@@ -113,7 +123,7 @@
             return Ok();
         }
 
-        private async Task SaveImages(IFormCollection formData, NewSampleBidingModel newSaple)
+        private async Task SaveImages(IFormCollection formData, NewSampleBidingModel newSample)
         {
             foreach (var image in formData.Files)
             {
@@ -130,7 +140,7 @@
                     using (var img = new FileStream(Path.Combine(path, newImgName), FileMode.Create))
                     {
                         await image.CopyToAsync(img);
-                        newSaple.ImgUrls.Add(newImgName);
+                        newSample.ImgUrls.Add(newImgName);
                     }
                 }
                 catch (Exception ex)

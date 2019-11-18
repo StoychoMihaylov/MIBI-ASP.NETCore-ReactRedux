@@ -113,15 +113,11 @@
             return sampleGroups;
         }
 
-        
-
         public List<SampleViewModel> GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams)
         {
-            var foundSamples = FindSampleDependingOnGivenParams(searchParams);
+            var samples = FindSampleDependingOnGivenParams(searchParams);
 
-            var sampleViewModels = this.mapper.Map<List<SampleViewModel>>(foundSamples);
-
-            return sampleViewModels;
+            return this.mapper.Map<List<SampleViewModel>>(samples);
         }
 
         private List<Sample> FindSampleDependingOnGivenParams(SearchParametersBindingModel searchParams)
@@ -202,15 +198,6 @@
                         samples.Add(sample);
                     }
                 }       
-            }
-
-            // Stoping reference loop
-            foreach (var sample in samples)
-            {
-                foreach (var img in sample.Images)
-                {
-                    img.Sample = null;
-                }
             }
 
             return samples;

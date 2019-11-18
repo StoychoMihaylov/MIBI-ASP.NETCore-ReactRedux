@@ -1,9 +1,9 @@
 ﻿namespace MIBI.Services.Interfaces
 {
     using System.Collections.Generic;
-    using MIBI.Data.Entities;
     using MIBI.Models.ViewModels.Sample;
     using MIBI.Models.BindingModels.Sample;
+    using MIBI.Data.Entities;
 
     public interface ISampleService
     {
