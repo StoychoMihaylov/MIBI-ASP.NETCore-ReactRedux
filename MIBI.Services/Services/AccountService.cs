@@ -10,7 +10,6 @@
     using MIBI.Models.ViewModels.Account;
     using MIBI.Models.BindingModels.Account;
    
-
     public class AccountService : Service, IAccountService
     {
         public AccountService(IMIBIContext context)

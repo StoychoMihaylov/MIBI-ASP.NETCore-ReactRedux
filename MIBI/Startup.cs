@@ -18,7 +18,9 @@ namespace MIBI
     using MIBI.Data.Interfaces;
     using MIBI.Services.Services;
     using MIBI.Services.Interfaces;
-
+    using Microsoft.AspNetCore.Mvc.Formatters;
+    using Newtonsoft.Json;
+    using System.Buffers;
 
     public class Startup
     {

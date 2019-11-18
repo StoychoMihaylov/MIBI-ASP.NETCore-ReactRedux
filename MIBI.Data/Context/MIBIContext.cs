@@ -6,8 +6,7 @@
 
     public class MIBIContext : DbContext, IMIBIContext
     {
-        public MIBIContext(DbContextOptions<MIBIContext> options)
-            : base(options){}
+        public MIBIContext(DbContextOptions<MIBIContext> options) : base(options) {}
 
         public DbSet<User> Users { get; set; }
 

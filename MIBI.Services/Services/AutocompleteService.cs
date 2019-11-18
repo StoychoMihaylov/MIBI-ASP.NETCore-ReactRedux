@@ -7,7 +7,6 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.ViewModels.AutocompleateSuggestions;
 
-
     public class AutocompleteService : Service, IAutocompleteService
     {
         public AutocompleteService(IMIBIContext context)
