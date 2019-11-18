@@ -61,15 +61,7 @@
 
             var sampleViewModels = this.service.GetAllSamplesByGivenSearchParams(searchParams);
 
-            // Prevent reference loop
-            var JsonSamplesModels = JsonConvert
-                .SerializeObject(sampleViewModels, new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                });
-
-            return Ok(JsonSamplesModels);
+            return Ok(sampleViewModels);
         }
 
         [HttpPost]

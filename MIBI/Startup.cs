@@ -21,6 +21,7 @@ namespace MIBI
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Newtonsoft.Json;
     using System.Buffers;
+    using Newtonsoft.Json.Serialization;
 
     public class Startup
     {
@@ -43,6 +44,14 @@ namespace MIBI
 
             // AutoMapper config
             services.AddAutoMapper(typeof(MapperInitializer));
+
+            // Prevent JSON reference loop handling
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .ConfigureApiBehaviorOptions(options =>
