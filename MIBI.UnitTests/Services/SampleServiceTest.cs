@@ -1,6 +1,6 @@
 ﻿namespace MIBI.UnitTests.Services
 {
-    public class SampleServiceTest
+    public class SampleServiceTest : TestsInitializer
     {
     }
 }

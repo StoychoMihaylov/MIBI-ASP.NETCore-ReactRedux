@@ -1,17 +1,31 @@
 namespace MIBI.UnitTests
 {
+    using System;
+    using global::AutoMapper;
+    using Microsoft.EntityFrameworkCore;
+    using MIBI.AutoMapper;
+    using MIBI.Data.Context;
+
     public class TestsInitializer
     {
-        private static bool testInitialized = false;
-
-        public void Initialize()
+        protected MIBIContext GetDatabase()
         {
-            if (!testInitialized)
-            {
-                // TO DO: Initializing of Automaper and other logik here!
+            var dbOptions = new DbContextOptionsBuilder<MIBIContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // Microsoft.EntityFrameworkCore.InMemory
+                .Options;
 
-                testInitialized = true;
-            }
+            return new MIBIContext(dbOptions);
+        }
+
+        protected IMapper GetAutoMapper()
+        {
+            var mockMapper = new MapperConfiguration(configuration =>
+            {
+                configuration.AllowNullCollections = true;
+                configuration.AddProfile(new MapperInitializer());
+            });
+
+            return mockMapper.CreateMapper();
         }
     }
 }

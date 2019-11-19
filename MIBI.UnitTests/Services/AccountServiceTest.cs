@@ -3,14 +3,12 @@
     using Xunit;
     using System;
     using System.Linq;
-    using MIBI.Data.Context;
     using MIBI.Data.Entities;
     using MIBI.Services.Services;
-    using Microsoft.EntityFrameworkCore;
     using MIBI.Models.ViewModels.Account;
     using MIBI.Models.BindingModels.Account;
-    
-    public class AccountServiceTest
+
+    public class AccountServiceTest : TestsInitializer
     {
         [Fact]
         public void CreateNewUserAccount_CalledWithCorrectInputData_ShouldReturnTrueAndUserCreated()
@@ -66,7 +64,6 @@
             };
 
             // Act
-            // Case with Correct Password Input
             var isUserCreated = service.CreateNewUserAccount(bm);
             if (isUserCreated != null)
             {
@@ -80,15 +77,6 @@
             Assert.NotEqual(0, userId.ToString().Length);
             var token = userCredentials.Token;
             Assert.NotEqual(0, token.Length);
-        }
-
-        private MIBIContext GetDatabase()
-        {
-            var dbOptions = new DbContextOptionsBuilder<MIBIContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // Microsoft.EntityFrameworkCore.InMemory
-                .Options;
-
-            return new MIBIContext(dbOptions);
         }
     }
 }
