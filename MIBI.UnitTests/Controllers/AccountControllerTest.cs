@@ -3,12 +3,11 @@
     using Moq;
     using Xunit;
     using System;
-    using Microsoft.AspNetCore.Mvc; 
     using MIBI.Controllers;
-    using MIBI.Models.BindingModels.Account;
-    using MIBI.Models.ViewModels.Account;
+    using Microsoft.AspNetCore.Mvc;
     using MIBI.Services.Interfaces;
-  
+    using MIBI.Models.ViewModels.Account;
+    using MIBI.Models.BindingModels.Account;
 
     public class AccountControllerTest
     {
@@ -29,7 +28,7 @@
                 Token = "Token-Token-Token"
             };
 
-            var serviceMock = new Mock<IAccountService>(); // Using Moq to mock the service
+            var serviceMock = new Mock<IAccountService>();
             serviceMock
                 .Setup(s => s.CreateNewUserAccount(bidingModel))
                 .Returns(userCredentials);

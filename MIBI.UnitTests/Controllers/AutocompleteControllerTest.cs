@@ -3,13 +3,13 @@
     using Moq;
     using Xunit;
     using System;
-    using MIBI.Models.ViewModels.AutocompleateSuggestions;
-    using MIBI.Services.Interfaces;
-    using System.Collections.Generic;
-    using MIBI.Controllers;
-    using Microsoft.AspNetCore.Mvc;
-    using MIBI.Data.Entities;
     using System.Linq;
+    using MIBI.Controllers;
+    using MIBI.Data.Entities;
+    using MIBI.Services.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using MIBI.Models.ViewModels.AutocompleateSuggestions;
 
     public class AutocompleteControllerTest
     {
@@ -30,7 +30,7 @@
                 }
             };
 
-            var serviceMock = new Mock<IAutocompleteService>(); // Using Moq to mock the service
+            var serviceMock = new Mock<IAutocompleteService>();
             serviceMock
                 .Setup(s => s.GetAllNamesOfSamples())
                 .Returns(listOfBacteriaNamesVm);
@@ -65,7 +65,7 @@
                 }
             };
 
-            var serviceMock = new Mock<IAutocompleteService>(); // Using Moq to mock the service
+            var serviceMock = new Mock<IAutocompleteService>();
             serviceMock
                 .Setup(s => s.GetAllGroups())
                 .Returns(groupsVm);
@@ -100,7 +100,7 @@
                 }
             };
 
-            var serviceMock = new Mock<IAutocompleteService>(); // Using Moq to mock the service
+            var serviceMock = new Mock<IAutocompleteService>();
             serviceMock
                 .Setup(s => s.GetAllNutrientAgarPlates())
                 .Returns(nutrientAgarPlatesVm);
@@ -135,7 +135,7 @@
                 }
             };
 
-            var serviceMock = new Mock<IAutocompleteService>(); // Using Moq to mock the service
+            var serviceMock = new Mock<IAutocompleteService>();
             serviceMock
                 .Setup(s => s.GetAllTags())
                 .Returns(tagNamesVm);

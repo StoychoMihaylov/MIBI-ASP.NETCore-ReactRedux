@@ -84,7 +84,7 @@
                 return BadRequest("Please field up at least one image! All fields are requered!");
             }
 
-            var newSaple = new NewSampleBidingModel()
+            var newSample = new NewSampleBidingModel()
             {
                 Name = name,
                 Description = description,
@@ -96,7 +96,7 @@
 
             try
             {
-                await SaveImages(formData, newSaple);
+                await SaveImages(formData, newSample);
             }
             catch (Exception ex)
             {
@@ -105,7 +105,7 @@
 
             try
             {
-                this.service.CreateNewSample(newSaple);
+                this.service.CreateNewSample(newSample);
             }
             catch (Exception ex)
             {
