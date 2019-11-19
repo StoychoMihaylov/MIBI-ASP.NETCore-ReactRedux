@@ -34,7 +34,7 @@
                 .Setup(s => s.GetAllNamesOfSamples())
                 .Returns(listOfBacteriaNamesVm);
 
-            var controller = new AutocompleteController(serviceMock.Object);
+            var controller = new FilterController(serviceMock.Object);
 
             // Act
             var response = controller.GetSampleNames();
@@ -69,7 +69,7 @@
                 .Setup(s => s.GetAllGroups())
                 .Returns(groupsVm);
 
-            var controller = new AutocompleteController(serviceMock.Object);
+            var controller = new FilterController(serviceMock.Object);
 
             // Act
             var response = controller.GetGroups();
@@ -104,7 +104,7 @@
                 .Setup(s => s.GetAllNutrientAgarPlates())
                 .Returns(nutrientAgarPlatesVm);
 
-            var controller = new AutocompleteController(serviceMock.Object);
+            var controller = new FilterController(serviceMock.Object);
 
             // Act
             var response = controller.GetNutrientAgarPlates();
@@ -139,7 +139,7 @@
                 .Setup(s => s.GetAllTags())
                 .Returns(tagNamesVm);
 
-            var controller = new AutocompleteController(serviceMock.Object);
+            var controller = new FilterController(serviceMock.Object);
 
             // Act
             var response = controller.GetTags();
