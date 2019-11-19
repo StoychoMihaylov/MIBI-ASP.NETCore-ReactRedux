@@ -7,13 +7,13 @@
     using Microsoft.AspNetCore.Mvc;
     using MIBI.Services.Interfaces;  
 
-    [Route("api/autocomplete")]
+    [Route("api/filter")]
     [ApiController]
-    public class AutocompleteController : Controller
+    public class FilterController : Controller
     {
         private IAutocompleteService service;
 
-        public AutocompleteController(IAutocompleteService service)
+        public FilterController(IAutocompleteService service)
         {
             this.service = service;
         }
