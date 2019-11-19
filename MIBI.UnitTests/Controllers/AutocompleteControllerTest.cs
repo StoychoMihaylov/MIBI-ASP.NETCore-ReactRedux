@@ -5,7 +5,6 @@
     using System;
     using System.Linq;
     using MIBI.Controllers;
-    using MIBI.Data.Entities;
     using MIBI.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
@@ -122,13 +121,13 @@
         public void Get_RetrieveAllTags_ShouldReturnNamesAndStatusCode200()
         {
             // Arrange
-            var tagNamesVm = new List<Tag>() {
-                new Tag()
+            var tagNamesVm = new List<TagViewModel>() {
+                new TagViewModel()
                 {
                     Id = new Guid(),
                     Name = "Test Tag 1"
                 },
-                new Tag()
+                new TagViewModel()
                 {
                     Id = new Guid(),
                     Name = "Test Tag 1"
@@ -149,7 +148,7 @@
             Assert.NotNull(response);
             Assert.IsType<OkObjectResult>(response);
             var result = response as OkObjectResult;
-            var models = result.Value as List<Tag>;
+            var models = result.Value as List<TagViewModel>;
             Assert.Equal(2, models.Count());
         }
     }
