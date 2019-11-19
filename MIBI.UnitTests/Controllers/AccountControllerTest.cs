@@ -15,6 +15,8 @@
         public void Post_RegisterAndLogin_ShouldReturnStatusCode201()
         {
             // Arrange
+            var userId = "12354321-3123-1122-4332-123456789231";
+
             var bidingModel = new RegisterUserBindingModel()
             {
                 Name = "Gosho",
@@ -24,7 +26,7 @@
             };
             var userCredentials = new AccountCredentialsViewModel()
             {
-                UserId = new Guid("12354321-3123-1122-4332-123456789231"),
+                UserId = new Guid(userId),
                 Token = "Token-Token-Token"
             };
 
@@ -43,8 +45,8 @@
             Assert.IsType<OkObjectResult>(response);
             var result = response as OkObjectResult;
             var model = result.Value as AccountCredentialsViewModel;
-            var userId = model.UserId;
-            Assert.Equal(new Guid("12354321-3123-1122-4332-123456789231"), userId);
+            var modelId = model.UserId;
+            Assert.Equal(new Guid(userId), modelId);
         }
     }
 }
