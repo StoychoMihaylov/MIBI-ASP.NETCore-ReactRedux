@@ -1,16 +1,15 @@
 ﻿namespace MIBI.UnitTests.Services
 {
-    using System;
     using Xunit;
+    using System;
     using System.Linq;
     using MIBI.Data.Context;
     using MIBI.Data.Entities;
-    using MIBI.Models.BindingModels.Account;
-    using MIBI.Models.ViewModels.Account;
     using MIBI.Services.Services;
     using Microsoft.EntityFrameworkCore;
+    using MIBI.Models.ViewModels.Account;
+    using MIBI.Models.BindingModels.Account;
     
-
     public class AccountServiceTest
     {
         [Fact]
@@ -79,6 +78,8 @@
             var userId = userCredentials.UserId;
             Assert.IsType<Guid>(userId);
             Assert.NotEqual(0, userId.ToString().Length);
+            var token = userCredentials.Token;
+            Assert.NotEqual(0, token.Length);
         }
 
         private MIBIContext GetDatabase()
