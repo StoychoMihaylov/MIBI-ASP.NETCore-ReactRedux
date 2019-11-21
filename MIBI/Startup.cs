@@ -85,7 +85,7 @@ namespace MIBI
             // Service Injection
             services.AddTransient<IMIBIContext, MIBIContext>();
             services.AddTransient<ISampleService, SampleService>();
-            services.AddTransient<IAutocompleteService, AutocompleteService>();
+            services.AddTransient<IAutocompleteService, FilterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

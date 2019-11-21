@@ -7,7 +7,7 @@
     using MIBI.Services.Services;
     using MIBI.Models.ViewModels.AutocompleateSuggestions;
 
-    public class AutocompleteServiceTest : TestsInitializer
+    public class FilterServiceTest : TestsInitializer
     {
         [Fact]
         public void GetAllGroups_CalledWithRelevantData_ShouldReturnListOfGroups()
@@ -36,7 +36,7 @@
 
             var mapper = this.GetAutoMapper();
 
-            var service = new AutocompleteService(db, mapper);
+            var service = new FilterService(db, mapper);
 
             // Act
             var groups = service.GetAllGroups();
@@ -75,7 +75,7 @@
 
             var mapper = this.GetAutoMapper();
 
-            var service = new AutocompleteService(db, mapper);
+            var service = new FilterService(db, mapper);
 
             // Act
             var groups = service.GetAllNamesOfSamples();
@@ -114,7 +114,7 @@
 
             var mapper = this.GetAutoMapper();
 
-            var service = new AutocompleteService(db, mapper);
+            var service = new FilterService(db, mapper);
 
             // Act
             var groups = service.GetAllNutrientAgarPlates();
@@ -153,7 +153,7 @@
 
             var mapper = this.GetAutoMapper();
 
-            var service = new AutocompleteService(db, mapper);
+            var service = new FilterService(db, mapper);
 
             // Act
             var groups = service.GetAllTags();
