@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIBI", "MIBI\MIBI.csproj", "{0564B611-F38A-4DB9-A138-603624711704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIBI.Wep", "MIBI\MIBI.Wep.csproj", "{0564B611-F38A-4DB9-A138-603624711704}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIBI.Data", "MIBI.Data\MIBI.Data.csproj", "{2F6E23C8-5040-4272-8832-4CCED40C99BC}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIBI.Services", "MIBI.Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIBI.Models", "MIBI.Models\MIBI.Models.csproj", "{D3743C77-26FD-40F8-B9ED-CB34F390B29F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIBI.UnitTests", "MIBI.UnitTests\MIBI.UnitTests.csproj", "{4197DE6D-6E1B-422D-B5CB-95643092B89C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIBI.UnitTests", "MIBI.UnitTests\MIBI.UnitTests.csproj", "{4197DE6D-6E1B-422D-B5CB-95643092B89C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

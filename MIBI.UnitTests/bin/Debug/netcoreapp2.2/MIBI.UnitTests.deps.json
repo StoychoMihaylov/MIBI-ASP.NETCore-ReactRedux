@@ -10,9 +10,9 @@
         "dependencies": {
           "AutoMapper": "9.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
-          "MIBI": "1.0.0",
           "MIBI.Models": "1.0.0",
           "MIBI.Services": "1.0.0",
+          "MIBI.Wep": "1.0.0",
           "Microsoft.EntityFrameworkCore.InMemory": "2.2.4",
           "Microsoft.NET.Test.Sdk": "15.9.0",
           "Moq": "4.13.1",
@@ -2824,21 +2824,6 @@
           "Microsoft.NET.Test.Sdk": "15.9.0"
         }
       },
-      "MIBI/1.0.0": {
-        "dependencies": {
-          "AutoMapper": "9.0.0",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
-          "MIBI.Data": "1.0.0",
-          "MIBI.Models": "1.0.0",
-          "MIBI.Services": "1.0.0",
-          "Microsoft.AspNetCore.StaticFiles": "2.2.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.2.0.0"
-        },
-        "runtime": {
-          "MIBI.dll": {}
-        }
-      },
       "MIBI.Data/1.0.0": {
         "dependencies": {
           "AutoMapper": "9.0.0",
@@ -2869,6 +2854,21 @@
         },
         "runtime": {
           "MIBI.Services.dll": {}
+        }
+      },
+      "MIBI.Wep/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "MIBI.Data": "1.0.0",
+          "MIBI.Models": "1.0.0",
+          "MIBI.Services": "1.0.0",
+          "Microsoft.AspNetCore.StaticFiles": "2.2.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3",
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.2.0.0"
+        },
+        "runtime": {
+          "MIBI.Wep.dll": {}
         }
       },
       "Microsoft.Extensions.Hosting/2.2.0.0": {
@@ -4463,11 +4463,6 @@
       "path": "xunit.runner.visualstudio/2.4.0",
       "hashPath": "xunit.runner.visualstudio.2.4.0.nupkg.sha512"
     },
-    "MIBI/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "MIBI.Data/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -4479,6 +4474,11 @@
       "sha512": ""
     },
     "MIBI.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MIBI.Wep/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
