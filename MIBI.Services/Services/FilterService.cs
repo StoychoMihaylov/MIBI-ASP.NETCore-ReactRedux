@@ -7,11 +7,11 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.ViewModels.AutocompleateSuggestions;
 
-    public class AutocompleteService : Service, IAutocompleteService
+    public class FilterService : Service, IAutocompleteService
     {
         private readonly IMapper mapper;
 
-        public AutocompleteService(IMIBIContext context, IMapper mapper)
+        public FilterService(IMIBIContext context, IMapper mapper)
             : base(context)
         {
             this.mapper = mapper;
