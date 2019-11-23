@@ -3784,6 +3784,25 @@
           "build/netcoreapp1.0/xunit.runner.visualstudio.props": {}
         }
       },
+      "MIBI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "AutoMapper": "9.0.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "MIBI.Data": "1.0.0",
+          "MIBI.Models": "1.0.0",
+          "MIBI.Services": "1.0.0",
+          "Microsoft.AspNetCore.StaticFiles": "2.2.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3"
+        },
+        "compile": {
+          "bin/placeholder/MIBI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MIBI.dll": {}
+        }
+      },
       "MIBI.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -3829,25 +3848,6 @@
         },
         "runtime": {
           "bin/placeholder/MIBI.Services.dll": {}
-        }
-      },
-      "MIBI.Wep/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.2",
-        "dependencies": {
-          "AutoMapper": "9.0.0",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
-          "MIBI.Data": "1.0.0",
-          "MIBI.Models": "1.0.0",
-          "MIBI.Services": "1.0.0",
-          "Microsoft.AspNetCore.StaticFiles": "2.2.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3"
-        },
-        "compile": {
-          "bin/placeholder/MIBI.Wep.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MIBI.Wep.dll": {}
         }
       }
     }
@@ -11261,6 +11261,11 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
+    "MIBI/1.0.0": {
+      "type": "project",
+      "path": "../MIBI/MIBI.csproj",
+      "msbuildProject": "../MIBI/MIBI.csproj"
+    },
     "MIBI.Data/1.0.0": {
       "type": "project",
       "path": "../MIBI.Data/MIBI.Data.csproj",
@@ -11275,20 +11280,15 @@
       "type": "project",
       "path": "../MIBI.Services/MIBI.Services.csproj",
       "msbuildProject": "../MIBI.Services/MIBI.Services.csproj"
-    },
-    "MIBI.Wep/1.0.0": {
-      "type": "project",
-      "path": "../MIBI/MIBI.Wep.csproj",
-      "msbuildProject": "../MIBI/MIBI.Wep.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "AutoMapper >= 9.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
+      "MIBI >= 1.0.0",
       "MIBI.Models >= 1.0.0",
       "MIBI.Services >= 1.0.0",
-      "MIBI.Wep >= 1.0.0",
       "Microsoft.EntityFrameworkCore.InMemory >= 2.2.4",
       "Microsoft.NET.Test.Sdk >= 15.9.0",
       "Microsoft.NETCore.App >= 2.2.0",
@@ -11334,8 +11334,8 @@
             "C:\\Users\\stmih\\source\\repos\\MIBI\\MIBI.Services\\MIBI.Services.csproj": {
               "projectPath": "C:\\Users\\stmih\\source\\repos\\MIBI\\MIBI.Services\\MIBI.Services.csproj"
             },
-            "C:\\Users\\stmih\\source\\repos\\MIBI\\MIBI\\MIBI.Wep.csproj": {
-              "projectPath": "C:\\Users\\stmih\\source\\repos\\MIBI\\MIBI\\MIBI.Wep.csproj"
+            "C:\\Users\\stmih\\source\\repos\\MIBI\\MIBI\\MIBI.csproj": {
+              "projectPath": "C:\\Users\\stmih\\source\\repos\\MIBI\\MIBI\\MIBI.csproj"
             }
           }
         }

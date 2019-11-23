@@ -2,13 +2,15 @@
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
 import {
+    fetchSamplesByGivenSearchParameters,
+} from '../store/actions/SampleActions'
+import {
     getAllNamesOfExistingSamples,
     getAllExistingTagsFromServer,
     getAllExistingGroupsFromServer,
-    fetchSamplesByGivenSearchParameters,
     fetchAllExistingNutrientAgarPlates
-} from '../store/actions/SampleActions'
-import "../styles/SearchSamples.css"
+} from '../store/actions/FilterActions'
+import '../styles/SearchSamples.css'
 
 class SearchSampleView extends Component {
     constructor(props) {
@@ -542,10 +544,10 @@ class SearchSampleView extends Component {
 const mapStateToProps = state => {
     return {
         samples: state.sample.samples,
-        allExistingNutrientAgarPlates: state.sample.allExistingNutrientAgarPlates,
-        allExistingGroups: state.sample.allExistingGroups,
-        allExistingTags: state.sample.allExistingTags,
-        autocompleteNamesOfSamples: state.sample.autocompleteNamesOfSamples,
+        allExistingNutrientAgarPlates: state.filter.allExistingNutrientAgarPlates,
+        allExistingGroups: state.filter.allExistingGroups,
+        allExistingTags: state.filter.allExistingTags,
+        autocompleteNamesOfSamples: state.filter.autocompleteNamesOfSamples,
         isLoading: state.sample.isLoading
     }
 }

@@ -6,12 +6,12 @@ import {
   getAllExistingTagsFromServer,
   getAllExistingGroupsFromServer,
   fetchAllExistingNutrientAgarPlates
-} from '../store/actions/SampleActions'
+} from '../store/actions/FilterActions'
 import {
     infoNotification,
     successfulNotification,
     errorNotification
-} from '../store/actions/CommonActions'
+} from '../store/actions/NotificationActions'
 import "../styles/CreateNewSample.css"
 
 class CreateNewSample extends Component {
@@ -626,9 +626,9 @@ class CreateNewSample extends Component {
 
 const mapStateToProps = state => {
   return {
-    allExistingNutrientAgarPlates: state.sample.allExistingNutrientAgarPlates,
-    allExistingTags: state.sample.allExistingTags,
-    allExistingGroups: state.sample.allExistingGroups,
+    allExistingNutrientAgarPlates: state.filter.allExistingNutrientAgarPlates,
+    allExistingTags: state.filter.allExistingTags,
+    allExistingGroups: state.filter.allExistingGroups,
     isLoading: state.sample.isLoading
   }
 }
@@ -643,7 +643,7 @@ const mapDispatchToProps = dispatch => {
       // Notifications
       infoNotification: (message) => dispatch(infoNotification(message)),
       successfulNotification: (message) => dispatch(successfulNotification(message)),
-      errorNotification: (message) => dispatch(successfulNotification(message))
+      errorNotification: (message) => dispatch(errorNotification(message))
   }
 }
 
