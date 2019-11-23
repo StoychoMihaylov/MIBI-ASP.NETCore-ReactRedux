@@ -19,7 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MIBI.Models\MIBI.Models.csproj" />
     <ProjectReference Include="..\MIBI.Services\MIBI.Services.csproj" />
-    <ProjectReference Include="..\MIBI\MIBI.Wep.csproj" />
+    <ProjectReference Include="..\MIBI\MIBI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
