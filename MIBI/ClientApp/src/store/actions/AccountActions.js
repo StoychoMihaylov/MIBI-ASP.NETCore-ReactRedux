@@ -12,16 +12,17 @@ import {
 import { api } from '../../constants/api'
 import axios from 'axios'
 
+var qs = require('qs');
+
 //*************************** Register account actions ***************************
 
-export function registerAccount(formData) {
+export function registerAccount(userModel) {
     return dispatch => {
         dispatch(requestRegisterAccount())
-        return axios.post(api + 'api/account/register', formData)
-        .then(result => {
-            dispatch(requestRegisterAccountSuccess())
-            console.log(result)
-            return result
+        return axios.post(api + 'api/account/register', userModel)
+        .then(response => {
+            dispatch(requestRegisterAccountSuccess(response))
+            return response
         })
         .catch(err => {
             dispatch(requestRegisterAccountFail(err))

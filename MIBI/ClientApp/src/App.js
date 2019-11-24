@@ -1,17 +1,25 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import Layout from './components/Layout';
 import SearchSampleView from './view/SearchSamples'
 import CreateNewSample from './view/CreateNewSample'
 import DetailedSample from './view/DetailedSample';
 import RegisterAccount from './view/RegisterAccount'
 
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+        localStorage.getItem('token') !== null
+        ? <Component {...props} />
+        : <Redirect to='/account/registration' />
+    )} />
+)
+
 export default () => (
     <Layout>
-        <Route exact path='/' component={SearchSampleView} />
-        <Route exact path='/searchSamples' component={SearchSampleView} />
-        <Route path='/addSample' component={CreateNewSample} />
-        <Route path='/sample/:id' component={DetailedSample} />
-        <Route path='/account/registration' component={RegisterAccount} />
+        <Route exact path='/account/registration' component={RegisterAccount} />
+        <PrivateRoute exact path='/' component={SearchSampleView} />
+        <PrivateRoute exact path='/addSample' component={CreateNewSample} />
+        <PrivateRoute exact path='/sample/:id' component={DetailedSample} />
+        <PrivateRoute exact path='/searchSamples' component={SearchSampleView} />
     </Layout>
-);
+)

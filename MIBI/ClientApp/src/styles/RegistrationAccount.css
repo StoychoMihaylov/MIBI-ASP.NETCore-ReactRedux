@@ -1,0 +1,10 @@
+.registerFormContainer {
+    text-align: center;
+}
+
+.registrationField {
+    margin: 2px;
+    font-size: 18px;
+    border-radius: 5px;
+    min-width: 300px;
+}
