@@ -418,7 +418,7 @@ class SearchSampleView extends Component {
         <div className="conteiner">
             <div className="searchingBar">
                 <div>
-                <img className="pageLogo" src={require("../content/logo/page-logo.png")} alt="logo"/>
+                    <img className="pageLogo" src={require("../content/logo/page-logo.png")} alt="logo"/>
                 </div>
                 <table>
                     <tbody>

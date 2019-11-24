@@ -27,6 +27,7 @@ class CreateNewSample extends Component {
       images: [],
       files: {},
 
+      // fields validation
       nameError: "",
       descriptionError: "",
       nutrientAgarPlatesError: "",

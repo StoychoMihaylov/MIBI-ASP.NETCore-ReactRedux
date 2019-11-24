@@ -12,8 +12,7 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels;
     using MIBI.Models.BindingModels.Sample;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
+
 
     [Route("api")]
     [ApiController]

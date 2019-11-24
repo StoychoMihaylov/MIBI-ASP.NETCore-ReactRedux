@@ -92,14 +92,12 @@ export function createSampleFail(error) {
 
 
 export function fetchSamplesByGivenSearchParameters(bateriaParams) {
+    let request = {
+        params: bateriaParams
+    }
     return function (dispatch) {
         dispatch(fetchSamples())
-        axios.get(api + 'api/samples', {
-            params: bateriaParams,
-            paramsSerializer: function(params) {
-                return qs.stringify(params, {arrayFormat: 'repeat'})
-            }
-        })
+        axios.get(api + 'api/samples', request)
         .then(response => {
             console.log(response)
             dispatch(fetchSamplesSuccess(response.data))

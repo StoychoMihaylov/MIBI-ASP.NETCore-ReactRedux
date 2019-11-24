@@ -18,7 +18,7 @@
         // api/account/register
         [HttpPost]
         [Route("register")]
-        public IActionResult RegisterAndLogin(RegisterUserBindingModel bm)
+        public IActionResult RegisterAndLogin([FromBody] RegisterUserBindingModel bm)
         {
             if (!ModelState.IsValid)
             {
