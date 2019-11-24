@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import SearchSampleView from './view/SearchSamples'
 import CreateNewSample from './view/CreateNewSample'
 import DetailedSample from './view/DetailedSample';
+import RegisterAccount from './view/RegisterAccount'
 
 export default () => (
     <Layout>
@@ -11,5 +12,6 @@ export default () => (
         <Route exact path='/searchSamples' component={SearchSampleView} />
         <Route path='/addSample' component={CreateNewSample} />
         <Route path='/sample/:id' component={DetailedSample} />
+        <Route path='/account/registration' component={RegisterAccount} />
     </Layout>
 );

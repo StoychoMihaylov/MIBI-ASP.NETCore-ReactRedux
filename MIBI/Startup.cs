@@ -2,26 +2,27 @@ namespace MIBI
 {
     using System.IO;
     using AutoMapper;
+    using System.Buffers;
+    using Newtonsoft.Json;
     using global::AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
+    using Newtonsoft.Json.Serialization;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.FileProviders;
+    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
     using MIBI.Data;
     using MIBI.Data.Context;
-    using MIBI.Data.DBInitilizer;
     using MIBI.Data.Interfaces;
+    using MIBI.Data.DBInitilizer;
     using MIBI.Services.Services;
     using MIBI.Services.Interfaces;
-    using Microsoft.AspNetCore.Mvc.Formatters;
-    using Newtonsoft.Json;
-    using System.Buffers;
-    using Newtonsoft.Json.Serialization;
+
 
     public class Startup
     {

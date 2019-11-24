@@ -1,0 +1,46 @@
+import {
+    REQUEST_REGISTER_NEW_ACCOUNT,
+    REQUEST_REGISTER_NEW_ACCOUNT_SUCCESS,
+    REQUEST_REGISTER_NEW_ACCOUNT_FAIL,
+    REQUEST_ACCOUNT_LOGIN,
+    REQUEST_ACCOUNT_LOGIN_SUCCESS,
+    REQUEST_ACCOUNT_LOGIN_FAIL,
+    REQUEST_ACCOUNT_LOGOUT,
+    REQUEST_ACCOUNT_LOGOUT_SUCCESS,
+    REQUEST_ACCOUNT_LOGOUT_FAIL
+} from '../../constants/AccountActionTypes'
+
+
+const initialState = {
+    credentials: {},
+
+    isLoading: false,
+    error: false
+}
+
+const AccountReducer = (state, action) => {
+    state = state || initialState
+
+    switch (action.type) {
+        case REQUEST_REGISTER_NEW_ACCOUNT:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case REQUEST_REGISTER_NEW_ACCOUNT_SUCCESS:
+            return {
+                ...state,
+                credentials: action.payload,
+                isLoading: false,
+            }
+        case REQUEST_REGISTER_NEW_ACCOUNT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+export default AccountReducer

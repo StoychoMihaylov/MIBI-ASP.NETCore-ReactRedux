@@ -492,7 +492,7 @@ class CreateNewSample extends Component {
         <div>
             <div className="errorMessage">{this.state.nameError}</div>
             <input
-              type="text"
+                type="text"
               placeholder="Type a name"
               name="name"
               className="nameInput"
@@ -607,9 +607,10 @@ class CreateNewSample extends Component {
               }
           </div>
           <br />
-          <button type="button"
-          className="saveBtn"
-          onClick={this.handleSubmit.bind(this)}>SAVE</button>
+          <button
+            type="button"
+            className="saveBtn"
+            onClick={this.handleSubmit.bind(this)}>SAVE</button>
           <Route
             render={({ history }) => (
               <button

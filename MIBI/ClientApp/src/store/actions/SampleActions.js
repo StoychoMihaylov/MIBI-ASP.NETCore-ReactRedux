@@ -74,10 +74,9 @@ export function createSample() {
     }
 }
 
-export function createSampleSuccess(successMessage) {
+export function createSampleSuccess() {
     return {
         type: REQUEST_ADD_NEW_SAMPLE_SUCCESS,
-        infoMessage: successMessage
     }
 }
 
