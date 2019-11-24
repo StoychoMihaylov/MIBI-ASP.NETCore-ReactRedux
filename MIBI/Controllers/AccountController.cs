@@ -4,7 +4,7 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels.Account;
 
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : Controller
     {
