@@ -163,7 +163,7 @@ class RegisterAccount extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        registerAccount: (sampleId) => dispatch(registerAccount(sampleId)),
+        registerAccount: (userData) => dispatch(registerAccount(userData)),
 
          // Notifications
         infoNotification: (message) => dispatch(infoNotification(message)),

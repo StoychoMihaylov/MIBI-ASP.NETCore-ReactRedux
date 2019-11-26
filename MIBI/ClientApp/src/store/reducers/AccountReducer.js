@@ -22,6 +22,22 @@ const AccountReducer = (state, action) => {
     state = state || initialState
 
     switch (action.type) {
+        case REQUEST_ACCOUNT_LOGIN:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case REQUEST_ACCOUNT_LOGIN_SUCCESS:
+            return {
+                ...state,
+                credentials: action.payload,
+                isLoading: false,
+            }
+        case REQUEST_ACCOUNT_LOGIN_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
         case REQUEST_REGISTER_NEW_ACCOUNT:
             return {
                 ...state,
