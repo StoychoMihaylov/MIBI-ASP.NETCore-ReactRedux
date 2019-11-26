@@ -16,6 +16,44 @@ var qs = require('qs');
 
 //*************************** Register account actions ***************************
 
+export function loginAccount(userModel) {
+    return dispatch => {
+        dispatch(loginRegisterAccount())
+        return axios.post(api + 'api/account/login', userModel)
+        .then(response => {
+            dispatch(requestRegisterAccountSuccess(response))
+            return response
+        })
+        .catch(err => {
+            dispatch(loginRegisterAccountFail(err))
+            return err
+        })
+    }
+}
+
+export function loginRegisterAccount() {
+    return {
+        type: REQUEST_ACCOUNT_LOGIN
+    }
+}
+
+export function loginRegisterAccountSuccess(data) {
+    return {
+        type: REQUEST_ACCOUNT_LOGIN_SUCCESS,
+        payload: data
+    }
+}
+
+export function loginRegisterAccountFail(error) {
+    return {
+        type: REQUEST_ACCOUNT_LOGIN_FAIL,
+        payload: error
+    }
+}
+
+
+//*************************** Register account actions ***************************
+
 export function registerAccount(userModel) {
     return dispatch => {
         dispatch(requestRegisterAccount())

@@ -612,14 +612,14 @@ class CreateNewSample extends Component {
             type="button"
             className="saveBtn"
             onClick={this.handleSubmit.bind(this)}>SAVE</button>
-          <Route
-            render={({ history }) => (
-              <button
-                type="button"
-                className="backBtn"
-                onClick={() => { this.props.history.goBack() }}>BACK</button>
-            )}
-          />
+            <Route
+                render={({ history }) => (
+                <button
+                    type="button"
+                    className="backBtn"
+                    onClick={() => { this.props.history.goBack() }}>BACK</button>
+                )}
+            />
         </div>
       </div>
     );
