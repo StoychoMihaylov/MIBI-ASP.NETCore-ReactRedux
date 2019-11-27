@@ -51,9 +51,6 @@ class NavMenu extends React.Component {
           <Container>
             <NavbarBrand tag={Link} to="/"><img className="navbarLogo" src={require("../content/logo/bar-logo.png")} /></NavbarBrand>
             <NavbarToggler onClick={this.toggle} className="mr-2" />
-            {
-              localStorage.getItem("token") !== null
-              ?
                 <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
                   <ul className="navbar-nav flex-grow">
                     <NavItem>
@@ -70,9 +67,6 @@ class NavMenu extends React.Component {
                     </NavItem>
                   </ul>
                 </Collapse>
-              :
-              null
-            }
           </Container>
         </Navbar>
       </header>

@@ -6,7 +6,8 @@ import {
     successfulNotification,
     errorNotification
 } from '../store/actions/NotificationActions'
-import { loginAccount } from "../store/actions/AccountActions"
+import { loginAccount } from '../store/actions/AccountActions'
+import '../styles/LoginAccount.css'
 
 class LoginAccount extends Component {
     constructor(props) {
@@ -68,7 +69,6 @@ class LoginAccount extends Component {
                     localStorage.setItem('userId', credentials.userId)
                     this.props.successfulNotification("Loged in!")
                     this.props.history.push("/")
-                    window.location.reload(false);
                 } else {
                     this.props.errorNotification("Wrong credentials or this user doesn't exist!")
                 }
@@ -77,7 +77,7 @@ class LoginAccount extends Component {
 
     render() {
         return (
-            <div className="registerFormContainer">
+            <div className="loginFormContainer">
                 <div>
                     <img className="pageLogo" src={require("../content/logo/page-logo.png")} alt="logo"/>
                 </div>
