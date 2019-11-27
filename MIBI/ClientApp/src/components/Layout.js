@@ -5,7 +5,13 @@ import Notification from '../components/Notification'
 
 export default props => (
   <div>
-    <NavMenu />
+    {
+      localStorage.getItem("token") !== null
+      ?
+      <NavMenu />
+      :
+      null
+    }
     <Notification/>
     <Container>
       {props.children}
