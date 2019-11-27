@@ -59,18 +59,18 @@ class LoginAccount extends Component {
             password: this.state.password,
         }
 
-        this.props.registerAccount(userData)
+        this.props.loginAccount(userData)
             .then(response => {
                 console.log(response)
                 if (response.status === 200) {
                     let credentials = response.data
                     localStorage.setItem('token', credentials.token)
                     localStorage.setItem('userId', credentials.userId)
-
                     this.props.successfulNotification("Loged in!")
                     this.props.history.push("/")
+                    window.location.reload(false);
                 } else {
-                    this.props.errorNotification("Something went wrong. Pleas try again")
+                    this.props.errorNotification("Wrong credentials or this user doesn't exist!")
                 }
             })
         }

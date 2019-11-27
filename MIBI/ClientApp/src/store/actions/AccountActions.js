@@ -12,39 +12,73 @@ import {
 import { api } from '../../constants/api'
 import axios from 'axios'
 
-var qs = require('qs');
+//*************************** Logout account actions ***************************
 
-//*************************** Register account actions ***************************
-
-export function loginAccount(userModel) {
+export function logoutAccount(userModel) {
     return dispatch => {
-        dispatch(loginRegisterAccount())
-        return axios.post(api + 'api/account/login', userModel)
+        dispatch(requestLogoutAccount())
+        return axios.post(api + 'api/account/logout', userModel)
         .then(response => {
-            dispatch(requestRegisterAccountSuccess(response))
+            dispatch(requestLogoutAccountSuccess(response))
             return response
         })
         .catch(err => {
-            dispatch(loginRegisterAccountFail(err))
+            dispatch(requestLogoutAccountFail(err))
             return err
         })
     }
 }
 
-export function loginRegisterAccount() {
+export function requestLogoutAccount() {
+    return {
+        type: REQUEST_ACCOUNT_LOGOUT
+    }
+}
+
+export function requestLogoutAccountSuccess(data) {
+    return {
+        type: REQUEST_ACCOUNT_LOGOUT_SUCCESS
+    }
+}
+
+export function requestLogoutAccountFail(error) {
+    return {
+        type: REQUEST_ACCOUNT_LOGOUT_FAIL,
+        payload: error
+    }
+}
+
+//*************************** Login account actions ***************************
+
+export function loginAccount(userModel) {
+    return dispatch => {
+        dispatch(requestLoginAccount())
+        return axios.post(api + 'api/account/login', userModel)
+        .then(response => {
+            dispatch(requestLoginAccountSuccess(response))
+            return response
+        })
+        .catch(err => {
+            dispatch(requestLoginAccountFail(err))
+            return err
+        })
+    }
+}
+
+export function requestLoginAccount() {
     return {
         type: REQUEST_ACCOUNT_LOGIN
     }
 }
 
-export function loginRegisterAccountSuccess(data) {
+export function requestLoginAccountSuccess(data) {
     return {
         type: REQUEST_ACCOUNT_LOGIN_SUCCESS,
         payload: data
     }
 }
 
-export function loginRegisterAccountFail(error) {
+export function requestLoginAccountFail(error) {
     return {
         type: REQUEST_ACCOUNT_LOGIN_FAIL,
         payload: error

@@ -81,6 +81,8 @@
         {
             string tokenBearer = string.Empty;
             Guid userId = Guid.Empty;
+            string name = string.Empty;
+            string email = string.Empty;
 
             try
             {
@@ -89,9 +91,13 @@
                 .Where(u => u.Email == bm.Email)
                 .First();
 
-                userId = user.Id; // taking the id to send it to the client
+                // taking the user data to send it to the client
+                userId = user.Id; 
+                name = user.Name;
+                email = user.Email;
 
                 var passwordHash = GenerateHashOfPassword(bm.Password, user.Salt);
+
                 if (user.PasswordHash == passwordHash)
                 {
                     tokenBearer = GenerateToken();
@@ -106,6 +112,10 @@
                     this.Context.Tokens.Add(newToken);
                     this.Context.SaveChanges();
                 }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {
@@ -115,7 +125,9 @@
             AccountCredentialsViewModel viewModel = new AccountCredentialsViewModel()
             {
                 UserId = userId,
-                Token = tokenBearer
+                Token = tokenBearer,
+                Name = name,
+                Email = email
             };
 
             return viewModel;
@@ -140,6 +152,17 @@
         private string GenerateToken()
         {
             return Guid.NewGuid().ToString() + TokenGenerator.Generate(30);
+        }
+
+        public void DeleteUserToken(LogoutBindingModel bm)
+        {
+            var token = this.Context
+                .Tokens
+                .Where(t => t.Value == bm.Token)
+                .First();
+
+            this.Context.Tokens.Remove(token);
+            this.Context.SaveChanges();
         }
     }
 }
