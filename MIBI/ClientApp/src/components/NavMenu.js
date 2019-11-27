@@ -1,9 +1,16 @@
 import React from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { logoutAccount} from '../store/actions/AccountActions'
 import { Link } from 'react-router-dom';
+import { connect } from "react-redux"
+import {
+  infoNotification,
+  successfulNotification,
+  errorNotification
+} from '../store/actions/NotificationActions'
 import '../styles/NavMenuStyles.css';
 
-export default class NavMenu extends React.Component {
+class NavMenu extends React.Component {
   constructor (props) {
     super(props);
 
@@ -19,6 +26,24 @@ export default class NavMenu extends React.Component {
     });
   }
 
+  logoutUser() {
+    let userToken = {
+      userId: localStorage.getItem("userId"),
+      token: localStorage.getItem("token")
+    }
+    this.props.logoutAccount(userToken)
+            .then(response => {
+              console.log(response)
+                if (response.status === 200) {
+                    localStorage.clear()
+                    this.props.successfulNotification("Loged out!")
+                    window.location.reload(false);
+                } else {
+                    this.props.errorNotification("Connection problem! Please try again")
+                }
+            })
+  }
+
   render () {
     return (
       <header>
@@ -26,22 +51,44 @@ export default class NavMenu extends React.Component {
           <Container>
             <NavbarBrand tag={Link} to="/"><img className="navbarLogo" src={require("../content/logo/bar-logo.png")} /></NavbarBrand>
             <NavbarToggler onClick={this.toggle} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                </NavItem>
-              </ul>
-            </Collapse>
+            {
+              localStorage.getItem("token") !== null
+              ?
+                <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
+                  <ul className="navbar-nav flex-grow">
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink className="logoutBtn" onClick={this.logoutUser.bind(this)}>LogOut</NavLink>
+                    </NavItem>
+                  </ul>
+                </Collapse>
+              :
+              null
+            }
           </Container>
         </Navbar>
       </header>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+      logoutAccount: (userToken) => dispatch(logoutAccount(userToken)),
+
+      // Notifications
+      infoNotification: (message) => dispatch(infoNotification(message)),
+      successfulNotification: (message) => dispatch(successfulNotification(message)),
+      errorNotification: (message) => dispatch(errorNotification(message))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NavMenu)

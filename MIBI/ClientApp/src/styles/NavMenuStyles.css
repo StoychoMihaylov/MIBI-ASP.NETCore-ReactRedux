@@ -22,3 +22,7 @@ html {
   width: 130px;
 }
 
+.logoutBtn:hover {
+  cursor: pointer;
+}
+

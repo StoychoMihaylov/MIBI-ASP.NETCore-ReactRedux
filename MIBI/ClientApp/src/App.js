@@ -17,8 +17,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 export default () => (
     <Layout>
-        <Route exact path='/account/login' component={LoginAccount} />
-        <Route exact path='/account/registration' component={RegisterAccount} />
+        {
+            localStorage.getItem('token') === null
+            ? <Route exact path='/account/login' component={LoginAccount} />
+            : null
+        }
+        {
+            localStorage.getItem('token') === null
+            ? <Route exact path='/account/registration' component={RegisterAccount} />
+            : null
+        }
         <PrivateRoute exact path='/' component={SearchSampleView} />
         <PrivateRoute exact path='/addSample' component={CreateNewSample} />
         <PrivateRoute exact path='/sample/:id' component={DetailedSample} />

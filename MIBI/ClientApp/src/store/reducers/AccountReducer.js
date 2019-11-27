@@ -22,6 +22,21 @@ const AccountReducer = (state, action) => {
     state = state || initialState
 
     switch (action.type) {
+        case REQUEST_ACCOUNT_LOGOUT:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case REQUEST_ACCOUNT_LOGOUT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+            }
+        case REQUEST_ACCOUNT_LOGOUT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
         case REQUEST_ACCOUNT_LOGIN:
             return {
                 ...state,

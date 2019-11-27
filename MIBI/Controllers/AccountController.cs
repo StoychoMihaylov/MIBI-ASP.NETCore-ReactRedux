@@ -1,5 +1,6 @@
 ﻿namespace MIBI.Controllers
 {
+    using System;
     using Microsoft.AspNetCore.Mvc;
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels.Account;
@@ -44,7 +45,7 @@
         // api/account/login
         [HttpPost]
         [Route("login")]
-        public IActionResult Login(LoginUserBindingModel bm)
+        public IActionResult Login([FromBody] LoginUserBindingModel bm)
         {
             if (!ModelState.IsValid)
             {
@@ -59,6 +60,22 @@
             }
 
             return Ok(userCredentials);
+        }
+
+        [HttpPost]
+        [Route("logout")]
+        public IActionResult Logout([FromBody] LogoutBindingModel bm)
+        {
+            try
+            {
+                this.service.DeleteUserToken(bm);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+            
+            return Ok();
         }
     }
 }
