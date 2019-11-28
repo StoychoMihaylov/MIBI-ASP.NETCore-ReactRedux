@@ -7,7 +7,7 @@
 
     public interface ISampleService
     {
-        void CreateNewSample(NewSampleBidingModel newSample);
+        void CreateNewSample(NewSampleBidingModel newSample, User currentUser);
         List<SampleViewModel> GetAllSamplesByGivenSearchParams(SearchParametersBindingModel searchParams);
         Sample GetSampleById(string id);
     }

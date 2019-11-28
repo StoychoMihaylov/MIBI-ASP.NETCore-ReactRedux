@@ -9,7 +9,8 @@
     using MIBI.Services.Interfaces;  
     using MIBI.Models.ViewModels.Account;
     using MIBI.Models.BindingModels.Account;
-   
+    using Microsoft.EntityFrameworkCore;
+
     public class AccountService : Service, IAccountService
     {
         public AccountService(IMIBIContext context)
@@ -163,6 +164,23 @@
 
             this.Context.Tokens.Remove(token);
             this.Context.SaveChanges();
+        }
+
+        public User RetrieveCurrentUser(string token)
+        {
+            try
+            {
+                return this.Context
+                    .Users
+                        .Include(u => u.Tokens)
+                    .Where(user => user.Tokens.All(t => t.Value == token))
+                    .First();
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
     }
 }

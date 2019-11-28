@@ -67,6 +67,8 @@ class LoginAccount extends Component {
                     let credentials = response.data
                     localStorage.setItem('token', credentials.token)
                     localStorage.setItem('userId', credentials.userId)
+                    localStorage.setItem('userName', credentials.name)
+
                     this.props.successfulNotification("Loged in!")
                     this.props.history.push("/")
                 } else {
@@ -108,7 +110,7 @@ class LoginAccount extends Component {
                 <button
                     type="button"
                     className="saveBtn"
-                    onClick={this.handleSubmit.bind(this)}>Log in</button>
+                    onClick={this.handleSubmit.bind(this)}>&nbsp;Log in&nbsp;</button>
                 <Route
                     render={({ history }) => (
                     <button

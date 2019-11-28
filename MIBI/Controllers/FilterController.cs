@@ -4,10 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Collections.Generic;
+    using MIBI.Utilities;
     using Microsoft.AspNetCore.Mvc;
-    using MIBI.Services.Interfaces;  
+    using MIBI.Services.Interfaces;
 
     [Route("api/filter")]
+    [Authorize]
     [ApiController]
     public class FilterController : Controller
     {

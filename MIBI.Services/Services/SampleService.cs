@@ -21,7 +21,7 @@
             this.mapper = mapper;
         }
 
-        public void CreateNewSample(NewSampleBidingModel newSampleData)
+        public void CreateNewSample(NewSampleBidingModel newSampleData, User currentUser)
         {
             List<SampleGroup> sampleGroups = CrateSampleGroupsByGroupName(newSampleData.Groups.Split(','));
             List<SampleTag> sampleTags = CreateSampleTagsByTagName(newSampleData.Tags.Split(','));
@@ -34,7 +34,7 @@
                 Name = newSampleData.Name,
                 Description = newSampleData.Description,
                 CreatedOn = DateTime.Now,
-                CreatedBy = "Bai Pesho",
+                CreatedBy = $"{currentUser.Name}({currentUser.Email})",
                 SampleGroups = sampleGroups,
                 SampleTags = sampleTags,
                 SampleNutrientAgarPlates = sampleNutrientAgarPlates,

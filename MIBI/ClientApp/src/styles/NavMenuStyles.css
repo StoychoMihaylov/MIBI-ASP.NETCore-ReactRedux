@@ -26,3 +26,6 @@ html {
   cursor: pointer;
 }
 
+.cursorPointer:hover {
+  cursor: pointer;
+}

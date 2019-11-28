@@ -2,6 +2,7 @@
 {
     using System;
     using Microsoft.AspNetCore.Mvc;
+    using MIBI.Utilities;
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels.Account;
 
@@ -63,6 +64,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         [Route("logout")]
         public IActionResult Logout([FromBody] LogoutBindingModel bm)
         {

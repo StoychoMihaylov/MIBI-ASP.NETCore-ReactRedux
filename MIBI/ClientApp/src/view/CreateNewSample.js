@@ -49,7 +49,7 @@ class CreateNewSample extends Component {
 
   handleImages(images) {
     let imgs = Array.from(images.target.files)
-    let previewImages = [];
+    let previewImages = this.state.images;
 
     for (var i = 0; i < imgs.length; i++) {
         if (imgs[i].type === "image/jpeg") {
