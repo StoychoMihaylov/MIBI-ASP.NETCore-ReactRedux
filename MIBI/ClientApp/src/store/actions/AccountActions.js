@@ -17,7 +17,11 @@ import axios from 'axios'
 export function logoutAccount(userModel) {
     return dispatch => {
         dispatch(requestLogoutAccount())
-        return axios.post(api + 'api/account/logout', userModel)
+        return axios.post(api + 'api/account/logout', userModel, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(response => {
             dispatch(requestLogoutAccountSuccess(response))
             return response

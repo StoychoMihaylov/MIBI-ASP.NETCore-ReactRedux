@@ -87,6 +87,7 @@ class RegisterAccount extends Component {
                     let credentials = response.data
                     localStorage.setItem('token', credentials.token)
                     localStorage.setItem('userId', credentials.userId)
+                    localStorage.setItem('userName', credentials.name)
 
                     this.props.successfulNotification("You are succesfully registered!")
                     this.props.history.push("/")

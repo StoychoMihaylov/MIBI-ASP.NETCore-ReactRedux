@@ -19,7 +19,11 @@ var qs = require('qs');
 export function fetchDetailedSampleById(id) {
     return function (dispatch) {
         dispatch(fetchSampleById())
-        axios.get(api + 'api/sample/' + id)
+        axios.get(api + 'api/sample/' + id, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(response => {
             console.log(response)
             dispatch(fetchSampleByIdSuccess(response["data"]))
@@ -56,7 +60,11 @@ export function fetchSampleByIdFail(error) {
 export function addNewSampleInTheServer(imgFormdata) {
     return dispatch => {
         dispatch(createSample()) // Dispatch createNewSample
-        return axios.post(api + 'api/sample', imgFormdata)
+        return axios.post(api + 'api/sample', imgFormdata, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(result => {
             dispatch(createSampleSuccess()) // Dispatch Successful created sample
             return result
@@ -96,6 +104,9 @@ export function fetchSamplesByGivenSearchParameters(bateriaParams) {
         dispatch(fetchSamples())
         axios.get(api + 'api/samples', {
             params: bateriaParams,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
             paramsSerializer: function(params) {
                 return qs.stringify(params, {arrayFormat: 'repeat'})
             }

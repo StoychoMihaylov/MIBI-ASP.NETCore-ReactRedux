@@ -20,7 +20,11 @@ import axios from 'axios'
 export function getAllNamesOfExistingSamples() {
     return function (dispatch) {
         dispatch(getAllExistingNamesOfSamples()) // Dispatch get all ezisting names of samples
-        axios.get(api + 'api/filter/names')
+        axios.get(api + 'api/filter/names', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(response => {
             dispatch(getAllExistingNamesOfSamplesSuccess(response["data"])) // Dispatch Successful request
         })
@@ -56,7 +60,11 @@ export function getAllExistingNamesOfSamplesFail(error) {
 export function getAllExistingTagsFromServer() {
     return function (dispatch) {
         dispatch(getAllExistingTags()) // Dispatch get all ezisting names of samples
-        axios.get(api + 'api/filter/tags')
+        axios.get(api + 'api/filter/tags', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(response => {
             dispatch(getAllExistingTagsSuccess(response["data"])) // Dispatch Successful request
         })
@@ -92,7 +100,11 @@ export function getAllExistingTagsFail(error) {
 export function getAllExistingGroupsFromServer() {
     return function (dispatch) {
         dispatch(getAllExistingGroups()) // Dispatch get all ezisting names of samples
-        axios.get(api + 'api/filter/groups')
+        axios.get(api + 'api/filter/groups', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(response => {
             dispatch(getAllExistingGroupsSuccess(response["data"])) // Dispatch Successful request
         })
@@ -128,7 +140,11 @@ export function getAllExistingGroupsFail(error) {
 export function fetchAllExistingNutrientAgarPlates() {
     return function (dispatch) {
         dispatch(getAllExistingNutrientAgarPlates()) // Dispatch get all ezisting names of samples
-        axios.get(api + 'api/filter/nutrientAgarPlates')
+        axios.get(api + 'api/filter/nutrientAgarPlates', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(response => {
             dispatch(getAllExistingNutrientAgarPlatesSuccess(response["data"])) // Dispatch Successful request
         })

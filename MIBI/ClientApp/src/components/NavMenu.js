@@ -62,6 +62,12 @@ class NavMenu extends React.Component {
                     <NavItem>
                       <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
                     </NavItem>
+                    <NavItem><NavLink></NavLink></NavItem>
+                    <NavItem><NavLink></NavLink></NavItem>
+                    <NavItem><NavLink></NavLink></NavItem>
+                    <NavItem className="cursorPointer">
+                      <NavLink className="text-dark">Hello {localStorage.getItem("userName")}!</NavLink>
+                    </NavItem>
                     <NavItem>
                       <NavLink className="logoutBtn" onClick={this.logoutUser.bind(this)}>LogOut</NavLink>
                     </NavItem>

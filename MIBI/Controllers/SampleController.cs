@@ -8,28 +8,31 @@
     using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Hosting;
+    using MIBI.Utilities;
     using MIBI.Models.ViewModels;
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels;
     using MIBI.Models.BindingModels.Sample;
 
-
     [Route("api")]
+    [Authorize]
     [ApiController]
     public class SampleController : Controller
     {
         private ISampleService service;
         private IHostingEnvironment env;
+        private UserManager userManager;
 
-        public SampleController(ISampleService service, IHostingEnvironment env)
+        public SampleController(ISampleService service, IHostingEnvironment env, IAccountService accountService)
         {
             this.service = service;
+            this.userManager = new UserManager(accountService);
             this.env = env;
         }
 
         [HttpGet]
         [Route("sample/{id}")]
-        public IActionResult Get(string id)
+        public IActionResult GetSampleById(string id)
         {
             if (id == null || id == "")
             {
@@ -48,7 +51,7 @@
 
         [HttpGet]
         [Route("samples")]
-        public IActionResult GetList(SearchParametersBindingModel searchParams)
+        public IActionResult GetListOfSamples(SearchParametersBindingModel searchParams)
         {
             if (searchParams.BacteriaName == null &&
                 searchParams.Tags == null && 
@@ -65,7 +68,7 @@
 
         [HttpPost]
         [Route("sample")]
-        public async Task<IActionResult> Post(
+        public async Task<IActionResult> CreateNewSample(
             [FromForm] string name,
             [FromForm] string description,
             [FromForm] string groups,
@@ -82,6 +85,8 @@
             {
                 return BadRequest("Please field up at least one image! All fields are requered!");
             }
+
+            var user = this.userManager.CurrentUser(this.Request.Headers["Authorization"]);
 
             var newSample = new NewSampleBidingModel()
             {
@@ -104,7 +109,7 @@
 
             try
             {
-                this.service.CreateNewSample(newSample);
+                this.service.CreateNewSample(newSample, user);
             }
             catch (Exception ex)
             {
