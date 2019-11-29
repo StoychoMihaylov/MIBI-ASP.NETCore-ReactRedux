@@ -166,19 +166,22 @@
             this.Context.SaveChanges();
         }
 
-        public User RetrieveCurrentUser(string token)
+        public User RetrieveCurrentUser(string tokenString)
         {
+            var token = tokenString.Split(' ')[1];
+
             try
             {
-                return this.Context
-                    .Users
-                        .Include(u => u.Tokens)
-                    .Where(user => user.Tokens.All(t => t.Value == token))
+                var tokenWithUser = this.Context
+                    .Tokens
+                        .Include(t => t.User)
+                    .Where(t => t.Value == token)
                     .First();
-            }
-            catch (Exception)
-            {
 
+                return tokenWithUser.User;
+            }
+            catch (Exception ex)
+            {
                 return null;
             }
         }
