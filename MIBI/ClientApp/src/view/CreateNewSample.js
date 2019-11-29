@@ -48,13 +48,15 @@ class CreateNewSample extends Component {
   }
 
   handleImages(images) {
-    let imgs = Array.from(images.target.files)
+    let fileImgs = Array.from(this.state.files)
+    let targetImg = Array.from(images.target.files)
+    let imgs = fileImgs.concat(targetImg)
     let previewImages = this.state.images;
 
-    for (var i = 0; i < imgs.length; i++) {
-        if (imgs[i].type === "image/jpeg") {
+    for (var i = 0; i < targetImg.length; i++) {
+        if (targetImg[i].type === "image/jpeg") {
           let newImg = {
-            url: URL.createObjectURL(imgs[i])
+            url: URL.createObjectURL(targetImg[i])
           };
 
           previewImages.push(newImg)
