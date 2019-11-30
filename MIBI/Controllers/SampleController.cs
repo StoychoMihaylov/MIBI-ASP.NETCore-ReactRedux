@@ -21,12 +21,12 @@
     {
         private ISampleService service;
         private IHostingEnvironment env;
-        private UserManager userManager;
+        private IAccountService accountService;
 
         public SampleController(ISampleService service, IHostingEnvironment env, IAccountService accountService)
         {
             this.service = service;
-            this.userManager = new UserManager(accountService);
+            this.accountService = accountService;
             this.env = env;
         }
 
@@ -86,7 +86,8 @@
                 return BadRequest("Please field up at least one image! All fields are requered!");
             }
 
-            var user = this.userManager.CurrentUser(this.Request.Headers["Authorization"]);
+            var user = this.accountService
+                .RetrieveCurrentUser(this.Request.Headers["Authorization"]);
 
             var newSample = new NewSampleBidingModel()
             {
