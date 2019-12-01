@@ -31,6 +31,12 @@
                 }
             };
 
+            User logedInUser = new User()
+            {
+                Name = "Test User",
+                Email = "testUser@test.test"
+            };
+
             var tag1 = new Tag() { Name = "tag1" };
             var group = new Group() { Name = "group1" };
             var nutrint = new NutrientAgarPlate() { Name = "nutrient1" };
@@ -43,7 +49,7 @@
             var service = new SampleService(db, null);
 
             // Act
-            service.CreateNewSample(newSampleData);
+            service.CreateNewSample(newSampleData, logedInUser);
             var cretedNewSample = db.Samples.First();
 
             // Assert

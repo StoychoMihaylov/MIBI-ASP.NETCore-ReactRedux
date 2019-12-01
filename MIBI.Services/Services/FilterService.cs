@@ -6,6 +6,7 @@
     using MIBI.Data.Interfaces;
     using MIBI.Services.Interfaces;
     using MIBI.Models.ViewModels.AutocompleateSuggestions;
+    using AutoMapper.QueryableExtensions;
 
     public class FilterService : Service, IAutocompleteService
     {
