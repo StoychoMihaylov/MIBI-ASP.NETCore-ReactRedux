@@ -31,10 +31,10 @@
                 .Setup(s => s.GetSampleById(sampleId))
                 .Returns(sample);
 
-            var controller = new SampleController(serviceMock.Object, null);
+            var controller = new SampleController(serviceMock.Object, null, null);
 
             // Act
-            var response = controller.Get(sampleId);
+            var response = controller.GetSampleById(sampleId);
 
             // Assert
             Assert.NotNull(response);
@@ -83,10 +83,10 @@
                 .Setup(s => s.GetAllSamplesByGivenSearchParams(searchParams))
                 .Returns(listOfsamples);
 
-            var controller = new SampleController(serviceMock.Object, null);
+            var controller = new SampleController(serviceMock.Object, null, null);
 
             // Act
-            var response = controller.GetList(searchParams);
+            var response = controller.GetListOfSamples(searchParams);
 
             // Assert
             Assert.NotNull(response);
