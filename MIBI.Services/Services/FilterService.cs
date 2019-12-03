@@ -3,10 +3,10 @@
     using System.Linq;
     using AutoMapper;
     using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
     using MIBI.Data.Interfaces;
     using MIBI.Services.Interfaces;
     using MIBI.Models.ViewModels.AutocompleateSuggestions;
-    using AutoMapper.QueryableExtensions;
 
     public class FilterService : Service, IAutocompleteService
     {
@@ -22,6 +22,7 @@
         {
             var groups = this.Context
                 .Groups
+                .AsNoTracking()
                 .ToList();
 
             return this.mapper.Map<List<GroupViewModel>>(groups);
@@ -31,6 +32,7 @@
         {
             var samples = this.Context
                 .Samples
+                .AsNoTracking()
                 .ToList();
 
             return this.mapper.Map<List<AutocompleteBacteriaNamesViewModel>>(samples);
@@ -40,6 +42,7 @@
         {
             var tags = this.Context
                 .Tags
+                .AsNoTracking()
                 .ToList();
 
             return this.mapper.Map<List<TagViewModel>>(tags);
@@ -49,6 +52,7 @@
         {
             var nutrientAgarPlates = this.Context
                 .NutrientAgarPlates
+                .AsNoTracking()
                 .ToList();
 
             return this.mapper.Map<List<NutrientAgarPlateViewModel>>(nutrientAgarPlates);
