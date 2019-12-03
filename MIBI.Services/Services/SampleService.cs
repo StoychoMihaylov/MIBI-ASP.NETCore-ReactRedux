@@ -142,6 +142,7 @@
             {
                 var samplesFromDB = this.Context
                     .Samples
+                    .AsNoTracking()
                     .Include(s => s.Images)
                     .Include(s => s.SampleTags)
                         .ThenInclude(st => st.Tag)
@@ -205,7 +206,9 @@
 
         public Sample GetSampleById(string id)
         {
-            var sample = this.Context.Samples
+            var sample = this.Context
+                .Samples
+                .AsNoTracking()
                 .Include(s => s.Images)
                 .Include(s => s.SampleTags)
                     .ThenInclude(st => st.Tag)
@@ -215,28 +218,6 @@
                     .ThenInclude(sn => sn.NutrientAgarPlate)
                 .Where(s => s.Id == new Guid(id))
                 .First();
-
-
-            // Delete thr reference loop
-            foreach (var img in sample.Images)
-            {
-                img.Sample = null;
-            }
-            foreach (var sg in sample.SampleGroups)
-            {
-                sg.Group.SampleGroups = null;
-                sg.Sample = null;
-            }
-            foreach (var st in sample.SampleTags)
-            {
-                st.Tag.SampleTags = null;
-                st.Sample = null;
-            }
-            foreach (var sn in sample.SampleNutrientAgarPlates)
-            {
-                sn.NutrientAgarPlate.SampleNutrientAgarPlates = null;
-                sn.Sample = null;
-            }
 
             return sample;
         }
