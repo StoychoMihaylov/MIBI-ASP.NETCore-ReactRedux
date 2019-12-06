@@ -10,5 +10,6 @@
         AccountCredentialsViewModel LoginUser(LoginUserBindingModel bm);
         void DeleteUserToken(LogoutBindingModel bm);
         User RetrieveCurrentUser(string token);
+        bool CheckIfUserExist(RegisterUserBindingModel bm);
     }
 }

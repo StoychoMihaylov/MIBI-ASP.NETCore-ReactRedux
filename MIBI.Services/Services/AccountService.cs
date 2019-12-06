@@ -185,5 +185,22 @@
                 return null;
             }
         }
+
+        public bool CheckIfUserExist(RegisterUserBindingModel bm)
+        {
+            try
+            {
+                this.Context
+                    .Users
+                    .Where(user => user.Email == bm.Email)
+                    .First();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

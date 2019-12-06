@@ -91,6 +91,8 @@ class RegisterAccount extends Component {
 
                     this.props.successfulNotification("You are succesfully registered!")
                     this.props.history.push("/")
+                } else if (response.response.status === 400) {
+                    this.props.errorNotification(response.response.data)
                 } else {
                     this.props.errorNotification("Something went wrong. Pleas try again")
                 }
