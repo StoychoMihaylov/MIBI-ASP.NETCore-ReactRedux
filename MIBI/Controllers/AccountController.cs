@@ -32,7 +32,13 @@
                 return BadRequest("Invalid credentials!");
             }
 
-            var userCredentials = this.service.CreateNewUserAccount(bm);
+            var userAlreadyExist = this.service.CheckIfUserExist(bm);
+            if (userAlreadyExist)
+            {
+                return BadRequest("User with this email already exist!");
+            }
+
+            var userCredentials = this.service.CreateNewUserAccount(bm); // User created, will return token(loged-in automaticaly)
 
             if (userCredentials == null)
             {
