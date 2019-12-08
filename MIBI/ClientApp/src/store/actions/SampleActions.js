@@ -26,7 +26,7 @@ export function fetchDetailedSampleById(id) {
         })
         .then(response => {
             console.log(response)
-            dispatch(fetchSampleByIdSuccess(response["data"]))
+            dispatch(fetchSampleByIdSuccess(response.data.result))
         })
         .catch(err => {
             console.log(err)

@@ -561,7 +561,7 @@ class SearchSampleView extends Component {
             {
                 this.props.samples.length != undefined && this.props.samples.length > 20
                 ?
-                <div>
+                <div className="paginNavigation">
                     <button className="paginButton" onClick={this.showPriviousPage.bind(this)} disabled={this.state.page == 0}>&#60;</button>
                     <span>{ this.state.page + 1} / {Math.floor(this.props.samples.length / 20)}</span>
                     <button className="paginButton" onClick={this.showNextPage.bind(this)} disabled={this.state.page == Math.floor(this.props.samples.length / 20) - 1}>&#62;</button>
