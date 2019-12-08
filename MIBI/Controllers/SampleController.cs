@@ -32,14 +32,14 @@
 
         [HttpGet]
         [Route("sample/{id}")]
-        public IActionResult GetSampleById(string id)
+        public async Task<IActionResult> GetSampleById(string id)
         {
             if (id == null || id == "")
             {
                 return BadRequest("Please provide sample id.");
             }
 
-            var sample = this.service.GetSampleById(id);
+            var sample = await this.service.GetSampleById(id);
 
             if (sample == null)
             {
