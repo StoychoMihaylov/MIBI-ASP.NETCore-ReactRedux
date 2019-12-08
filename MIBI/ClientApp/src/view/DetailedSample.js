@@ -23,6 +23,9 @@ class SampleDetails extends Component {
     }
 
     render() {
+        console.log("dsdsdsdsdsds")
+        console.log(this.props.detailedSample)
+        console.log("dsdsdsdsdsds")
         return(
             <div>
                 {
@@ -33,7 +36,7 @@ class SampleDetails extends Component {
                         <hr></hr>
                         <div className="detaildSampleImgsContainer">
                             {
-                                this.props.detailedSample.sampleTags != undefined
+                                this.props.detailedSample.tags != undefined
                                 ?
                                 this.props.detailedSample.images.map((img, index) => {
                                     return (
@@ -56,9 +59,9 @@ class SampleDetails extends Component {
                         <hr></hr>
                         <h3>Group:
                             {
-                                this.props.detailedSample.sampleGroups != undefined
+                                this.props.detailedSample.groups != undefined
                                 ?
-                                <span className="sampleGroup">{this.props.detailedSample.sampleGroups[0].group.name}</span>
+                                <span className="sampleGroup">{this.props.detailedSample.groups[0].name}</span>
                                 :
                                 null
                             }
@@ -69,12 +72,12 @@ class SampleDetails extends Component {
                             <h3>Nutrient Agar Plates:</h3>
                             <div className="sampleNutrientAgarPlatesContainer">
                                 {
-                                    this.props.detailedSample.sampleNutrientAgarPlates != undefined
+                                    this.props.detailedSample.nutrientAgarPlates != undefined
                                     ?
-                                    this.props.detailedSample.sampleNutrientAgarPlates.map((nutrientObj, index) => {
+                                    this.props.detailedSample.nutrientAgarPlates.map((nutrientAgarPlate, index) => {
                                         return (
                                         <button key={index} className="nutrients">
-                                            {nutrientObj.nutrientAgarPlate.name}
+                                            {nutrientAgarPlate.name}
                                         </button>
                                         )
                                     })
@@ -91,14 +94,14 @@ class SampleDetails extends Component {
                                 <div>
                                     <h4>Elevations</h4>
                                     {
-                                        this.props.detailedSample.sampleTags != undefined
+                                        this.props.detailedSample.tags != undefined
                                         ?
-                                        this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                            if (tagObj.tag.category === "Elevations") {
+                                        this.props.detailedSample.tags.map((tag, index) => {
+                                            if (tag.category === "Elevations") {
                                                 return (
                                                 <button key={index} className="tags">
-                                                    {tagObj.tag.name}
-                                                    <img src={require('../content/tagIcons/' + tagObj.tag.iconUrl)} className="tagIcon"/>
+                                                    {tag.name}
+                                                    <img src={require('../content/tagIcons/' + tag.iconUrl)} className="tagIcon"/>
                                                 </button>
                                                 )
                                             }
@@ -111,14 +114,14 @@ class SampleDetails extends Component {
                                 <div>
                                     <h4>Form</h4>
                                     {
-                                        this.props.detailedSample.sampleTags != undefined
+                                        this.props.detailedSample.tags != undefined
                                         ?
-                                        this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                            if (tagObj.tag.category === "Form") {
+                                        this.props.detailedSample.tags.map((tag, index) => {
+                                            if (tag.category === "Form") {
                                                 return (
                                                 <button key={index} className="tags">
-                                                    {tagObj.tag.name}
-                                                    <img src={require('../content/tagIcons/' + tagObj.tag.iconUrl)} className="tagIcon"/>
+                                                    {tag.tag.name}
+                                                    <img src={require('../content/tagIcons/' + tag.iconUrl)} className="tagIcon"/>
                                                 </button>
                                                 )
                                             }
@@ -131,13 +134,13 @@ class SampleDetails extends Component {
                                 <div>
                                     <h4>Surface appearance</h4>
                                     {
-                                        this.props.detailedSample.sampleTags != undefined
+                                        this.props.detailedSample.tags != undefined
                                         ?
-                                        this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                            if (tagObj.tag.category === "Surface appearance") {
+                                        this.props.detailedSample.tags.map((tag, index) => {
+                                            if (tag.category === "Surface appearance") {
                                                 return (
                                                 <button key={index} className="tags">
-                                                    {tagObj.tag.name}
+                                                    {tag.name}
                                                 </button>
                                                 )
                                             }
@@ -150,13 +153,13 @@ class SampleDetails extends Component {
                                 <div>
                                     <h4>Consistency</h4>
                                     {
-                                        this.props.detailedSample.sampleTags != undefined
+                                        this.props.detailedSample.tags != undefined
                                         ?
-                                        this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                            if (tagObj.tag.category === "Consistency") {
+                                        this.props.detailedSample.tags.map((tag, index) => {
+                                            if (tag.category === "Consistency") {
                                                 return (
                                                     <button key={index} className="tags">
-                                                        {tagObj.tag.name}
+                                                        {tag.tag.name}
                                                     </button>
                                                 )
                                             }
@@ -169,14 +172,14 @@ class SampleDetails extends Component {
                                 <div>
                                     <h4>Colors</h4>
                                     {
-                                        this.props.detailedSample.sampleTags != undefined
+                                        this.props.detailedSample.tags != undefined
                                         ?
-                                        this.props.detailedSample.sampleTags.map((tagObj, index) => {
-                                            if (tagObj.tag.category === "Colors") {
+                                        this.props.detailedSample.tags.map((tag, index) => {
+                                            if (tag.category === "Colors") {
                                                 return (
                                                     <button key={index} className="tags">
-                                                        {tagObj.tag.name}
-                                                        <span className="tagColor" style={{backgroundColor: tagObj.tag.color}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                                        {tag.name}
+                                                        <span className="tagColor" style={{backgroundColor: tag.color}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                     </button>
                                                 )
                                             }

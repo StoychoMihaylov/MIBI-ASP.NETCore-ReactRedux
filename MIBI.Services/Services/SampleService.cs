@@ -10,6 +10,8 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.ViewModels.Sample;
     using MIBI.Models.BindingModels.Sample;
+    using System.Threading.Tasks;
+    using static System.Net.Mime.MediaTypeNames;
 
     public class SampleService : Service, ISampleService
     {
@@ -206,22 +208,65 @@
             return samples;
         }
 
-        public Sample GetSampleById(string id)
+        public async Task<DetailedSampleViewModel> GetSampleById(string id)
         {
             var sample = this.Context
                 .Samples
                 .AsNoTracking()
-                .Include(s => s.Images)
-                .Include(s => s.SampleTags)
-                    .ThenInclude(st => st.Tag)
-                .Include(s => s.SampleGroups)
-                    .ThenInclude(sg => sg.Group)
-                .Include(s => s.SampleNutrientAgarPlates)
-                    .ThenInclude(sn => sn.NutrientAgarPlate)
-                .Where(s => s.Id == new Guid(id))
-                .First();
+                .Select(samp => new Sample {
+                    Id = samp.Id,
+                    Name = samp.Name,
+                    Description = samp.Description,
+                    CreatedOn = samp.CreatedOn,
+                    CreatedBy = samp.CreatedBy,
+                })
+                .First(samp => samp.Id == new Guid(id));
 
-            return sample;
+            var tags = this.Context
+                .SampleTags
+                .AsNoTracking()
+                .Where(t => t.SampleId == new Guid(id))
+                .Select(t => t.Tag)
+                .ToList();
+
+            var groups = this.Context
+                .SampleGroups
+                .AsNoTracking()
+                .Where(t => t.SampleId == new Guid(id))
+                .Select(t => t.Group)
+                .ToList();
+
+            var nutrients = this.Context
+                .SampleNutrientAgarPlates
+                .AsNoTracking()
+                .Where(t => t.SampleId == new Guid(id))
+                .Select(t => t.NutrientAgarPlate)
+                .ToList();
+
+            var images = this.Context
+                .Images
+                .AsNoTracking()
+                .Where(img => img.SampleId == new Guid(id))
+                .Select(img => new SampleImage()
+                {
+                    Id = img.Id,
+                    Url = img.Url,
+                })
+                .ToList();
+
+            var sampleViewModel = new DetailedSampleViewModel();
+
+            sampleViewModel.Id = sample.Id;
+            sampleViewModel.Name = sample.Name;
+            sampleViewModel.Description = sample.Description;
+            sampleViewModel.CreatedOn = sample.CreatedOn;
+            sampleViewModel.CreatedBy = sample.CreatedBy;
+            sampleViewModel.Tags = tags;
+            sampleViewModel.Groups = groups;
+            sampleViewModel.NutrientAgarPlates = nutrients;
+            sampleViewModel.Images = images;
+
+            return sampleViewModel;
         }
     }
 }
