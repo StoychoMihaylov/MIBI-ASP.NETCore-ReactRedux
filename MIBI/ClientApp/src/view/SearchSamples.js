@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router'
+import LoadingSpinner from '../components/LoadingSpinner'
 import {
     fetchSamplesByGivenSearchParameters,
 } from '../store/actions/SampleActions'
@@ -17,6 +18,7 @@ class SearchSampleView extends Component {
         super(props)
 
         this.state = {
+            page: 0,
             showHideOptionSetOfNames: false,
             searchSampleName: "",
             optionSetNames: [],
@@ -70,13 +72,13 @@ class SearchSampleView extends Component {
         // filter the option set values
         if(value.length > 0) {
             this.props.autocompleteNamesOfSamples.forEach(opt => {
-                if(opt.name.toLowerCase().includes(value.toLowerCase())) {
+                if(opt.name.toLowerCase().startsWith(value.toLowerCase())) {
                     newOptSet.push(opt)
                 }
             })
 
             this.setState({
-                optionSetNames: newOptSet,
+                optionSetNames: newOptSet.slice(0, 20),
                 showHideOptionSetOfNames: true
             })
         } else {
@@ -274,8 +276,20 @@ class SearchSampleView extends Component {
         }
     }
 
+    showPriviousPage() {
+        this.setState({
+            page: this.state.page - 1
+        })
+    }
+
+    showNextPage() {
+        this.setState({
+            page: this.state.page + 1
+        })
+    }
+
     render() {
-        let samples = this.props.samples.map((sample, index) => (
+        let samples = this.props.samples.slice(this.state.page * 20, (this.state.page + 1) * 20).map((sample, index) => (
             <Route render={({ history }) => (
                 <div key={index} id={sample.id} className="sampleResult" onClick={() => history.push('/sample/' + sample.id)}>
                     <div className="sampleTitle"><div className="title">{sample.name}</div></div>
@@ -413,7 +427,6 @@ class SearchSampleView extends Component {
                 {grop.name}
             </button>
         ))
-
     return(
         <div className="conteiner">
             <div className="searchingBar">
@@ -535,7 +548,28 @@ class SearchSampleView extends Component {
                     }
                 </div>
             </div>
-            { samples }
+            {
+                this.props.isLoading === true
+                ?
+                <LoadingSpinner />
+                :
+                samples
+            }
+            <br/>
+            <br/>
+            <div>
+            {
+                this.props.samples.length != undefined && this.props.samples.length > 20
+                ?
+                <div>
+                    <button className="paginButton" onClick={this.showPriviousPage.bind(this)} disabled={this.state.page == 0}>&#60;</button>
+                    <span>{ this.state.page + 1} / {Math.floor(this.props.samples.length / 20)}</span>
+                    <button className="paginButton" onClick={this.showNextPage.bind(this)} disabled={this.state.page == Math.floor(this.props.samples.length / 20) - 1}>&#62;</button>
+                </div>
+                :
+                null
+            }
+            </div>
         </div>
         )
     }

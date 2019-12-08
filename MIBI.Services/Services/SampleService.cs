@@ -133,7 +133,8 @@
                 samples = this.Context
                     .Samples
                     .Include(s => s.Images)
-                    .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
+                    .Where(sample => sample.Name.StartsWith(searchParams.BacteriaName))
+                    .Take(100)
                     .ToList();
 
             } // Searching by Name plus any other provided search params
@@ -150,7 +151,8 @@
                         .ThenInclude(sg => sg.Group)
                     .Include(s => s.SampleNutrientAgarPlates)
                         .ThenInclude(sn => sn.NutrientAgarPlate)
-                    .Where(sample => sample.Name.Contains(searchParams.BacteriaName))
+                    .Where(sample => sample.Name.StartsWith(searchParams.BacteriaName))
+                    .Take(100)
                     .ToList();
 
                 // Filtering the samples containing certan name by any other given search param
