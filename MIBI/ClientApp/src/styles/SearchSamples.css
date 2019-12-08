@@ -313,8 +313,16 @@
     width: 300px;
 }
 
-.paginButton{
+.paginButton {
     background-color: transparent;
     border: transparent;
+    border-radius: 5px;
+}
+
+.paginNavigation {
     font-size: large;
+    background-color: rgb(102, 178, 255);
+    border-radius: 5px;
+    display: inline-block;
+    padding: 3px;
 }
