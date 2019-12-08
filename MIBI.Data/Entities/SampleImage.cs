@@ -9,9 +9,6 @@
 
         public string Url { get; set; }
 
-        [ForeignKey("SampleId")]
-        public Sample Sample { get; set; }
-
         public Guid SampleId { get; set; }
     }
 }

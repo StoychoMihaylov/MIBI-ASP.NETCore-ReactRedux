@@ -312,3 +312,9 @@
 .pageLogo {
     width: 300px;
 }
+
+.paginButton{
+    background-color: transparent;
+    border: transparent;
+    font-size: large;
+}
