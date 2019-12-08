@@ -120,7 +120,7 @@ class SampleDetails extends Component {
                                             if (tag.category === "Form") {
                                                 return (
                                                 <button key={index} className="tags">
-                                                    {tag.tag.name}
+                                                    {tag.name}
                                                     <img src={require('../content/tagIcons/' + tag.iconUrl)} className="tagIcon"/>
                                                 </button>
                                                 )
@@ -159,7 +159,7 @@ class SampleDetails extends Component {
                                             if (tag.category === "Consistency") {
                                                 return (
                                                     <button key={index} className="tags">
-                                                        {tag.tag.name}
+                                                        {tag.name}
                                                     </button>
                                                 )
                                             }

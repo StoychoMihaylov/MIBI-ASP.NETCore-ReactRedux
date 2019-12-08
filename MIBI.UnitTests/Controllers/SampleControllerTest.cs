@@ -11,16 +11,17 @@
     using System.Collections.Generic;
     using MIBI.Models.ViewModels.Sample;
     using MIBI.Models.BindingModels.Sample;
+    using System.Threading.Tasks;
 
     public class SampleControllerTest
     {
         [Fact]
-        public void Get_SampleById_ShouldReturnSample()
+        public async Task Get_SampleById_ShouldReturnSample()
         {
             // Arrange
             var sampleId = "12354321-3123-1122-4332-123456789231";
 
-            var sample = new Sample()
+            var sample = new DetailedSampleViewModel()
             {
                 Id = new Guid(sampleId),
                 Name = "Test 1"
@@ -29,18 +30,18 @@
             var serviceMock = new Mock<ISampleService>(); // Using Moq to mock the service
             serviceMock
                 .Setup(s => s.GetSampleById(sampleId))
-                .Returns(sample);
+                .ReturnsAsync(sample);
 
             var controller = new SampleController(serviceMock.Object, null, null);
 
             // Act
-            var response = controller.GetSampleById(sampleId);
+            var response = await controller.GetSampleById(sampleId);
 
             // Assert
             Assert.NotNull(response);
             var okObjectResult = response as OkObjectResult;
             Assert.NotNull(okObjectResult);
-            var model = okObjectResult.Value as Sample;
+            var model = okObjectResult.Value as DetailedSampleViewModel;
             Assert.NotNull(model);
             var modelId = model.Id;
             Assert.Equal(new Guid(sampleId), modelId);
