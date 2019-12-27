@@ -8,6 +8,7 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.ViewModels.Account;
     using MIBI.Models.BindingModels.Account;
+    using LoggerAPI.Interfaces;
 
     public class AccountControllerTest
     {
@@ -35,7 +36,9 @@
                 .Setup(s => s.CreateNewUserAccount(bidingModel))
                 .Returns(userCredentials);
 
-            var controller = new AccountController(serviceMock.Object);
+            var loggerMock = new Mock<ILogger>();
+
+            var controller = new AccountController(serviceMock.Object, loggerMock.Object);
 
             // Act
             var response = controller.RegisterAndLogin(bidingModel);

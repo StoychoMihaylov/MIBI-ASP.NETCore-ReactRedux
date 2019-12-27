@@ -4,11 +4,12 @@
     using Xunit;
     using System;
     using System.Linq;
-    using MIBI.Controllers;
-    using MIBI.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using MIBI.Controllers;
+    using MIBI.Services.Interfaces;
     using MIBI.Models.ViewModels.AutocompleateSuggestions;
+    using LoggerAPI.Interfaces;
 
     public class AutocompleteControllerTest
     {
@@ -34,7 +35,9 @@
                 .Setup(s => s.GetAllNamesOfSamples())
                 .Returns(listOfBacteriaNamesVm);
 
-            var controller = new FilterController(serviceMock.Object);
+            var loggerMock = new Mock<ILogger>();
+
+            var controller = new FilterController(serviceMock.Object, loggerMock.Object);
 
             // Act
             var response = controller.GetSampleNames();
@@ -69,7 +72,9 @@
                 .Setup(s => s.GetAllGroups())
                 .Returns(groupsVm);
 
-            var controller = new FilterController(serviceMock.Object);
+            var loggerMock = new Mock<ILogger>();
+
+            var controller = new FilterController(serviceMock.Object, loggerMock.Object);
 
             // Act
             var response = controller.GetGroups();
@@ -104,7 +109,9 @@
                 .Setup(s => s.GetAllNutrientAgarPlates())
                 .Returns(nutrientAgarPlatesVm);
 
-            var controller = new FilterController(serviceMock.Object);
+            var loggerMock = new Mock<ILogger>();
+
+            var controller = new FilterController(serviceMock.Object, loggerMock.Object);
 
             // Act
             var response = controller.GetNutrientAgarPlates();
@@ -139,7 +146,9 @@
                 .Setup(s => s.GetAllTags())
                 .Returns(tagNamesVm);
 
-            var controller = new FilterController(serviceMock.Object);
+            var loggerMock = new Mock<ILogger>();
+
+            var controller = new FilterController(serviceMock.Object, loggerMock.Object);
 
             // Act
             var response = controller.GetTags();

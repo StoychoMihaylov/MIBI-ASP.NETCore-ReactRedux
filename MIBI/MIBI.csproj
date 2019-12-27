@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LoggerAPI\LoggerAPI.csproj" />
     <ProjectReference Include="..\MIBI.Data\MIBI.Data.csproj" />
     <ProjectReference Include="..\MIBI.Models\MIBI.Models.csproj" />
     <ProjectReference Include="..\MIBI.Services\MIBI.Services.csproj" />

@@ -27,3 +27,5 @@ C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Vie
 C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.Views.pdb
 C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\MIBI.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\LoggerAPI.dll
+C:\Users\stmih\source\repos\MIBI\MIBI.UnitTests\bin\Debug\netcoreapp2.2\LoggerAPI.pdb

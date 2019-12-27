@@ -22,7 +22,8 @@ namespace MIBI
     using MIBI.Data.DBInitilizer;
     using MIBI.Services.Services;
     using MIBI.Services.Interfaces;
-
+    using LoggerAPI.Interfaces;
+    using LoggerAPI.Logger;
 
     public class Startup
     {
@@ -88,6 +89,7 @@ namespace MIBI
             services.AddTransient<ISampleService, SampleService>();
             services.AddTransient<IAutocompleteService, FilterService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ILogger, Logger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

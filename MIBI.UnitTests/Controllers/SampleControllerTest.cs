@@ -12,6 +12,7 @@
     using MIBI.Models.ViewModels.Sample;
     using MIBI.Models.BindingModels.Sample;
     using System.Threading.Tasks;
+    using LoggerAPI.Interfaces;
 
     public class SampleControllerTest
     {
@@ -32,7 +33,9 @@
                 .Setup(s => s.GetSampleById(sampleId))
                 .ReturnsAsync(sample);
 
-            var controller = new SampleController(serviceMock.Object, null, null);
+            var loggerMock = new Mock<ILogger>();
+
+            var controller = new SampleController(serviceMock.Object, null, null, loggerMock.Object);
 
             // Act
             var response = await controller.GetSampleById(sampleId);
@@ -84,7 +87,9 @@
                 .Setup(s => s.GetAllSamplesByGivenSearchParams(searchParams))
                 .Returns(listOfsamples);
 
-            var controller = new SampleController(serviceMock.Object, null, null);
+            var loggerMock = new Mock<ILogger>();
+
+            var controller = new SampleController(serviceMock.Object, null, null, loggerMock.Object);
 
             // Act
             var response = controller.GetListOfSamples(searchParams);
