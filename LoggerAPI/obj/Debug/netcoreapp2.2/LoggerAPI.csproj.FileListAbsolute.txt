@@ -1,0 +1,14 @@
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\bin\Debug\netcoreapp2.2\LoggerAPI.deps.json
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\bin\Debug\netcoreapp2.2\LoggerAPI.runtimeconfig.json
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\bin\Debug\netcoreapp2.2\LoggerAPI.runtimeconfig.dev.json
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\bin\Debug\netcoreapp2.2\LoggerAPI.dll
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\bin\Debug\netcoreapp2.2\LoggerAPI.pdb
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.csprojAssemblyReference.cache
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.csproj.CoreCompileInputs.cache
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.RazorAssemblyInfo.cache
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.RazorAssemblyInfo.cs
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.AssemblyInfoInputs.cache
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.AssemblyInfo.cs
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.RazorTargetAssemblyInfo.cache
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.dll
+C:\Users\stmih\source\repos\MIBI\LoggerAPI\obj\Debug\netcoreapp2.2\LoggerAPI.pdb

@@ -6,9 +6,9 @@ C:\Users\stmih\source\repos\MIBI\MIBI.Models\bin\Debug\netcoreapp2.2\Microsoft.E
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\bin\Debug\netcoreapp2.2\MIBI.Data.pdb
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\bin\Debug\netcoreapp2.2\Microsoft.EntityFrameworkCore.SqlServer.xml
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.csprojAssemblyReference.cache
-C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.csproj.CoreCompileInputs.cache
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.AssemblyInfoInputs.cache
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.AssemblyInfo.cs
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.csproj.CopyComplete
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.dll
 C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.pdb
+C:\Users\stmih\source\repos\MIBI\MIBI.Models\obj\Debug\netcoreapp2.2\MIBI.Models.csproj.CoreCompileInputs.cache

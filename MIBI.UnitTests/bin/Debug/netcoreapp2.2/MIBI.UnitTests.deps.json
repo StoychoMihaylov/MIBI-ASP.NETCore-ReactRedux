@@ -2824,10 +2824,16 @@
           "Microsoft.NET.Test.Sdk": "15.9.0"
         }
       },
+      "LoggerAPI/1.0.0": {
+        "runtime": {
+          "LoggerAPI.dll": {}
+        }
+      },
       "MIBI/1.0.0": {
         "dependencies": {
           "AutoMapper": "9.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "LoggerAPI": "1.0.0",
           "MIBI.Data": "1.0.0",
           "MIBI.Models": "1.0.0",
           "MIBI.Services": "1.0.0",
@@ -4462,6 +4468,11 @@
       "sha512": "sha512-3eq5cGXbEJkqW9nwLuXwtxy9B5gMA8i7HW4rN63AhAvy5UvEcQbZnve23wx/oPrkyg/4CbfNhxkBezS0b1oUdQ==",
       "path": "xunit.runner.visualstudio/2.4.0",
       "hashPath": "xunit.runner.visualstudio.2.4.0.nupkg.sha512"
+    },
+    "LoggerAPI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "MIBI/1.0.0": {
       "type": "project",

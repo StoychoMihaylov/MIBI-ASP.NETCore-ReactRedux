@@ -13,6 +13,7 @@
     using MIBI.Services.Interfaces;
     using MIBI.Models.BindingModels;
     using MIBI.Models.BindingModels.Sample;
+    using LoggerAPI.Interfaces;
 
     [Route("api")]
     [Authorize]
@@ -22,12 +23,18 @@
         private ISampleService service;
         private IHostingEnvironment env;
         private IAccountService accountService;
+        private ILogger logger;
 
-        public SampleController(ISampleService service, IHostingEnvironment env, IAccountService accountService)
+        public SampleController(
+            ISampleService service, 
+            IHostingEnvironment env, 
+            IAccountService accountService, 
+            ILogger logger)
         {
             this.service = service;
             this.accountService = accountService;
             this.env = env;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -43,8 +50,11 @@
 
             if (sample == null)
             {
+                logger.LogError($"sample with id:{id} is not found");
                 return NotFound();
             }
+
+            logger.LogSuccess($"sample with id:{id} is has been found");
 
             return Ok(sample);
         }
@@ -62,6 +72,8 @@
             }
 
             var sampleViewModels = this.service.GetAllSamplesByGivenSearchParams(searchParams);
+
+            logger.LogSuccess("All samples has been send");
 
             return Ok(sampleViewModels);
         }
@@ -83,6 +95,7 @@
                 && formData == null
                 && nutrientAgarPlates == null)
             {
+                logger.LogError("description, tags or ... are not provided to create to sample");
                 return BadRequest("Please field up at least one image! All fields are requered!");
             }
 
@@ -105,6 +118,7 @@
             }
             catch (Exception ex)
             {
+                logger.LogError($"error on save image when try to create new sample with name:{name}");
                 return BadRequest(ex);
             }
 
@@ -114,6 +128,7 @@
             }
             catch (Exception ex)
             {
+                logger.LogError($"error on create new sample with name:{name}");
                 return BadRequest(ex);
             }
 
@@ -127,6 +142,7 @@
                 var isImage = CheckIfFileIsAnImage(image);
                 if (!isImage)
                 {
+                    logger.LogError("the file is not an image! on create new sample.");
                     throw new Exception("Allowed image format is image/jpg(jpeg).");
                 }
 

@@ -3784,12 +3784,23 @@
           "build/netcoreapp1.0/xunit.runner.visualstudio.props": {}
         }
       },
+      "LoggerAPI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/LoggerAPI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LoggerAPI.dll": {}
+        }
+      },
       "MIBI/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "AutoMapper": "9.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "LoggerAPI": "1.0.0",
           "MIBI.Data": "1.0.0",
           "MIBI.Models": "1.0.0",
           "MIBI.Services": "1.0.0",
@@ -11260,6 +11271,11 @@
         "xunit.runner.visualstudio.2.4.0.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "LoggerAPI/1.0.0": {
+      "type": "project",
+      "path": "../LoggerAPI/LoggerAPI.csproj",
+      "msbuildProject": "../LoggerAPI/LoggerAPI.csproj"
     },
     "MIBI/1.0.0": {
       "type": "project",

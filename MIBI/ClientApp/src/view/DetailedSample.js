@@ -10,7 +10,11 @@ class SampleDetails extends Component {
         super(props)
 
         this.state = {
-            isTagConsistencyEmpty: true
+            showElevationHeader: false,
+            showFormHeader: false,
+            showSurfaceHeader: false,
+            showConsistencyHeader: false,
+            showColorHeader: false
         }
     }
 
@@ -19,13 +23,35 @@ class SampleDetails extends Component {
         this.props.fetchDetailedSampleById(sampleId)
     }
 
-    clickmeTest () {
+    showHideTagCategories() {
+        if (this.props.detailedSample.tags != undefined) {
+            this.props.detailedSample.tags.forEach(tag => {
+                if (tag.category === "Elevations") {
+                   this.setState({
+                        showElevationHeader: true
+                   })
+                } else if (tag.category === "Form") {
+                    this.setState({
+                        showFormHeader: true
+                    })
+                } else if (tag.category === "Surface appearance") {
+                    this.setState({
+                        showSurfaceHeader: true
+                    })
+                } else if (tag.category === "Consistency") {
+                    this.setState({
+                        showConsistencyHeader: true
+                    })
+                } else if (tag.category === "Colors") {
+                    this.setState({
+                        showColorHeader: true
+                    })
+                }
+            })
+        }
     }
 
     render() {
-        console.log("dsdsdsdsdsds")
-        console.log(this.props.detailedSample)
-        console.log("dsdsdsdsdsds")
         return(
             <div>
                 {
@@ -92,7 +118,11 @@ class SampleDetails extends Component {
                             <h3>Tags:</h3>
                             <div className="tagContainer">
                                 <div>
-                                    <h4>Elevations</h4>
+                                    {
+                                        this.showElevationHeader === true
+                                        ? <h4>Elevations</h4>
+                                        : null
+                                    }
                                     {
                                         this.props.detailedSample.tags != undefined
                                         ?
@@ -112,7 +142,11 @@ class SampleDetails extends Component {
                                 </div>
                                 <br/>
                                 <div>
-                                    <h4>Form</h4>
+                                    {
+                                        this.showFormHeader === true
+                                        ? <h4>Form</h4>
+                                        : null
+                                    }
                                     {
                                         this.props.detailedSample.tags != undefined
                                         ?
@@ -132,7 +166,11 @@ class SampleDetails extends Component {
                                 </div>
                                 <br/>
                                 <div>
-                                    <h4>Surface appearance</h4>
+                                    {
+                                        this.showSurfaceHeader === true
+                                        ? <h4>Surface appearance</h4>
+                                        : null
+                                    }
                                     {
                                         this.props.detailedSample.tags != undefined
                                         ?
@@ -151,7 +189,11 @@ class SampleDetails extends Component {
                                 </div>
                                 <br/>
                                 <div>
-                                    <h4>Consistency</h4>
+                                    {
+                                        this.showConsistencyHeader === true
+                                        ? <h4>Consistency</h4>
+                                        : null
+                                    }
                                     {
                                         this.props.detailedSample.tags != undefined
                                         ?
@@ -170,7 +212,11 @@ class SampleDetails extends Component {
                                 </div>
                                 <br/>
                                 <div>
-                                    <h4>Colors</h4>
+                                    {
+                                        this.showColorHeader === true
+                                        ? <h4>Colors</h4>
+                                        : null
+                                    }
                                     {
                                         this.props.detailedSample.tags != undefined
                                         ?

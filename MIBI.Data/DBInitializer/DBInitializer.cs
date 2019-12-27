@@ -14,7 +14,7 @@
             SeedGroups(context);
             SeedTags(context);
             SeedNutrientAgarPlates(context);
-            //SeedSamples(context);
+            //SeedSamples(context); 
         }
 
         private static void SeedSamples(MIBIContext context)
@@ -33,7 +33,7 @@
             reproduced in their exact original form, accompanied by English versions from the
             1914 translation by H.Rackham.";
 
-            var step = 100;
+            var step = 200;
             var samples = new List<Sample>();
             for (int i = 0; i < 100000; i++)
             {
@@ -68,7 +68,7 @@
                     context.SaveChanges();
 
                     samples.Clear();
-                    step += 100;
+                    step += 200;
                 }
             }
         }
